@@ -1,0 +1,26 @@
+<!-- app/views/payment_terms/index.html.erb -->
+
+<div class="card-header d-flex align-items-center justify-content-between border-bottom border-light">
+  <h4 class="header-title">Rutas</h4>
+<%= button_to 'Nuevo Ruta', new_payment_term_path(format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" } }, class: "btn btn-primary" %>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-nowrap mb-0">
+    <thead class="bg-light-subtle">
+      <tr>
+        <th>Porcentaje</th>
+        <th>Couta Dias</th>
+        <th>Frecuencua pagos letra</th>
+        <th>No dias pago</th>
+        <th>Es mensual?</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        <%= turbo_frame_tag "payment_terms_table" do %>
+            <%= render "table", payment_terms: @payment_terms %>
+        <% end %>
+    </tbody>
+  </table>
+</div>

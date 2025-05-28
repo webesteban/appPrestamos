@@ -6,15 +6,6 @@ Email: support@coderthemes.com
 File: App Css File
 */
 
-li.no-hover:hover {
-    pointer-events: none !important;
-    cursor: default !important;
-  }
-  
-  a.no-hover:hover {
-    pointer-events: none !important;
-    cursor: default !important;
-  }
 
 // Core files
 @import "bootstrap/scss/functions";
@@ -93,13 +84,3 @@ li.no-hover:hover {
 @import "plugins/sweetalert2";
 @import "plugins/rangeslider";
 
-
-li.no-hover:hover {
-    pointer-events: none !important;
-    cursor: default !important;
-  }
-  
-  a.no-hover:hover {
-    pointer-events: none !important;
-    cursor: default !important;
-  }

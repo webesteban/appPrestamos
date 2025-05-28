@@ -1,0 +1,15 @@
+<% payment_terms.each do |payment_term| %>
+  
+  <tr id="payment_term_<%= payment_term.id %>">
+    <td><%= payment_term.percentage %></td>
+    <td><%= payment_term.quota_days %></td>
+    <td><%= payment_term.payment_frequency %></td>
+    <td><%= payment_term.payment_days %></td>
+    <td><%= payment_term.monthly %></td>
+    <td class="text-center">
+      <%= button_to edit_payment_term_path(payment_term, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar Ruta" do %>
+        <i class="ti ti-edit"></i>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

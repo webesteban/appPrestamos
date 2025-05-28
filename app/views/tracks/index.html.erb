@@ -1,0 +1,22 @@
+<!-- app/views/tracks/index.html.erb -->
+
+<div class="card-header d-flex align-items-center justify-content-between border-bottom border-light">
+  <h4 class="header-title">Rutas</h4>
+<%= button_to 'Nuevo Ruta', new_track_path(format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" } }, class: "btn btn-primary" %>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-nowrap mb-0">
+    <thead class="bg-light-subtle">
+      <tr>
+        <th>Nombre</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        <%= turbo_frame_tag "tracks_table" do %>
+            <%= render "table", tracks: @tracks %>
+        <% end %>
+    </tbody>
+  </table>
+</div>

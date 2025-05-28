@@ -1,0 +1,6 @@
+<%= turbo_stream.update "modal" do %>
+    <!-- Limpia antes -->
+<% end %>
+<%= turbo_stream.append "modal" do %>
+  <%= render "form_modal", payment_term: @payment_term, title: "Editar Ruta" %>
+<% end %>

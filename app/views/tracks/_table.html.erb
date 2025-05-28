@@ -1,0 +1,11 @@
+<% tracks.each do |track| %>
+  
+  <tr id="track_<%= track.id %>">
+    <td><%= track.name %></td>
+    <td class="text-center">
+      <%= button_to edit_track_path(track, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar Ruta" do %>
+        <i class="ti ti-edit"></i>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

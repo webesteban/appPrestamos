@@ -4,6 +4,8 @@
 <head>
   <%= csrf_meta_tags %>
   <%= turbo_include_tags %>
+  <%= javascript_importmap_tags %>
+
 
   <%= render 'layouts/partials/title_meta', title: @page_title %>
   <%= render 'layouts/partials/head_css' %>
@@ -35,5 +37,5 @@
 <%= render 'layouts/partials/footer_scripts' %>
 
 <% content_for :javascript do %>
-  <%= javascript_include_tag '', defer: true %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 <% end %>

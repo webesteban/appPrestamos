@@ -9,27 +9,10 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-li.no-hover:hover {
-  pointer-events: none !important;
-  cursor: default !important;
-}
 
-a.no-hover:hover {
-  pointer-events: none !important;
-  cursor: default !important;
-}
 
 @import "vendor";
 @import "style";
 @import "icons";
 
 
-li.no-hover:hover {
-  pointer-events: none !important;
-  cursor: default !important;
-}
-
-a.no-hover:hover {
-  pointer-events: none !important;
-  cursor: default !important;
-}
