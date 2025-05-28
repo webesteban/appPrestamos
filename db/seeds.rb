@@ -10,11 +10,24 @@
 
 
 # Estados posibles
-Status.find_or_create_by!(name: "Active")
+Status.find_or_create_by!(name: "Activo")
 Status.find_or_create_by!(name: "Blocked")
 
 # Roles
-admin_role = Role.find_or_create_by!(name: "Admin")
+admin_role = Role.find_or_create_by!(name: "Administrador", description: "Administrador")
+Role.find_or_create_by!(name: "DUEÑO", description: "DUEÑO")
+Role.find_or_create_by!(name: "DUEÑO NO LIQUIDA", description: "DUEÑO NO LIQUIDA")
+Role.find_or_create_by!(name: "SOCIO", description: "SOCIO")
+Role.find_or_create_by!(name: "SOCIO COBRADOR NO LIQUIDA", description: "SOCIO NO LIQUIDA")
+Role.find_or_create_by!(name: "AUDITOR-ROTADOR NO LIQUIDAR", description: "ROTADOR SIN LIQUIDAR")
+Role.find_or_create_by!(name: "AUDITOR-ROTADOR", description: "LIQUIDA")
+Role.find_or_create_by!(name: "COBRADORES", description: "COBRADORES")
+Role.find_or_create_by!(name: "COBRADOR NO LIQUIDA", description: "COBRADOR NO LIQUIDA")
+Role.find_or_create_by!(name: "SECRETARIA", description: "SECRETARIA")
+Role.find_or_create_by!(name: "SECRETARIA NO LIQUIDA", description: "SECRETARIA NO LIQUIDA")
+Role.find_or_create_by!(name: "SOLO ABONO", description: "SOLO ABONO")
+Role.find_or_create_by!(name: "ENSAYO", description: "ENSAYO")
+
 user_role  = Role.find_or_create_by!(name: "User")
 
 # Ciudad
