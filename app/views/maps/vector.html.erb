@@ -1,0 +1,109 @@
+<% @page_title = "Vector Maps" %>
+
+<%= render 'layouts/partials/page_title', page_title: "Vector Maps", sub_title: "Maps" %>
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header border-0 border-bottom border-dashed">
+        <h4 class="header-title">World Vector Map</h4>
+      </div>
+      <div class="card-body">
+        <div id="world-map-markers" style="height: 360px"></div>
+      </div> <!-- end card-body-->
+    </div> <!-- card end -->
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header border-0 border-bottom border-dashed">
+        <h4 class="header-title">World Vector Map</h4>
+      </div>
+      <div class="card-body">
+        <div id="world-map-markers-line" style="height: 360px"></div>
+      </div> <!-- end card-body-->
+    </div> <!-- card end -->
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header border-0 border-bottom border-dashed">
+        <h4 class="header-title">India Vector Map</h4>
+      </div>
+      <div class="card-body">
+        <div id="india-vector-map" style="height: 360px"></div>
+      </div> <!-- end card-body-->
+    </div> <!-- card end -->
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header border-0 border-bottom border-dashed">
+        <h4 class="header-title">Canada Vector Map</h4>
+      </div>
+      <div class="card-body">
+        <div id="canada-vector-map" style="height: 360px"></div>
+      </div> <!-- end card-body-->
+    </div> <!-- card end -->
+  </div>
+
+
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header border-0 border-bottom border-dashed">
+        <h4 class="header-title">Russia Vector Map</h4>
+      </div>
+      <div class="card-body">
+        <div id="russia-vector-map" style="height: 360px"></div>
+      </div> <!-- end card-body-->
+    </div> <!-- card end -->
+  </div>
+
+
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header border-0 border-bottom border-dashed">
+        <h4 class="header-title">US Vector Map</h4>
+      </div>
+      <div class="card-body">
+        <div id="usa-vector-map" style="height: 360px"></div>
+      </div> <!-- end card-body-->
+    </div> <!-- card end -->
+  </div>
+
+
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header border-0 border-bottom border-dashed">
+        <h4 class="header-title">Iraq Vector Map</h4>
+      </div>
+      <div class="card-body">
+        <div id="iraq-vector-map" style="height: 360px"></div>
+      </div> <!-- end card-body-->
+    </div> <!-- card end -->
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header border-0 border-bottom border-dashed">
+        <h4 class="header-title">Spain Vector Map</h4>
+      </div>
+      <div class="card-body">
+        <div id="spain-vector-map" style="height: 360px"></div>
+      </div> <!-- end card-body-->
+    </div> <!-- card end -->
+  </div>
+</div>
+
+
+<% content_for :javascript do %>
+  <%= javascript_include_tag 'maps/in-mill-en.js' %>
+  <%= javascript_include_tag 'maps/canada.js' %>
+  <%= javascript_include_tag 'maps/iraq.js' %>
+  <%= javascript_include_tag 'maps/russia.js' %>
+  <%= javascript_include_tag 'maps/spain.js' %>
+  <%= javascript_include_tag 'maps/us-aea-en.js' %>
+  <%= javascript_include_tag 'maps/us-lcc-en.js' %>
+  <%= javascript_include_tag 'maps/us-mill-en.js' %>
+  <%= javascript_include_tag 'pages/maps-vector.js', defer: true %>
+<% end %>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html <%= @html_attributes || "" %>>
+
+<head>
+  <%= csrf_meta_tags %>
+  <%= turbo_include_tags %>
+
+  <%= render 'layouts/partials/title_meta', title: @page_title %>
+  <%= render 'layouts/partials/head_css' %>
+</head>
+
+<body <%= @body_attributes || "" %>>
+
+<div class="wrapper">
+
+  <%= render 'layouts/partials/topbar' %>
+  <%= render 'layouts/partials/sidenav' %>
+
+  <div class="page-content">
+    <div class="page-container">
+
+        <%= yield %>
+
+<%= turbo_frame_tag "modal" %>
+
+    </div>
+
+    <%= render 'layouts/partials/footer' %>
+
+  </div>
+</div>
+
+<%= render 'layouts/partials/customizer' %>
+
+<%= render 'layouts/partials/footer_scripts' %>
+
+<% content_for :javascript do %>
+  <%= javascript_include_tag '', defer: true %>
+<% end %>

@@ -1,0 +1,281 @@
+<!-- Horizontal Menu Start -->
+<header class="topnav">
+    <nav class="navbar navbar-expand-lg">
+        <nav class="page-container">
+            <div class="collapse navbar-collapse" id="topnav-menu-content">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown hover-dropdown">
+                        <a class="nav-link dropdown-toggle drop-arrow-none" href="#" id="topnav-dashboards" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="menu-icon"><i class="ti ti-dashboard"></i></span>
+                            <span class="menu-text"> Dashboards </span>
+                            <div class="menu-arrow"></div>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="topnav-dashboards">
+                            <a href="<%= url_for :controller => 'dashboards', :action => 'index' %>" class="dropdown-item">Sales</a>
+                            <a href="<%= url_for :controller => 'dashboards', :action => 'clinic' %>" class="dropdown-item">Clinic</a>
+                            <a href="<%= url_for :controller => 'dashboards', :action => 'wallet' %>" class="dropdown-item">eWallet</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown hover-dropdown">
+                        <a class="nav-link dropdown-toggle drop-arrow-none" href="#" id="topnav-apps" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="menu-icon"><i class="ti ti-apps"></i></span>
+                            <span class="menu-text">Apps</span>
+                            <div class="menu-arrow"></div>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="topnav-apps">
+                            <a href="<%= url_for :controller => 'apps', :action => 'chat' %>" class="dropdown-item">Chat</a>
+                            <a href="<%= url_for :controller => 'apps', :action => 'calendar' %>" class="dropdown-item">Calendar</a>
+                            <a href="<%= url_for :controller => 'apps', :action => 'email' %>" class="dropdown-item">Email</a>
+                            <a href="<%= url_for :controller => 'apps', :action => 'file_manager' %>" class="dropdown-item">File Manager</a>
+                            <div class="dropdown hover-dropdown">
+                                <a class="dropdown-item dropdown-toggle drop-arrow-none" href="#" id="topnav-hospital" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Hospital
+                                    <div class="menu-arrow"></div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-hospital">
+                                    <a href="<%= url_for :controller => 'hospital', :action => 'doctors' %>" class="dropdown-item">Doctors</a>
+                                    <a href="<%= url_for :controller => 'hospital', :action => 'doctor_details' %>" class="dropdown-item">Doctor Details</a>
+                                    <a href="<%= url_for :controller => 'hospital', :action => 'add_doctors' %>" class="dropdown-item">Add Doctors</a>
+                                    <a href="<%= url_for :controller => 'hospital', :action => 'patients' %>" class="dropdown-item">Patients</a>
+                                    <a href="<%= url_for :controller => 'hospital', :action => 'patient_details' %>" class="dropdown-item">Patient Details</a>
+                                    <a href="<%= url_for :controller => 'hospital', :action => 'add_patients' %>" class="dropdown-item">Add Patients</a>
+                                    <a href="<%= url_for :controller => 'hospital', :action => 'appointments' %>" class="dropdown-item">Appointments</a>
+                                    <a href="<%= url_for :controller => 'hospital', :action => 'payments' %>" class="dropdown-item">Payments</a>
+                                    <a href="<%= url_for :controller => 'hospital', :action => 'departments' %>" class="dropdown-item">Departments</a>
+                                    <a href="<%= url_for :controller => 'hospital', :action => 'reviews' %>" class="dropdown-item">Reviews</a>
+                                    <a href="<%= url_for :controller => 'hospital', :action => 'contacts' %>" class="dropdown-item">Hospital Contacts</a>
+                                    <a href="<%= url_for :controller => 'hospital', :action => 'staffs' %>" class="dropdown-item">Staffs</a>
+                                </div>
+                            </div>
+                            <div class="dropdown hover-dropdown">
+                                <a class="dropdown-item dropdown-toggle drop-arrow-none" href="#" id="topnav-ecommerce" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Ecommerce
+                                    <div class="menu-arrow"></div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-ecommerce">
+                                    <a href="<%= url_for :controller => 'e_commerce', :action => 'products' %>" class="dropdown-item">Products</a>
+                                    <a href="<%= url_for :controller => 'e_commerce', :action => 'products_grid' %>" class="dropdown-item">Products Grid</a>
+                                    <a href="<%= url_for :controller => 'e_commerce', :action => 'product_details' %>" class="dropdown-item">Product Details</a>
+                                    <a href="<%= url_for :controller => 'e_commerce', :action => 'products_add' %>" class="dropdown-item">Add Products</a>
+                                    <a href="<%= url_for :controller => 'e_commerce', :action => 'categories' %>" class="dropdown-item">Categories</a>
+                                    <a href="<%= url_for :controller => 'e_commerce', :action => 'orders' %>" class="dropdown-item">Orders</a>
+                                    <a href="<%= url_for :controller => 'e_commerce', :action => 'order_details' %>" class="dropdown-item">Order Details</a>
+                                    <a href="<%= url_for :controller => 'e_commerce', :action => 'customers' %>" class="dropdown-item">Customers</a>
+                                    <a href="<%= url_for :controller => 'e_commerce', :action => 'sellers' %>" class="dropdown-item">Sellers</a>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown hover-dropdown">
+                        <a class="nav-link dropdown-toggle drop-arrow-none" href="#" id="topnav-pages" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="menu-icon"><i class="ti ti-file-description"></i></span>
+                            <span class="menu-text">Pages</span>
+                            <div class="menu-arrow"></div>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="topnav-pages">
+                            <div class="dropdown hover-dropdown">
+                                <a class="dropdown-item dropdown-toggle drop-arrow-none" href="#" id="topnav-auth" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Authentication <div class="menu-arrow"></div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-auth">
+                                    <a href="<%= url_for :controller => 'auth', :action => 'login' %>" class="dropdown-item">Login</a>
+                                    <a href="<%= url_for :controller => 'auth', :action => 'register' %>" class="dropdown-item">Register</a>
+                                    <a href="<%= url_for :controller => 'auth', :action => 'logout' %>" class="dropdown-item">Logout</a>
+                                    <a href="<%= url_for :controller => 'auth', :action => 'recover_password' %>" class="dropdown-item">Recover Password</a>
+                                    <a href="<%= url_for :controller => 'auth', :action => 'create_password' %>" class="dropdown-item">Create Password</a>
+                                    <a href="<%= url_for :controller => 'auth', :action => 'lock_screen' %>" class="dropdown-item">Lock Screen</a>
+                                    <a href="<%= url_for :controller => 'auth', :action => 'confirm_mail' %>" class="dropdown-item">Confirm Mail</a>
+                                    <a href="<%= url_for :controller => 'auth', :action => 'login_pin' %>" class="dropdown-item">Login with PIN</a>
+                                    <a href="<%= url_for :controller => 'auth', :action => 'auth_2fa' %>" class="dropdown-item">2FA</a>
+                                    <a href="<%= url_for :controller => 'auth', :action => 'account_deactivation' %>" class="dropdown-item">Account Deactivation</a>
+                                </div>
+                            </div>
+                            <div class="dropdown hover-dropdown">
+                                <a class="dropdown-item dropdown-toggle drop-arrow-none" href="#" id="topnav-error" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Error <div class="menu-arrow"></div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-error">
+                                    <a href="<%= url_for :controller => 'error', :action => 'error_401' %>" class="dropdown-item">401 Unauthorized</a>
+                                    <a href="<%= url_for :controller => 'error', :action => 'error_400' %>" class="dropdown-item">400 Bad Request</a>
+                                    <a href="<%= url_for :controller => 'error', :action => 'error_403' %>" class="dropdown-item">403 Forbidden</a>
+                                    <a href="<%= url_for :controller => 'error', :action => 'error_404' %>" class="dropdown-item">404 Not Found</a>
+                                    <a href="<%= url_for :controller => 'error', :action => 'error_408' %>" class="dropdown-item">408 Request Timeout</a>
+                                    <a href="<%= url_for :controller => 'error', :action => 'error_500' %>" class="dropdown-item">500 Internal Server</a>
+                                    <a href="<%= url_for :controller => 'error', :action => 'error_501' %>" class="dropdown-item">501 Not Implemented</a>
+                                    <a href="<%= url_for :controller => 'error', :action => 'error_502' %>" class="dropdown-item">502 Service Overloaded</a>
+                                    <a href="<%= url_for :controller => 'error', :action => 'service_unavailable' %>" class="dropdown-item">Service Unavailable</a>
+                                    <a href="<%= url_for :controller => 'error', :action => 'error_404_alt' %>" class="dropdown-item">Error 404 Alt</a>
+                                </div>
+                            </div>
+                            <a href="<%= url_for :controller => 'pages', :action => 'starter' %>" class="dropdown-item">Starter Page</a>
+                            <a href="<%= url_for :controller => 'pages', :action => 'faq' %>" class="dropdown-item">FAQ</a>
+                            <a href="<%= url_for :controller => 'pages', :action => 'pricing' %>" class="dropdown-item">Pricing One</a>
+                            <a href="<%= url_for :controller => 'pages', :action => 'pricing_2' %>" class="dropdown-item">Pricing Two</a>
+                            <a href="<%= url_for :controller => 'pages', :action => 'maintenance' %>" class="dropdown-item">Maintenance</a>
+                            <a href="<%= url_for :controller => 'pages', :action => 'timeline' %>" class="dropdown-item">Timeline</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown hover-dropdown">
+                        <a class="nav-link dropdown-toggle drop-arrow-none" href="#" id="topnav-components" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="menu-icon"><i class="ti ti-components"></i></span>
+                            <span class="menu-text">Components</span>
+                            <div class="menu-arrow"></div>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="topnav-components">
+                        
+                            <div class="dropdown hover-dropdown">
+                                <a class="dropdown-item dropdown-toggle drop-arrow-none" href="#" id="topnav-ui-kit" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Base UI 1
+                                    <div class="menu-arrow"></div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-ui-kit">
+                                    <a href="<%= url_for :controller => 'ui', :action => 'accordions' %>" class="dropdown-item">Accordions</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'alerts' %>" class="dropdown-item">Alerts</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'avatars' %>" class="dropdown-item">Avatars</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'badges' %>" class="dropdown-item">Badges</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'breadcrumb' %>" class="dropdown-item">Breadcrumb</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'buttons' %>" class="dropdown-item">Buttons</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'cards' %>" class="dropdown-item">Cards</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'carousel' %>" class="dropdown-item">Carousel</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'dropdowns' %>" class="dropdown-item">Dropdowns</a>                    
+                                    <a href="<%= url_for :controller => 'ui', :action => 'grid' %>" class="dropdown-item">Grid</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'list_group' %>" class="dropdown-item">List Group</a>
+                                </div>
+                            </div>
+                            <div class="dropdown hover-dropdown">
+                                <a class="dropdown-item dropdown-toggle drop-arrow-none" href="#" id="topnav-ui-kit2" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Base UI 2
+                                    <div class="menu-arrow"></div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-ui-kit2">
+                                    <a href="<%= url_for :controller => 'ui', :action => 'modals' %>" class="dropdown-item">Modals</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'notifications' %>" class="dropdown-item">Notifications</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'offcanvas' %>" class="dropdown-item">Offcanvas</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'placeholders' %>" class="dropdown-item">Placeholders</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'pagination' %>" class="dropdown-item">Pagination</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'popovers' %>" class="dropdown-item">Popovers</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'progress' %>" class="dropdown-item">Progress</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'spinners' %>" class="dropdown-item">Spinners</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'tabs' %>" class="dropdown-item">Tabs</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'tooltips' %>" class="dropdown-item">Tooltips</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'links' %>" class="dropdown-item">Links</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'typography' %>" class="dropdown-item">Typography</a>
+                                    <a href="<%= url_for :controller => 'ui', :action => 'utilities' %>" class="dropdown-item">Utilities</a>
+                                </div>
+                            </div>
+                            <div class="dropdown hover-dropdown">
+                                <a class="dropdown-item dropdown-toggle drop-arrow-none" href="#" id="topnav-extended-ui" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Extended UI
+                                    <div class="menu-arrow"></div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-extended-ui">
+                                    <a href="<%= url_for :controller => 'extended', :action => 'dragula' %>" class="dropdown-item">Dragula</a>
+                                    <a href="<%= url_for :controller => 'extended', :action => 'sweet_alerts' %>" class="dropdown-item">Sweet Alerts</a>
+                                    <a href="<%= url_for :controller => 'extended', :action => 'ratings' %>" class="dropdown-item">Ratings</a>
+                                    <a href="<%= url_for :controller => 'extended', :action => 'scrollbar' %>" class="dropdown-item">Scrollbar</a>
+                                </div>
+                            </div>
+                            <div class="dropdown hover-dropdown">
+                                <a class="dropdown-item dropdown-toggle drop-arrow-none" href="#" id="topnav-forms" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Forms
+                                    <div class="menu-arrow"></div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-forms">
+                                    <a href="<%= url_for :controller => 'forms', :action => 'elements' %>" class="dropdown-item">Basic Elements</a>
+                                    <a href="<%= url_for :controller => 'forms', :action => 'inputmask' %>" class="dropdown-item">Inputmask</a>
+                                    <a href="<%= url_for :controller => 'forms', :action => 'picker' %>" class="dropdown-item">Picker</a>
+                                    <a href="<%= url_for :controller => 'forms', :action => 'select' %>" class="dropdown-item">Select</a>
+                                    <a href="<%= url_for :controller => 'forms', :action => 'range_slider' %>" class="dropdown-item">Range Slider</a>
+                                    <a href="<%= url_for :controller => 'forms', :action => 'validation' %>" class="dropdown-item">Validation</a>
+                                    <a href="<%= url_for :controller => 'forms', :action => 'wizard' %>" class="dropdown-item">Wizard</a>
+                                    <a href="<%= url_for :controller => 'forms', :action => 'fileuploads' %>" class="dropdown-item">File Uploads</a>
+                                    <a href="<%= url_for :controller => 'forms', :action => 'editors' %>" class="dropdown-item">Editors</a>
+                                    <a href="<%= url_for :controller => 'forms', :action => 'layouts' %>" class="dropdown-item">Layouts</a>
+                                </div>
+                            </div>
+                            <div class="dropdown hover-dropdown">
+                                <a class="dropdown-item dropdown-toggle drop-arrow-none" href="#" id="topnav-charts" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Charts
+                                    <div class="menu-arrow"></div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-charts">
+                                    <a href="<%= url_for :controller => 'charts', :action => 'area' %>" class="dropdown-item">Area</a>
+                                    <a href="<%= url_for :controller => 'charts', :action => 'bar' %>" class="dropdown-item">Bar</a>
+                                    <a href="<%= url_for :controller => 'charts', :action => 'bubble' %>" class="dropdown-item">Bubble</a>
+                                    <a href="<%= url_for :controller => 'charts', :action => 'candlestick' %>" class="dropdown-item">Candlestick</a>
+                                    <a href="<%= url_for :controller => 'charts', :action => 'column' %>" class="dropdown-item">Column</a>
+                                    <a href="<%= url_for :controller => 'charts', :action => 'heatmap' %>" class="dropdown-item">Heatmap</a>
+                                    <a href="<%= url_for :controller => 'charts', :action => 'line' %>" class="dropdown-item">Line</a>
+                                    <a href="<%= url_for :controller => 'charts', :action => 'mixed' %>" class="dropdown-item">Mixed</a>
+                                    <a href="<%= url_for :controller => 'charts', :action => 'timeline' %>" class="dropdown-item">Timeline</a>
+                                    <a href="<%= url_for :controller => 'charts', :action => 'boxplot' %>" class="dropdown-item">Boxplot</a>
+                                    <a href="<%= url_for :controller => 'charts', :action => 'treemap' %>" class="dropdown-item">Treemap</a>
+                                    <a href="<%= url_for :controller => 'charts', :action => 'pie' %>" class="dropdown-item">Pie</a>
+                                    <a href="<%= url_for :controller => 'charts', :action => 'radar' %>" class="dropdown-item">Radar</a>
+                                    <a href="<%= url_for :controller => 'charts', :action => 'radialbar' %>" class="dropdown-item">RadialBar</a>
+                                    <a href="<%= url_for :controller => 'charts', :action => 'scatter' %>" class="dropdown-item">Scatter</a>
+                                    <a href="<%= url_for :controller => 'charts', :action => 'polar_area' %>" class="dropdown-item">Polar Area</a>
+                                    <a href="<%= url_for :controller => 'charts', :action => 'sparklines' %>" class="dropdown-item">Sparklines</a>
+                                </div>
+                            </div>
+                            <div class="dropdown hover-dropdown">
+                                <a class="dropdown-item dropdown-toggle drop-arrow-none" href="#" id="topnav-tables" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Tables
+                                    <div class="menu-arrow"></div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-tables">
+                                    <a href="<%= url_for :controller => 'tables', :action => 'basic' %>" class="dropdown-item">Basic Tables</a>
+                                    <a href="<%= url_for :controller => 'tables', :action => 'gridjs' %>" class="dropdown-item">Gridjs Tables</a>
+                                </div>
+                            </div>
+                            <div class="dropdown hover-dropdown">
+                                <a class="dropdown-item dropdown-toggle drop-arrow-none" href="#" id="topnav-icons" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Icons
+                                    <div class="menu-arrow"></div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-icons">
+                                    <a href="<%= url_for :controller => 'icons', :action => 'tabler' %>" class="dropdown-item">Tabler Icons</a>
+                                    <a href="<%= url_for :controller => 'icons', :action => 'solar' %>" class="dropdown-item">Solar Design</a>
+                                </div>
+                            </div>
+                            <div class="dropdown hover-dropdown">
+                                <a class="dropdown-item dropdown-toggle drop-arrow-none" href="#" id="topnav-maps" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Maps
+                                    <div class="menu-arrow"></div>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="topnav-maps">
+                                    <a href="<%= url_for :controller => 'maps', :action => 'google' %>" class="dropdown-item">Google Maps</a>
+                                    <a href="<%= url_for :controller => 'maps', :action => 'vector' %>" class="dropdown-item">Vector Maps</a>
+                                    <a href="<%= url_for :controller => 'maps', :action => 'leaflet' %>" class="dropdown-item">Leaflet Maps</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown hover-dropdown">
+                        <a class="nav-link dropdown-toggle drop-arrow-none" href="#" id="topnav-layouts" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="menu-icon"><i class="ti ti-layout"></i></span>
+                            <span class="menu-text">Layouts</span>
+                            <div class="menu-arrow"></div>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="topnav-layouts">
+                            <a href="<%= url_for :controller => 'dashboards', :action => 'index' %>" class="dropdown-item" target="_blank">Vertical</a>
+                            <a href="<%= url_for :controller => 'layouts_eg', :action => 'horizontal' %>" class="dropdown-item" target="_blank">Horizontal</a>
+                            <a href="<%= url_for :controller => 'layouts_eg', :action => 'detached' %>" class="dropdown-item" target="_blank">Detached</a>
+                            <a href="<%= url_for :controller => 'layouts_eg', :action => 'full' %>" class="dropdown-item" target="_blank">Full</a>
+                            <a href="<%= url_for :controller => 'layouts_eg', :action => 'fullscreen' %>" class="dropdown-item" target="_blank">Fullscreen</a>
+                            <a href="<%= url_for :controller => 'layouts_eg', :action => 'hover' %>" class="dropdown-item" target="_blank">Hover Menu</a>
+                            <a href="<%= url_for :controller => 'layouts_eg', :action => 'compact' %>" class="dropdown-item" target="_blank">Compact Menu</a>
+                            <a href="<%= url_for :controller => 'layouts_eg', :action => 'icon_view' %>" class="dropdown-item" target="_blank">Icon View</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </nav>
+</header>
+<!-- Horizontal Menu End -->

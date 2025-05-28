@@ -1,0 +1,80 @@
+<% @page_title = "Doctors" %>
+
+<%= render 'layouts/partials/page_title', page_title: "Doctorsaaaaaa", sub_title: "Hospital" %>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+    <div class="card-header d-flex align-items-center justify-content-between border-bottom border-light">
+      <h4 class="header-title">Sections List</h4>
+      <div>
+        
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-nowrap mb-0">
+        <thead class="bg-light-subtle">
+          <tr>
+            <th class="ps-3" style="width: 50px;">
+              <input type="checkbox" class="form-check-input" id="selectAllSections">
+            </th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th class="text-center" style="width: 120px;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @sections.each do |section| %>
+            <tr>
+              <td class="ps-3">
+                <input type="checkbox" class="form-check-input">
+              </td>
+              <td><%= section.code %></td>
+              <td><%= section.name %></td>
+              <td><%= truncate(section.description, length: 80) %></td>
+              <td class="pe-3">
+                <div class="hstack gap-1 justify-content-end">
+                  <%= link_to section_path(section), class: "btn btn-soft-primary btn-icon btn-sm rounded-circle" do %>
+                    <i class="ti ti-eye"></i>
+                  <% end %>
+
+                  <%= link_to edit_section_path(section), class: "btn btn-soft-success btn-icon btn-sm rounded-circle" do %>
+                    <i class="ti ti-edit fs-16"></i>
+                  <% end %>
+
+                  <%= link_to section_path(section), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-soft-danger btn-icon btn-sm rounded-circle" do %>
+                    <i class="ti ti-trash"></i>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+      <div class="card-footer">
+        <div class="d-flex justify-content-end">
+          <ul class="pagination mb-0">
+            <li class="page-item disabled">
+              <a href="#" class="page-link"><i class="ti ti-chevrons-left"></i></a>
+            </li>
+            <li class="page-item">
+              <a href="#" class="page-link">1</a>
+            </li>
+            <li class="page-item active">
+              <a href="#" class="page-link">2</a>
+            </li>
+            <li class="page-item">
+              <a href="#" class="page-link">3</a>
+            </li>
+            <li class="page-item">
+              <a href="#" class="page-link"><i class="ti ti-chevrons-right"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
