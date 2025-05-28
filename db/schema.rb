@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_28_125411) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_28_141712) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -117,7 +117,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_28_125411) do
     t.integer "city_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "parent_id"
+    t.integer "hierarchy_level", default: 0, null: false
     t.index ["city_id"], name: "index_users_on_city_id"
+    t.index ["parent_id"], name: "index_users_on_parent_id"
     t.index ["role_id"], name: "index_users_on_role_id"
     t.index ["status_id"], name: "index_users_on_status_id"
   end

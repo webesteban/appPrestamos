@@ -34,6 +34,23 @@ class UsersController < ApplicationController
         render :edit, status: :unprocessable_entity, formats: [:turbo_stream]
       end
     end
+
+    def hierarchy
+        @owners = User.where(hierarchy_level: :owner)
+        @selected_owner = User.find_by(id: params[:selected_owner_id])
+        @partners = @selected_owner&.children || []
+
+        @selected_partner = User.find_by(id: params[:selected_partner_id])
+        @collectors = @selected_partner&.children || []
+
+        @selected_collector = User.find_by(id: params[:selected_collector_id])
+        @charges = @selected_collector&.children || []
+
+        respond_to do |format|
+            format.html # renders the view
+            format.turbo_stream # for Turbo updates
+        end
+    end
   
     private
   

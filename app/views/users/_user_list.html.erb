@@ -1,0 +1,12 @@
+<% users.each do |user| %>
+  <% if next_level %>
+    <%= link_to user.name_with_role,
+                hierarchy_users_path("#{next_level}" => user.id),
+                data: { turbo_frame: turbo_frame_id(next_level) },
+                class: "btn btn-outline-primary d-block mb-1" %>
+  <% else %>
+    <div class="alert alert-secondary p-2 mb-1">
+      <%= user.name_with_role %>
+    </div>
+  <% end %>
+<% end %>

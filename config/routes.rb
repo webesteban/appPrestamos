@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   resources :reasons
   resources :tracks
   resources :section_permissions
-  resources :users
+  resources :users do
+    collection do
+      get :hierarchy
+    end
+  end
 
   resources :user_sessions, only: [:new, :create]
   delete 'logout', to: 'user_sessions#destroy', as: :logout
