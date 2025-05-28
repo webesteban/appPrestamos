@@ -1,0 +1,11 @@
+<% statuses.each do |status| %>
+  
+  <tr id="status_<%= status.id %>">
+    <td><%= status.name %></td>
+    <td class="text-center">
+      <%= button_to edit_status_path(status, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar Estado" do %>
+        <i class="ti ti-edit"></i>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

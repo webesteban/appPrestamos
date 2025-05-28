@@ -1,0 +1,7 @@
+
+<%= turbo_stream.update "modal" do %>
+  ""  <!-- Limpia antes -->
+<% end %>
+<%= turbo_stream.append "modal" do %>
+  <%= render "form_modal", role: @role, title: "Nueva Rol" %>
+<% end %>

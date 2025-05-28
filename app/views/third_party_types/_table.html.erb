@@ -1,0 +1,11 @@
+<% third_party_types.each do |third_party_type| %>
+  
+  <tr id="third_party_type_<%= third_party_type.id %>">
+    <td><%= third_party_type.name %></td>
+    <td class="text-center">
+      <%= button_to edit_third_party_type_path(third_party_type, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar Tipo Tercero" do %>
+        <i class="ti ti-edit"></i>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

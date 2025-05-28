@@ -38,63 +38,18 @@
                 <div class="collapse" id="sidebarHospital">
                     <ul class="sub-menu">
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'hospital', :action => 'doctors' %>" class="side-nav-link">
+                            <a href="<%= url_for(controller: 'roles', action: 'index') %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Roles</span>
                             </a>
                         </li>
                         <li class="side-nav-item">
                             <a href="<%= url_for(controller: 'permissions', action: 'index') %>" data-turbo="false" class="side-nav-link">
-                            <span class="menu-text">Permisos</span>
+                                <span class="menu-text">Permisos</span>
                             </a>
                         </li>
                         <li class="side-nav-item">
                             <a href="<%= url_for :controller => 'sections', :action => 'index' %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Modulos</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'hospital', :action => 'patients' %>" class="side-nav-link">
-                                <span class="menu-text">Patients</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'hospital', :action => 'patient_details' %>" class="side-nav-link">
-                                <span class="menu-text">Patient Details</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'hospital', :action => 'add_patients' %>" class="side-nav-link">
-                                <span class="menu-text">Add Patients</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'hospital', :action => 'appointments' %>" class="side-nav-link">
-                                <span class="menu-text">Appointments</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'hospital', :action => 'payments' %>" class="side-nav-link">
-                                <span class="menu-text">Payments</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'hospital', :action => 'departments' %>" class="side-nav-link">
-                                <span class="menu-text">Departments</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'hospital', :action => 'reviews' %>" class="side-nav-link">
-                                <span class="menu-text">Reviews</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'hospital', :action => 'contacts' %>" class="side-nav-link">
-                                <span class="menu-text">Hospital Contacts</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'hospital', :action => 'staffs' %>" class="side-nav-link">
-                                <span class="menu-text">Staffs</span>
                             </a>
                         </li>
                     </ul>
@@ -104,54 +59,39 @@
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarEcommerce" aria-expanded="false" aria-controls="sidebarEcommerce" class="side-nav-link">
                     <span class="menu-icon"><i class="ti ti-basket"></i></span>
-                    <span class="menu-text"> Ecommerce </span>
+                    <span class="menu-text"> Parametros </span>
                     <span class="menu-arrow"></span>
                 </a>
                 <div class="collapse" id="sidebarEcommerce">
                     <ul class="sub-menu">
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'e_commerce', :action => 'products' %>" class="side-nav-link">
-                                <span class="menu-text">Products</span>
+                            <a href="<%= url_for :controller => 'third_party_types', :action => 'index' %>" data-turbo="false" class="side-nav-link">
+                                <span class="menu-text">Tipo Tercero</span>
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'e_commerce', :action => 'products_grid' %>" class="side-nav-link">
-                                <span class="menu-text">Products Grid</span>
+                            <a href="<%= url_for :controller => 'e_commerce', :action => 'products_grid' %>" data-turbo="false" class="side-nav-link">
+                                <span class="menu-text">Tipo Gasto</span>
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'e_commerce', :action => 'product_details' %>" class="side-nav-link">
-                                <span class="menu-text">Product Details</span>
+                            <a href="<%= url_for :controller => 'statuses', :action => 'index' %>" data-turbo="false" class="side-nav-link">
+                                <span class="menu-text">Estados</span>
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'e_commerce', :action => 'products_add' %>" class="side-nav-link">
-                                <span class="menu-text">Add Products</span>
+                            <a href="<%= url_for :controller => 'e_commerce', :action => 'products_add' %>" data-turbo="false" class="side-nav-link">
+                                <span class="menu-text">Tiempos</span>
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'e_commerce', :action => 'categories' %>" class="side-nav-link">
-                                <span class="menu-text">Categories</span>
+                            <a href="<%= url_for :controller => 'e_commerce', :action => 'categories' %>" data-turbo="false" class="side-nav-link">
+                                <span class="menu-text">Motivos</span>
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'e_commerce', :action => 'orders' %>" class="side-nav-link">
-                                <span class="menu-text">Orders</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'e_commerce', :action => 'order_details' %>" class="side-nav-link">
-                                <span class="menu-text">Order Details</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'e_commerce', :action => 'customers' %>" class="side-nav-link">
-                                <span class="menu-text">Customers</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'e_commerce', :action => 'sellers' %>" class="side-nav-link">
-                                <span class="menu-text">Sellers</span>
+                            <a href="<%= url_for :controller => 'e_commerce', :action => 'orders' %>" data-turbo="false" class="side-nav-link">
+                                <span class="menu-text">Rutas</span>
                             </a>
                         </li>
                     </ul>

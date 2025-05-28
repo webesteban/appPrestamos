@@ -1,0 +1,2 @@
+module ThirdPartyTypesHelper
+end

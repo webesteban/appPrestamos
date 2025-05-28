@@ -2,6 +2,13 @@ Rails.application.routes.draw do
   resources :sections
   resources :permissions
   resources :roles
+
+  resources :third_party_types
+  resources :expense_types
+  resources :statuses
+  resources :payment_terms
+  resources :motives
+  resources :tracks
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
