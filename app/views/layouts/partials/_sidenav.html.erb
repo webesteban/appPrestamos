@@ -127,517 +127,45 @@
                 </div>
             </li>
 
-            <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
-                    <span class="menu-icon"><i class="ti ti-files"></i></span>
-                    <span class="menu-text"> Pages </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarPages">
-                    <ul class="sub-menu">
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'pages', :action => 'starter' %>" class="side-nav-link">
-                                <span class="menu-text">Starter Page</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'pages', :action => 'faq' %>" class="side-nav-link">
-                                <span class="menu-text">FAQ</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'pages', :action => 'maintenance' %>" class="side-nav-link">
-                                <span class="menu-text">Maintenance</span>
-                            </a>
-                        </li>                      
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'pages', :action => 'timeline' %>" class="side-nav-link">
-                                <span class="menu-text">Timeline</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'pages', :action => 'coming_soon' %>" class="side-nav-link">
-                                <span class="menu-text">Coming Soon</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'pages', :action => 'terms_conditions' %>" class="side-nav-link">
-                                <span class="menu-text">Terms & Conditions</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarPricing" aria-expanded="false" aria-controls="sidebarPricing" class="side-nav-link">
-                    <span class="menu-icon"><i class="ti ti-receipt-2"></i></span>
-                    <span class="menu-text"> Pricing</span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarPricing">
-                    <ul class="sub-menu">
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'pages', :action => 'pricing' %>" class="side-nav-link">
-                                <span class="menu-text">Pricing One</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'pages', :action => 'pricing_2' %>" class="side-nav-link">
-                                <span class="menu-text">Pricing Two</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarPagesAuth" aria-expanded="false" aria-controls="sidebarPagesAuth" class="side-nav-link">
-                    <span class="menu-icon"><i class="ti ti-lock"></i></span>
-                    <span class="menu-text"> Auth Pages </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarPagesAuth">
-                    <ul class="sub-menu">
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'auth', :action => 'login' %>" class="side-nav-link">
-                                <span class="menu-text">Login</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'auth', :action => 'register' %>" class="side-nav-link">
-                                <span class="menu-text">Register</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'auth', :action => 'logout' %>" class="side-nav-link">
-                                <span class="menu-text">Logout</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'auth', :action => 'recover_password' %>" class="side-nav-link">
-                                <span class="menu-text">Recover Password</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'auth', :action => 'create_password' %>" class="side-nav-link">
-                                <span class="menu-text">Create Password</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'auth', :action => 'lock_screen' %>" class="side-nav-link">
-                                <span class="menu-text">Lock Screen</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'auth', :action => 'confirm_mail' %>" class="side-nav-link">
-                                <span class="menu-text">Confirm Mail</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'auth', :action => 'login_pin' %>" class="side-nav-link">
-                                <span class="menu-text">Login with PIN</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'auth', :action => 'auth_2fa' %>" class="side-nav-link">
-                                <span class="menu-text">2FA</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'auth', :action => 'account_deactivation' %>" class="side-nav-link">
-                                <span class="menu-text">Account Deactivation</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarPagesError" aria-expanded="false" aria-controls="sidebarPagesError" class="side-nav-link">
-                    <span class="menu-icon"><i class="ti ti-server-2"></i></span>
-                    <span class="menu-text"> Error Pages </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarPagesError">
-                    <ul class="sub-menu">
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'error', :action => 'error_401' %>" class="side-nav-link">
-                                <span class="menu-text">401 Unauthorized</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'error', :action => 'error_400' %>" class="side-nav-link">
-                                <span class="menu-text">400 Bad Request</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'error', :action => 'error_403' %>" class="side-nav-link">
-                                <span class="menu-text">403 Forbidden</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'error', :action => 'error_404' %>" class="side-nav-link">
-                                <span class="menu-text">404 Not Found</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'error', :action => 'error_408' %>" class="side-nav-link">
-                                <span class="menu-text">408 Request Timeout</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'error', :action => 'error_500' %>" class="side-nav-link">
-                                <span class="menu-text">500 Internal Server</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'error', :action => 'error_501' %>" class="side-nav-link">
-                                <span class="menu-text">501 Not Implemented</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'error', :action => 'error_502' %>" class="side-nav-link">
-                                <span class="menu-text">502 Service Overloaded</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'error', :action => 'service_unavailable' %>" class="side-nav-link">
-                                <span class="menu-text">Service Unavailable</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'error', :action => 'error_404_alt' %>" class="side-nav-link">
-                                <span class="menu-text">Error 404 Alt</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarEmailTemplates" aria-expanded="false" aria-controls="sidebarEmailTemplates" class="side-nav-link">
-                    <span class="menu-icon"><i class="ti ti-news"></i></span>
-                    <span class="menu-text"> Email Templates </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarEmailTemplates">
-                    <ul class="sub-menu">
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'email_templates', :action => 'basic' %>" class="side-nav-link">
-                                <span class="menu-text">Basic Email</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'email_templates', :action => 'invoice' %>" class="side-nav-link">
-                                <span class="menu-text">Purchase Invoice</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'email_templates', :action => 'activation' %>" class="side-nav-link">
-                                <span class="menu-text">Account Activation</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <li class="side-nav-title mt-2">Components</li>
-
-            <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarBaseUI" aria-expanded="false" aria-controls="sidebarBaseUI" class="side-nav-link">
-                    <span class="menu-icon"><i class="ti ti-brightness"></i></span>
-                    <span class="menu-text"> Base UI </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarBaseUI">
-                    <ul class="sub-menu">
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'accordions' %>" class="side-nav-link">
-                                <span class="menu-text">Accordions</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'alerts' %>" class="side-nav-link">
-                                <span class="menu-text">Alerts</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'avatars' %>" class="side-nav-link">
-                                <span class="menu-text">Avatars</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'badges' %>" class="side-nav-link">
-                                <span class="menu-text">Badges</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'breadcrumb' %>" class="side-nav-link">
-                                <span class="menu-text">Breadcrumb</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'buttons' %>" class="side-nav-link">
-                                <span class="menu-text">Buttons</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'cards' %>" class="side-nav-link">
-                                <span class="menu-text">Cards</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'carousel' %>" class="side-nav-link">
-                                <span class="menu-text">Carousel</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'collapse' %>" class="side-nav-link">
-                                <span class="menu-text">Collapse</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'dropdowns' %>" class="side-nav-link">
-                                <span class="menu-text">Dropdowns</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'ratios' %>" class="side-nav-link">
-                                <span class="menu-text">Ratios</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'grid' %>" class="side-nav-link">
-                                <span class="menu-text">Grid</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'links' %>" class="side-nav-link">
-                                <span class="menu-text">Links</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'list_group' %>" class="side-nav-link">
-                                <span class="menu-text">List Group</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'modals' %>" class="side-nav-link">
-                                <span class="menu-text">Modals</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'notifications' %>" class="side-nav-link">
-                                <span class="menu-text">Notifications</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'offcanvas' %>" class="side-nav-link">
-                                <span class="menu-text">Offcanvas</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'placeholders' %>" class="side-nav-link">
-                                <span class="menu-text">Placeholders</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'pagination' %>" class="side-nav-link">
-                                <span class="menu-text">Pagination</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'popovers' %>" class="side-nav-link">
-                                <span class="menu-text">Popovers</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'progress' %>" class="side-nav-link">
-                                <span class="menu-text">Progress</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'scrollspy' %>" class="side-nav-link">
-                                <span class="menu-text">Scrollspy</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'spinners' %>" class="side-nav-link">
-                                <span class="menu-text">Spinners</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'tabs' %>" class="side-nav-link">
-                                <span class="menu-text">Tabs</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'tooltips' %>" class="side-nav-link">
-                                <span class="menu-text">Tooltips</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'typography' %>" class="side-nav-link">
-                                <span class="menu-text">Typography</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'ui', :action => 'utilities' %>" class="side-nav-link">
-                                <span class="menu-text">Utilities</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarExtendedUI" aria-expanded="false" aria-controls="sidebarExtendedUI" class="side-nav-link">
-                    <span class="menu-icon"><i class="ti ti-alien"></i></span>
-                    <span class="menu-text"> Extended UI </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarExtendedUI">
-                    <ul class="sub-menu">
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'extended', :action => 'dragula' %>" class="side-nav-link">
-                                <span class="menu-text">Dragula</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'extended', :action => 'sweet_alerts' %>" class="side-nav-link">
-                                <span class="menu-text">Sweet Alerts</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'extended', :action => 'ratings' %>" class="side-nav-link">
-                                <span class="menu-text">Ratings</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'extended', :action => 'scrollbar' %>" class="side-nav-link">
-                                <span class="menu-text">Scrollbar</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarIcons" aria-expanded="false" aria-controls="sidebarIcons" class="side-nav-link">
-                    <span class="menu-icon"><i class="ti ti-leaf"></i></span>
-                    <span class="menu-text"> Icons </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarIcons">
-                    <ul class="sub-menu">
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'icons', :action => 'tabler' %>" class="side-nav-link">
-                                <span class="menu-text">Tabler</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'icons', :action => 'solar' %>" class="side-nav-link">
-                                <span class="menu-text">Solar</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
+            <li class="side-nav-title mt-2">Liquidaciones y reportes</li>
 
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarCharts" aria-expanded="false" aria-controls="sidebarCharts" class="side-nav-link">
                     <span class="menu-icon"><i class="ti ti-chart-arcs"></i></span>
-                    <span class="menu-text"> Charts </span>
+                    <span class="menu-text"> Reportes </span>
                     <span class="menu-arrow"></span>
                 </a>
                 <div class="collapse" id="sidebarCharts">
                     <ul class="sub-menu">
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'area' %>" class="side-nav-link">
-                                <span class="menu-text">Area</span>
+                            <a href="<%= url_for :controller => 'charts', :action => 'area' %>"  data-turbo="false" class="side-nav-link">
+                                <span class="menu-text">reportes grafico Area</span>
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'bar' %>" class="side-nav-link">
-                                <span class="menu-text">Bar</span>
+                            <a href="<%= url_for :controller => 'charts', :action => 'bar' %>" data-turbo="false" class="side-nav-link">
+                                <span class="menu-text">Reportes grafico barra</span>
                             </a>
                         </li>
+                        
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'bubble' %>" class="side-nav-link">
-                                <span class="menu-text">Bubble</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'candlestick' %>" class="side-nav-link">
-                                <span class="menu-text">Candlestick</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'column' %>" class="side-nav-link">
+                            <a href="<%= url_for :controller => 'charts', :action => 'column' %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Column</span>
                             </a>
                         </li>
+                        
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'heatmap' %>" class="side-nav-link">
-                                <span class="menu-text">Heatmap</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'line' %>" class="side-nav-link">
-                                <span class="menu-text">Line</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'mixed' %>" class="side-nav-link">
-                                <span class="menu-text">Mixed</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'timeline' %>" class="side-nav-link">
+                            <a href="<%= url_for :controller => 'charts', :action => 'timeline' %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Timeline</span>
                             </a>
                         </li>
+                       
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'boxplot' %>" class="side-nav-link">
-                                <span class="menu-text">Boxplot</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'treemap' %>" class="side-nav-link">
-                                <span class="menu-text">Treemap</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'pie' %>" class="side-nav-link">
+                            <a href="<%= url_for :controller => 'charts', :action => 'pie' %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Pie</span>
                             </a>
                         </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'radar' %>" class="side-nav-link">
-                                <span class="menu-text">Radar</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'radialbar' %>" class="side-nav-link">
-                                <span class="menu-text">RadialBar</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'scatter' %>" class="side-nav-link">
-                                <span class="menu-text">Scatter</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'polar_area' %>" class="side-nav-link">
-                                <span class="menu-text">Polar Area</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'sparklines' %>" class="side-nav-link">
-                                <span class="menu-text">Sparklines</span>
-                            </a>
-                        </li>
+                       
                     </ul>
                 </div>
             </li>
@@ -645,83 +173,22 @@
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarForms" aria-expanded="false" aria-controls="sidebarForms" class="side-nav-link">
                     <span class="menu-icon"><i class="ti ti-forms"></i></span>
-                    <span class="menu-text"> Forms </span>
+                    <span class="menu-text"> Liquidaciones </span>
                     <span class="menu-arrow"></span>
                 </a>
                 <div class="collapse" id="sidebarForms">
                     <ul class="sub-menu">
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'forms', :action => 'elements' %>" class="side-nav-link">
-                                <span class="menu-text">Basic Elements</span>
+                            <a href="<%= url_for :controller => 'forms', :action => 'elements' %>" data-turbo="false" class="side-nav-link">
+                                <span class="menu-text">Liquidaciones</span>
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'forms', :action => 'inputmask' %>" class="side-nav-link">
-                                <span class="menu-text">Inputmask</span>
+                            <a href="<%= url_for :controller => 'tables', :action => 'basic' %>" data-turbo="false" class="side-nav-link">
+                                <span class="menu-text">Reportes tablas</span>
                             </a>
                         </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'forms', :action => 'picker' %>" class="side-nav-link">
-                                <span class="menu-text">Picker</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'forms', :action => 'select' %>" class="side-nav-link">
-                                <span class="menu-text">Select</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'forms', :action => 'range_slider' %>" class="side-nav-link">
-                                <span class="menu-text">Range Slider</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'forms', :action => 'validation' %>" class="side-nav-link">
-                                <span class="menu-text">Validation</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'forms', :action => 'wizard' %>" class="side-nav-link">
-                                <span class="menu-text">Wizard</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'forms', :action => 'fileuploads' %>" class="side-nav-link">
-                                <span class="menu-text">File Uploads</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'forms', :action => 'editors' %>" class="side-nav-link">
-                                <span class="menu-text">Editors</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'forms', :action => 'layouts' %>" class="side-nav-link">
-                                <span class="menu-text">Layouts</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarTables" aria-expanded="false" aria-controls="sidebarTables" class="side-nav-link">
-                    <span class="menu-icon"><i class="ti ti-table"></i></span>
-                    <span class="menu-text"> Tables </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarTables">
-                    <ul class="sub-menu">
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'tables', :action => 'basic' %>" class="side-nav-link">
-                                <span class="menu-text">Basic Tables</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'tables', :action => 'gridjs' %>" class="side-nav-link">
-                                <span class="menu-text">Gridjs Tables</span>
-                            </a>
-                        </li>
+                        
                     </ul>
                 </div>
             </li>
@@ -729,140 +196,25 @@
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarMaps" aria-expanded="false" aria-controls="sidebarMaps" class="side-nav-link">
                     <span class="menu-icon"><i class="ti ti-map-pin"></i></span>
-                    <span class="menu-text"> Maps </span>
+                    <span class="menu-text"> Geolocalizacion </span>
                     <span class="menu-arrow"></span>
                 </a>
                 <div class="collapse" id="sidebarMaps">
                     <ul class="sub-menu">
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'maps', :action => 'google' %>" class="side-nav-link">
-                                <span class="menu-text">Google Maps</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'maps', :action => 'vector' %>" class="side-nav-link">
-                                <span class="menu-text">Vector Maps</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'maps', :action => 'leaflet' %>" class="side-nav-link">
-                                <span class="menu-text">Leaflet Maps</span>
+                            <a href="<%= url_for :controller => 'maps', :action => 'leaflet' %>" data-turbo="false" class="side-nav-link">
+                                <span class="menu-text">Geolocalizacion de clientes</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </li>
 
-            <li class="side-nav-title mt-2">
-                More
-            </li>
 
-            <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarLayouts" aria-expanded="false" aria-controls="sidebarLayouts" class="side-nav-link">
-                    <span class="menu-icon"><i class="ti ti-layout"></i></span>
-                    <span class="menu-text"> Layouts </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarLayouts">
-                    <ul class="sub-menu">                        
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'layouts_eg', :action => 'horizontal' %>" target="_blank" class="side-nav-link">Horizontal</a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'layouts_eg', :action => 'detached' %>" target="_blank" class="side-nav-link">Detached</a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'layouts_eg', :action => 'full' %>" target="_blank" class="side-nav-link">Full View</a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'layouts_eg', :action => 'fullscreen' %>" target="_blank" class="side-nav-link">Fullscreen View</a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'layouts_eg', :action => 'hover' %>" target="_blank" class="side-nav-link">Hover Menu</a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'layouts_eg', :action => 'compact' %>" target="_blank" class="side-nav-link">Compact</a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'layouts_eg', :action => 'icon_view' %>" target="_blank" class="side-nav-link">Icon View</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
 
-            <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarMultiLevel" aria-expanded="false" aria-controls="sidebarMultiLevel" class="side-nav-link">
-                    <span class="menu-icon"><i class="ti ti-box-multiple-3"></i></span>
-                    <span class="menu-text"> Multi Level </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarMultiLevel">
-                    <ul class="sub-menu">
-                        <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#sidebarSecondLevel" aria-expanded="false" aria-controls="sidebarSecondLevel" class="side-nav-link">
-                                <span class="menu-text"> Second Level </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="sidebarSecondLevel">
-                                <ul class="sub-menu">
-                                    <li class="side-nav-item">
-                                        <a href="javascript: void(0);" class="side-nav-link">
-                                            <span class="menu-text">Item 1</span>
-                                        </a>
-                                    </li>
-                                    <li class="side-nav-item">
-                                        <a href="javascript: void(0);" class="side-nav-link">
-                                            <span class="menu-text">Item 2</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#sidebarThirdLevel" aria-expanded="false" aria-controls="sidebarThirdLevel" class="side-nav-link">
-                                <span class="menu-text"> Third Level </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="sidebarThirdLevel">
-                                <ul class="sub-menu">
-                                    <li class="side-nav-item">
-                                        <a href="javascript: void(0);" class="side-nav-link">Item 1</a>
-                                    </li>
-                                    <li class="side-nav-item">
-                                        <a data-bs-toggle="collapse" href="#sidebarFourthLevel" aria-expanded="false" aria-controls="sidebarFourthLevel" class="side-nav-link">
-                                            <span class="menu-text"> Item 2 </span>
-                                            <span class="menu-arrow"></span>
-                                        </a>
-                                        <div class="collapse" id="sidebarFourthLevel">
-                                            <ul class="sub-menu">
-                                                <li class="side-nav-item">
-                                                    <a href="javascript: void(0);" class="side-nav-link">
-                                                        <span class="menu-text">Item 2.1</span>
-                                                    </a>
-                                                </li>
-                                                <li class="side-nav-item">
-                                                    <a href="javascript: void(0);" class="side-nav-link">
-                                                        <span class="menu-text">Item 2.2</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </li>
         </ul>
 
         <!-- Help Box -->
-        <div class="help-box text-center">
-            <img src="<%= image_path("coffee-cup.svg") %>" height="90" alt="Helper Icon Image" />
-            <h5 class="mt-3 fw-semibold fs-16">Unlimited Access</h5>
-            <p class="mb-3 text-muted">Upgrade to plan to get access to unlimited reports</p>
-            <a href="javascript: void(0);" class="btn btn-danger btn-sm">Upgrade</a>
-        </div>
 
         <div class="clearfix"></div>
     </div>
