@@ -28,15 +28,13 @@ Role.find_or_create_by!(name: "SECRETARIA NO LIQUIDA", description: "SECRETARIA 
 Role.find_or_create_by!(name: "SOLO ABONO", description: "SOLO ABONO")
 Role.find_or_create_by!(name: "ENSAYO", description: "ENSAYO")
 
-user_role  = Role.find_or_create_by!(name: "User")
-
 # Ciudad
 city = City.find_or_create_by!(name: "Medellin")
 
 # Usuario por defecto
 user_owner = User.find_or_create_by!(username: "admin") do |user|
   user.password = "password123"
-  user.status = Status.find_by(name: "Active")
+  user.status = Status.find_by(name: "Activo")
   user.role = admin_role
   user.reason_block = nil
   user.email = "admin@example.com"
@@ -51,7 +49,7 @@ end
 
 user_socio = User.find_or_create_by!(username: "socio") do |user|
     user.password = "password123"
-    user.status = Status.find_by(name: "Active")
+    user.status = Status.find_by(name: "Activo")
     user.role = admin_role
     user.reason_block = nil
     user.email = "socio@example.com"
@@ -66,7 +64,7 @@ user_socio = User.find_or_create_by!(username: "socio") do |user|
 
   User.find_or_create_by!(username: "Cobrador1") do |user|
     user.password = "password123"
-    user.status = Status.find_by(name: "Active")
+    user.status = Status.find_by(name: "Activo")
     user.role = admin_role
     user.reason_block = nil
     user.email = "socio@example.com"
@@ -81,7 +79,7 @@ user_socio = User.find_or_create_by!(username: "socio") do |user|
 
   User.find_or_create_by!(username: "Cobrador2") do |user|
     user.password = "password123"
-    user.status = Status.find_by(name: "Active")
+    user.status = Status.find_by(name: "Activo")
     user.role = admin_role
     user.reason_block = nil
     user.email = "socio@example.com"
@@ -96,7 +94,7 @@ user_socio = User.find_or_create_by!(username: "socio") do |user|
 
   User.find_or_create_by!(username: "Cobrador3") do |user|
     user.password = "password123"
-    user.status = Status.find_by(name: "Active")
+    user.status = Status.find_by(name: "Activo")
     user.role = admin_role
     user.reason_block = nil
     user.email = "socio@example.com"
