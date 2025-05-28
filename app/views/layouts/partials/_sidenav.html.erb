@@ -43,12 +43,12 @@
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'hospital', :action => 'doctor_details' %>" class="side-nav-link">
-                                <span class="menu-text">Permisos</span>
+                            <a href="<%= url_for(controller: 'permissions', action: 'index') %>" data-turbo="false" class="side-nav-link">
+                            <span class="menu-text">Permisos</span>
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'sections', :action => 'index' %>" class="side-nav-link">
+                            <a href="<%= url_for :controller => 'sections', :action => 'index' %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Modulos</span>
                             </a>
                         </li>
