@@ -1,0 +1,11 @@
+<% section_permissions.each do |section_permission| %>
+  <tr id="section_permission_<%= section_permission.id %>">
+    <td><%= section_permission.section.name %></td>
+    <td><%= section_permission.permission.name %></td>
+    <td class="text-center">
+      <%= button_to edit_section_permission_path(section_permission, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar" do %>
+        <i class="ti ti-edit"></i>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

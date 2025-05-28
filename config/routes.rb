@@ -9,6 +9,16 @@ Rails.application.routes.draw do
   resources :payment_terms
   resources :reasons
   resources :tracks
+  resources :section_permissions
+  resources :users
+
+  resources :user_sessions, only: [:new, :create]
+  delete 'logout', to: 'user_sessions#destroy', as: :logout
+  get 'login', to: 'user_sessions#new', as: :login
+
+  # Ruta por defecto
+  root to: 'sections#index'
+
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -21,7 +31,6 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root to: 'dashboards#index'
 
   get "dashboards/clinic"
   get "dashboards/index"

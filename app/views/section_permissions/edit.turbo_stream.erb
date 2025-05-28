@@ -1,0 +1,5 @@
+<%= turbo_stream.update "modal" do %>
+<% end %>
+<%= turbo_stream.append "modal" do %>
+  <%= render "form_modal", section_permission: @section_permission, title: action_name == 'edit' ? "Editar Asignación" : "Nueva Asignación" %>
+<% end %>

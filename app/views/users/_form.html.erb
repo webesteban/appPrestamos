@@ -1,0 +1,67 @@
+<%= form_with model: user, data: { turbo: false } do |f| %>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <%= f.label :username, class: "form-label" %>
+      <%= f.text_field :username, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= f.label :email, class: "form-label" %>
+      <%= f.email_field :email, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= f.label :password, class: "form-label" %>
+      <%= f.password_field :password, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= f.label :password_confirmation, class: "form-label" %>
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= f.label :full_name, class: "form-label" %>
+      <%= f.text_field :full_name, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= f.label :phone, class: "form-label" %>
+      <%= f.text_field :phone, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= f.label :national_id, class: "form-label" %>
+      <%= f.text_field :national_id, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= f.label :city_id, class: "form-label" %>
+      <%= f.collection_select :city_id, City.all, :id, :name, { prompt: "Select a city" }, { class: "form-control select2" } %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= f.label :address, class: "form-label" %>
+      <%= f.text_field :address, class: "form-control" %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= f.label :status_id, class: "form-label" %>
+      <%= f.collection_select :status_id, Status.all, :id, :name, { prompt: "Select a status" }, { class: "form-control select2" } %>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <%= f.label :role_id, class: "form-label" %>
+      <%= f.collection_select :role_id, Role.all, :id, :name, { prompt: "Select a role" }, { class: "form-control select2" } %>
+    </div>
+
+    <div class="col-md-12 mb-3">
+      <%= f.label :reason_block, class: "form-label" %>
+      <%= f.text_field :reason_block, class: "form-control" %>
+    </div>
+
+    <div class="col-md-12 d-flex justify-content-end">
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
