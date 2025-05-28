@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :expense_types
   resources :statuses
   resources :payment_terms
-  resources :motives
+  resources :reasons
   resources :tracks
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

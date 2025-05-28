@@ -1,0 +1,25 @@
+<!-- app/views/third_party_types/_form_modal.html.erb -->
+
+<div class="modal fade show d-block" id="reasonModal" tabindex="-1" style="background: rgba(0,0,0,0.5);" aria-modal="true" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= local_assigns[:title] || 'Motivo' %></h5>
+        <button type="button" class="btn-close" data-action="click->modal#close" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <%= render 'form', reason: reason %>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.querySelector('.btn-close').addEventListener('click', () => {
+    const modal = document.getElementById('reasonModal');
+    if (modal) {
+      modal.classList.remove('show', 'd-block');
+      modal.classList.add('fade');
+      modal.style.display = 'none';
+    }
+  });
+</script>

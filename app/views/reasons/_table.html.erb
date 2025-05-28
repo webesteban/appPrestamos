@@ -1,0 +1,11 @@
+<% reasons.each do |reason| %>
+  
+  <tr id="reason_<%= reason.id %>">
+    <td><%= reason.name %></td>
+    <td class="text-center">
+      <%= button_to edit_reason_path(reason, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar Motivo" do %>
+        <i class="ti ti-edit"></i>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
