@@ -1,0 +1,13 @@
+<!-- app/views/clients/_table.html.erb -->
+<% clients.each do |client| %>
+  <tr id="client_<%= client.id %>">
+    <td><%= client.full_name %></td>
+    <td><%= client.identification %></td>
+    <td><%= client.mobile_phone %></td>
+    <td class="text-center">
+      <%= button_to edit_client_path(client, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar Cliente" do %>
+        <i class="ti ti-edit"></i>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

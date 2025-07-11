@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   resources :sections
   resources :permissions
   resources :roles
+  resources :clients
+  resources :loans
+
+  resources :payments
 
   resources :third_party_types
   resources :expense_types
@@ -14,6 +18,12 @@ Rails.application.routes.draw do
     collection do
       get :hierarchy
     end
+  end
+
+  namespace :api do
+    resources :clients, only: [:index, :show, :create, :update]
+    resources :loans, only: [:index, :show, :create, :update]
+    resources :payments, only: [:index, :show, :create, :update]
   end
 
   resources :user_sessions, only: [:new, :create]

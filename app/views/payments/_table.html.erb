@@ -1,0 +1,20 @@
+<% payments.each do |payment| %>
+  <tr id="payment_<%= payment.id %>">
+    <td><%= payment.client&.full_name %></td>
+    <td><%= payment.loan&.id %></td>
+    <td><%= number_to_currency(payment.amount) %></td>
+    <td><%= l(payment.paid_at, format: :long) %></td>
+    <td><%= payment.latitude %>, <%= payment.longitude %></td>
+    <td><%= payment.user&.full_name %></td>
+    <td><%= truncate(payment.details.to_s, length: 30) %></td>
+    <td class="text-center">
+      <%= button_to edit_payment_path(payment, format: :turbo_stream),
+                    method: :get,
+                    form: { data: { turbo_frame: "modal" }, class: "d-inline" },
+                    class: "btn btn-soft-success btn-icon btn-sm rounded-circle",
+                    title: "Editar Abono" do %>
+        <i class="ti ti-edit"></i>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

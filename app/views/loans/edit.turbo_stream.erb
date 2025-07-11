@@ -1,0 +1,7 @@
+<%= turbo_stream.update "modal" do %>
+  ""
+<% end %>
+
+<%= turbo_stream.append "modal" do %>
+  <%= render "form_modal", loan: @loan, title: "Editar Préstamo" %>
+<% end %>

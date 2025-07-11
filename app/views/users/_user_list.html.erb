@@ -1,3 +1,9 @@
+<%= link_to  ' Crear nuevo registro ',
+  new_user_path(format: :turbo_stream, hierarchy_level: level, parent_id: parent_id),
+  method: :get,
+  form: { data: { turbo_frame: "modal" } },
+  class: "btn btn-primary btn-sm p-1 px-2 mb-1" %>
+
 <% users.each do |user| %>
   <% if next_level %>
     <%= link_to user.name_with_role,
@@ -5,7 +11,7 @@
                 data: { turbo_frame: turbo_frame_id(next_level) },
                 class: "btn btn-outline-primary d-block mb-1" %>
   <% else %>
-    <div class="alert alert-secondary p-2 mb-1">
+    <div class="alert alert-secondary p-2">
       <%= user.name_with_role %>
     </div>
   <% end %>

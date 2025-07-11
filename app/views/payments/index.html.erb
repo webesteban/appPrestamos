@@ -1,0 +1,24 @@
+<div class="card-header d-flex align-items-center justify-content-between border-bottom border-light">
+  <h4 class="header-title">Abonos</h4>
+  <%= button_to 'Nuevo Abono', new_payment_path(format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" } }, class: "btn btn-primary" %>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-nowrap mb-0">
+    <thead class="bg-light-subtle">
+      <tr>
+        <th>Cliente</th>
+        <th>Préstamo</th>
+        <th>Valor</th>
+        <th>Fecha</th>
+        <th>Usuario</th>
+        <th class="text-center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= turbo_frame_tag "payments_table" do %>
+        <%= render "table", payments: @payments %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

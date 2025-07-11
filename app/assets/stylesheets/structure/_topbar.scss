@@ -17,6 +17,7 @@ Topbar CSS
     transition: $transition-base;
     border-bottom: $card-border-width solid $card-border-color;
     padding: 0 calc(#{$grid-gutter-width} * 0.5);
+    margin-bottom: 20px !important;
 
     .topbar-menu {
         display: flex;

@@ -1,0 +1,8 @@
+<!-- app/views/clients/new.turbo_stream.erb -->
+<%= turbo_stream.update "modal" do %>
+  "" 
+<% end %>
+
+<%= turbo_stream.append "modal" do %>
+  <%= render "form_modal", client: @client, title: "Nuevo Cliente" %>
+<% end %>

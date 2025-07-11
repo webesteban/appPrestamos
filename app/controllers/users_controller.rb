@@ -6,6 +6,9 @@ class UsersController < ApplicationController
     end
   
     def new
+      @hierarchy_level = params[:hierarchy_level].nil? ? :not_assigned : params[:hierarchy_level]
+      @parent_id = params[:parent_id]
+
       @user = User.new
       respond_to do |format|
         format.turbo_stream
@@ -36,6 +39,7 @@ class UsersController < ApplicationController
     end
 
     def hierarchy
+
         @owners = User.where(hierarchy_level: :owner)
         @selected_owner = User.find_by(id: params[:selected_owner_id])
         @partners = @selected_owner&.children || []

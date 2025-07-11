@@ -16,6 +16,9 @@
 !/log/.keep
 !/tmp/.keep
 
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
 !/tmp/pids/
@@ -33,3 +36,8 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 node_modules
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

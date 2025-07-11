@@ -1,0 +1,14 @@
+<% loans.each do |loan| %>
+  <tr id="loan_<%= loan.id %>">
+    <td><%= loan.client.full_name %></td>
+    <td><%= loan.payment_term.payment_frequency %></td>
+    <td><%= loan.installment_days %></td>
+    <td><%= number_to_currency loan.amount %></td>
+    <td><%= loan.insurance ? "Sí" : "No" %></td>
+    <td class="text-center">
+      <%= button_to edit_loan_path(loan, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar Préstamo" do %>
+        <i class="ti ti-edit"></i>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

@@ -1,4 +1,8 @@
 <%= form_with model: user, data: { turbo: false } do |f| %>
+
+  <%= hidden_field_tag :hierarchy_level, @hierarchy_level %>
+  <%= hidden_field_tag :parent_id, @parent_id %>
+  
   <div class="row">
     <div class="col-md-6 mb-3">
       <%= f.label :username, class: "form-label" %>

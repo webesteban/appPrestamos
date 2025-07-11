@@ -10,9 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_28_141712) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_10_233545) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.string "identification"
+    t.string "identification_type"
+    t.string "full_name"
+    t.date "identification_issued_at"
+    t.date "birth_date"
+    t.string "sex"
+    t.string "address"
+    t.string "mobile_phone"
+    t.string "landline_phone"
+    t.string "billing_address"
+    t.string "occupation"
+    t.string "workplace"
+    t.decimal "income"
+    t.string "reference1_name"
+    t.string "reference1_identification"
+    t.string "reference1_address"
+    t.string "reference1_phone"
+    t.string "reference2_name"
+    t.string "reference2_identification"
+    t.string "reference2_address"
+    t.string "reference2_phone"
+    t.string "email"
+    t.decimal "latitude"
+    t.decimal "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -24,6 +53,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_28_141712) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "loans", force: :cascade do |t|
+    t.integer "payment_term_id", null: false
+    t.integer "client_id", null: false
+    t.integer "installment_days"
+    t.decimal "amount"
+    t.text "details"
+    t.decimal "insurance_amount"
+    t.boolean "insurance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_loans_on_client_id"
+    t.index ["payment_term_id"], name: "index_loans_on_payment_term_id"
+  end
+
   create_table "payment_terms", force: :cascade do |t|
     t.integer "percentage"
     t.integer "quota_days"
@@ -32,6 +75,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_28_141712) do
     t.boolean "monthly"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer "client_id", null: false
+    t.integer "loan_id", null: false
+    t.integer "user_id", null: false
+    t.decimal "amount"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.date "paid_at"
+    t.text "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_payments_on_client_id"
+    t.index ["loan_id"], name: "index_payments_on_loan_id"
+    t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
   create_table "permissions", force: :cascade do |t|
@@ -125,6 +184,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_28_141712) do
     t.index ["status_id"], name: "index_users_on_status_id"
   end
 
+  add_foreign_key "loans", "clients"
+  add_foreign_key "loans", "payment_terms"
+  add_foreign_key "payments", "clients"
+  add_foreign_key "payments", "loans"
+  add_foreign_key "payments", "users"
   add_foreign_key "section_permissions", "permissions"
   add_foreign_key "section_permissions", "sections"
   add_foreign_key "users", "cities"

@@ -4,7 +4,9 @@
     <h5>Owners</h5>
     <%= render partial: "users/user_list", locals: {
       users: User.owner,
-      next_level: :selected_owner_id
+      next_level: :selected_owner_id,
+      level: :owner,
+      parent_id: nil
     } %>
   </div>
 
@@ -14,7 +16,9 @@
       <% if params[:selected_owner_id] %>
         <%= render partial: "users/user_list", locals: {
           users: User.where(parent_id: params[:selected_owner_id], hierarchy_level: :partner),
-          next_level: :selected_partner_id
+          next_level: :selected_partner_id,
+          level: :partner,
+          parent_id: params[:selected_owner_id]
         } %>
       <% else %>
         <p class="text-muted">Select an owner</p>
@@ -28,7 +32,9 @@
       <% if params[:selected_partner_id] %>
         <%= render partial: "users/user_list", locals: {
           users: User.where(parent_id: params[:selected_partner_id], hierarchy_level: :collector),
-          next_level: :selected_collector_id
+          next_level: :selected_collector_id,
+          level: :collector,
+          parent_id: params[:selected_partner_id]
         } %>
       <% else %>
         <p class="text-muted">Select a partner</p>
@@ -42,7 +48,8 @@
       <% if params[:selected_collector_id] %>
         <%= render partial: "users/user_list", locals: {
           users: User.where(parent_id: params[:selected_collector_id], hierarchy_level: :charge),
-          next_level: nil
+          next_level: nil,
+          parent_id: params[:selected_collector_id]
         } %>
       <% else %>
         <p class="text-muted">Select a collector</p>

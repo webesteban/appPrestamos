@@ -1,0 +1,53 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  identification: MyString
+  identification_type: MyString
+  full_name: MyString
+  identification_issued_at: 2025-07-10
+  birth_date: 2025-07-10
+  sex: MyString
+  address: MyString
+  mobile_phone: MyString
+  landline_phone: MyString
+  billing_address: MyString
+  occupation: MyString
+  workplace: MyString
+  income: 9.99
+  reference1_name: MyString
+  reference1_identification: MyString
+  reference1_address: MyString
+  reference1_phone: MyString
+  reference2_name: MyString
+  reference2_identification: MyString
+  reference2_address: MyString
+  reference2_phone: MyString
+  email: MyString
+  latitude: 9.99
+  longitude: 9.99
+
+two:
+  identification: MyString
+  identification_type: MyString
+  full_name: MyString
+  identification_issued_at: 2025-07-10
+  birth_date: 2025-07-10
+  sex: MyString
+  address: MyString
+  mobile_phone: MyString
+  landline_phone: MyString
+  billing_address: MyString
+  occupation: MyString
+  workplace: MyString
+  income: 9.99
+  reference1_name: MyString
+  reference1_identification: MyString
+  reference1_address: MyString
+  reference1_phone: MyString
+  reference2_name: MyString
+  reference2_identification: MyString
+  reference2_address: MyString
+  reference2_phone: MyString
+  email: MyString
+  latitude: 9.99
+  longitude: 9.99

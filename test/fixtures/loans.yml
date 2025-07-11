@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  payment_term: one
+  client: one
+  installment_days: 1
+  amount: 9.99
+  details: MyText
+  insurance_amount: 9.99
+  insurance: false
+
+two:
+  payment_term: two
+  client: two
+  installment_days: 1
+  amount: 9.99
+  details: MyText
+  insurance_amount: 9.99
+  insurance: false
