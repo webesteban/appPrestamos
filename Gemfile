@@ -71,3 +71,7 @@ group :test do
 end
 
 gem "sass-rails", "~> 6.0"
+
+group :production do
+  gem "pg"
+end
