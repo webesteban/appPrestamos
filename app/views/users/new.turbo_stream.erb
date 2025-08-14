@@ -1,7 +1,0 @@
-<!-- app/views/users/edit.turbo_stream.erb & new.turbo_stream.erb -->
-
-<%= turbo_stream.update "modal" do %>
-<% end %>
-<%= turbo_stream.append "modal" do %>
-  <%= render "form_modal", user: @user, title: action_name == 'edit' ? "Editar Usuario" : "Nuevo Usuario" %>
-<% end %>

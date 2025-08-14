@@ -13,8 +13,15 @@ class User < ApplicationRecord
 
   enum :hierarchy_level, { not_assigned: 0, owner: 1, partner: 2, collector: 3, charge: 4 }
 
+  before_create :generate_api_token
+
   def name_with_role
     "#{full_name} (#{hierarchy_level})"
   end
 
+  private
+
+  def generate_api_token
+    self.api_token ||= SecureRandom.hex(32)
+  end
 end

@@ -39,7 +39,7 @@ class Api::LoansController < ApplicationController
     params.require(:loan).permit(
       :payment_term_id, :installment_days,
       :amount, :details, :insurance_amount,
-      :insurance, :client_id
+      :insurance, :client_id, :latitude, :longitude
     )
   end
 end

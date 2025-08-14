@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_10_233545) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_14_073203) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -53,6 +53,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_10_233545) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "expenses", force: :cascade do |t|
+    t.integer "expense_type_id", null: false
+    t.decimal "amount"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "active", default: true, null: false
+    t.index ["expense_type_id"], name: "index_expenses_on_expense_type_id"
+    t.index ["user_id"], name: "index_expenses_on_user_id"
+  end
+
   create_table "loans", force: :cascade do |t|
     t.integer "payment_term_id", null: false
     t.integer "client_id", null: false
@@ -63,6 +74,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_10_233545) do
     t.boolean "insurance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "latitude", precision: 10, scale: 6
+    t.decimal "longitude", precision: 10, scale: 6
     t.index ["client_id"], name: "index_loans_on_client_id"
     t.index ["payment_term_id"], name: "index_loans_on_payment_term_id"
   end
@@ -178,12 +191,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_10_233545) do
     t.datetime "updated_at", null: false
     t.integer "parent_id"
     t.integer "hierarchy_level", default: 0, null: false
+    t.string "api_token"
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["parent_id"], name: "index_users_on_parent_id"
     t.index ["role_id"], name: "index_users_on_role_id"
     t.index ["status_id"], name: "index_users_on_status_id"
   end
 
+  add_foreign_key "expenses", "expense_types"
+  add_foreign_key "expenses", "users"
   add_foreign_key "loans", "clients"
   add_foreign_key "loans", "payment_terms"
   add_foreign_key "payments", "clients"

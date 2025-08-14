@@ -1,4 +1,4 @@
-class Api::ClientsController < ApplicationController
+class Api::ClientsController < Api::BaseController
   skip_forgery_protection
 
   def index

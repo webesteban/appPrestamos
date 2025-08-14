@@ -22,8 +22,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :clients, only: [:index, :show, :create, :update]
+    resources :expenses, only: [:index, :show, :create, :update]
+    resources :expense_types, only: [:index]
+    resources :payment_terms, only: [:index]
     resources :loans, only: [:index, :show, :create, :update]
     resources :payments, only: [:index, :show, :create, :update]
+    resource :session, only: [:create, :destroy]
   end
 
   resources :user_sessions, only: [:new, :create]

@@ -1,7 +1,11 @@
-<%= link_to  ' Crear nuevo registro ',
-  new_user_path(format: :turbo_stream, hierarchy_level: level, parent_id: parent_id),
-  method: :get,
-  form: { data: { turbo_frame: "modal" } },
+<%= link_to ' Crear nuevo registro ',
+  new_user_path(
+    format: :html,
+    from: :hierarchy,
+    hierarchy_level: level,
+    parent_id: parent_id
+  ),
+  data: { turbo_frame: "modal" },
   class: "btn btn-primary btn-sm p-1 px-2 mb-1" %>
 
 <% users.each do |user| %>

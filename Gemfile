@@ -29,6 +29,8 @@ gem "solid_queue"
 gem "solid_cable"
 gem 'authlogic'
 gem "scrypt", "~> 3.0"
+gem 'rack-cors', require: 'rack/cors'
+
 
 
 

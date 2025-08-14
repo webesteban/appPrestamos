@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
   layout "vertical"
 
-  before_action :require_login
+  #before_action :require_login
   helper_method :current_user
 
 

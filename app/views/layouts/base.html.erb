@@ -8,6 +8,8 @@
 
 <body <%= @body_attributes || "" %>>
 
+<turbo-frame id="modal"></turbo-frame>  <!-- 👈 contenedor persistente -->
+
 <%= yield %>
 
 <%= turbo_stream_from "flash" %>

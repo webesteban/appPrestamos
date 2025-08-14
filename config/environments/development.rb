@@ -8,9 +8,10 @@ Rails.application.configure do
 
   config.hosts.clear
 
-  config.hosts << "e65d8c684102.ngrok-free.app"
-  config.hosts << "e65d8c684102.ngrok-free.app"
+  config.hosts << "71d46c70ff15.ngrok-free.app"
+  config.hosts << "b3aa590f8995.ngrok-free.app"
   config.hosts << "localhost:3000"
+  
 
 
   # Do not eager load code on boot.
