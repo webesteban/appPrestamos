@@ -1,0 +1,112 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- Panel izquierdo -->
+    <div class="col-md-3">
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Filtrar por Bodega">
+        <div class="d-flex mt-2 gap-2">
+          <button class="btn btn-primary btn-sm">Guardar</button>
+          <button class="btn btn-danger btn-sm">Gastos</button>
+          <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-printer"></i></button>
+        </div>
+      </div>
+
+      <div class="card p-2">
+        <h6>Reportes</h6>
+        <div class="d-grid gap-2">
+          <button class="btn btn-dark">Ver compras</button>
+          <button class="btn btn-primary">Ver abonos</button>
+          <button class="btn btn-info">Liquidaciones</button>
+          <button class="btn btn-secondary">Liquidaciones2</button>
+          <button class="btn btn-danger">Autorizacion</button>
+          <button class="btn btn-dark">Ultimas compras</button>
+          <button class="btn btn-warning">Faltantes</button>
+          <button class="btn btn-warning">Informes de socios y dueños</button>
+          <button class="btn btn-warning">Retiros o traslado de clientes</button>
+          <button class="btn btn-warning">Estadisticas semanales</button>
+          <button class="btn btn-primary">Descuentos y refinanciacion</button>
+          <button class="btn btn-warning">Liquidaciones por bodegas</button>
+          <button class="btn btn-success">Morocidad de ruta</button>
+          <button class="btn btn-danger">Grafica liquidacion x mes</button>
+          <button class="btn btn-dark">Verificar compras</button>
+          <button class="btn btn-dark">Verificar abonos</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel central -->
+    <div class="col-md-6">
+      <div class="card p-3">
+        <h5>LIQUIDAR</h5>
+        <div class="row g-2">
+          <div class="col-6">
+            <label>BASE</label>
+            <input class="form-control" value="0">
+          </div>
+          <div class="col-6">
+            <label>GASTOS</label>
+            <input class="form-control" value="0">
+          </div>
+          <div class="col-6">
+            <label>ABONOS</label>
+            <input class="form-control" value="0">
+          </div>
+          <div class="col-6">
+            <label>RETIROS</label>
+            <input class="form-control" value="0">
+          </div>
+          <div class="col-6">
+            <label>EFECTIVO</label>
+            <div class="input-group">
+              <input class="form-control" value="0">
+              <button class="btn btn-success"><i class="bi bi-save"></i></button>
+            </div>
+          </div>
+          <div class="col-6">
+            <label>DESCUENTO</label>
+            <input class="form-control" value="0">
+          </div>
+          <div class="col-6">
+            <label>DIFERENCIA</label>
+            <input class="form-control bg-warning" value="0">
+          </div>
+          <div class="col-6">
+            <label>REFINANCIACION</label>
+            <input class="form-control" value="0">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel derecho -->
+    <div class="col-md-3">
+      <div class="card p-2 mb-3">
+        <h6>Sistema de gastos</h6>
+        <select class="form-select mb-2">
+          <option selected>Seleccione tipo gastos</option>
+        </select>
+        <div class="d-flex mb-2">
+          <input class="form-control me-2" value="0">
+          <input class="form-control" placeholder="Tipo">
+          <input class="form-control" placeholder="valor">
+        </div>
+        <input class="form-control mb-2" placeholder="detalles">
+        <button class="btn btn-success">Guardar</button>
+      </div>
+
+      <div class="row g-2">
+        <% stats = ['ABONOS MOROSOS', 'CARTERA TOTAL', 'CARTERA VENCIDA', 'Clientes abonados',
+                    'Num compras canceladas', 'Valor compras canceladas',
+                    'Num de reenganches', 'Valor de reenganches'] %>
+        <% stats.each do |s| %>
+          <div class="col-6">
+            <div class="card text-center text-white bg-primary p-2">
+              <div><strong><%= s %></strong></div>
+              <div>0</div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

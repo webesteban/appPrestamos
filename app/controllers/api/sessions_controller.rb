@@ -1,6 +1,6 @@
 # app/controllers/api/sessions_controller.rb
 module Api
-  class SessionsController < BaseController
+  class SessionsController < ActionController::API
 
     def create
       user_session = UserSession.new(username: params[:username], password: params[:password])
