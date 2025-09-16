@@ -136,3 +136,39 @@ Section.create!([
   { name: "CLIENTES MOVIL", code: "clientes_movil", description: "Módulo de configuración de accesos por usuario." },
 
 ])
+
+payment_terms_data = [
+  [20, 60, "DIARIO", 1],
+  [20, 60, "DIARIO", 1],
+  [20, 30, "DIARIO", 1],
+  [20, 24, "DIRIO", 1],
+  [20, 120, "NECESITA AURORIZACION", 1],
+  [20, 24, "DIARIO", 1],
+  [20, 40, "SEMANAL", 7],
+  [20, 40, "DIRARIO", 1],
+  [20, 40, "NECESITA AUTORIZACION", 1],
+  [20, 60, "DIARIO", 1],
+  [0,   111111, "VENTA CONTADO", 1],
+  [20, 30010, "MENSUAL", 0],
+  [1,  31, "pago letras", 30],
+  [20, 60, "SEMNAL", 7],
+  [20, 45, "SEMANAL", 7],
+  [20, 50, "DIARIO", 1],
+  [20, 20, "DIARIO", 1]
+]
+
+puts "⏳ Creando términos de pago..."
+
+payment_terms_data.each do |percentage, quota_days, payment_frequency, payment_days|
+  monthly = payment_frequency.to_s.upcase.include?("MENSUAL") ? 0 : 1
+
+  PaymentTerm.create!(
+    percentage: percentage,
+    quota_days: quota_days,
+    payment_frequency: payment_frequency,
+    payment_days: payment_days,
+    monthly: monthly
+  )
+end
+
+puts "✅ #{payment_terms_data.size} términos de pago creados con éxito."
