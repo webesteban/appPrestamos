@@ -1,7 +1,7 @@
 
 <div class="row">
   <div class="col-md-3">
-    <h5>Owners</h5>
+    <h5>DUEÑOS</h5>
     <%= render partial: "users/user_list", locals: {
       users: User.owner,
       next_level: :selected_owner_id,
@@ -11,7 +11,7 @@
   </div>
 
   <div class="col-md-3">
-    <h5>Partners</h5>
+    <h5>Socios</h5>
     <turbo-frame id="collectors">
       <% if params[:selected_owner_id] %>
         <%= render partial: "users/user_list", locals: {
@@ -21,13 +21,13 @@
           parent_id: params[:selected_owner_id]
         } %>
       <% else %>
-        <p class="text-muted">Select an owner</p>
+        <p class="text-muted">Seleccione primero un dueño</p>
       <% end %>
     </turbo-frame>
   </div>
 
   <div class="col-md-3">
-    <h5>Collectors</h5>
+    <h5>Cobradores</h5>
     <turbo-frame id="charges">
       <% if params[:selected_partner_id] %>
         <%= render partial: "users/user_list", locals: {
@@ -37,23 +37,22 @@
           parent_id: params[:selected_partner_id]
         } %>
       <% else %>
-        <p class="text-muted">Select a partner</p>
+        <p class="text-muted">Seleccione primero un socio</p>
       <% end %>
     </turbo-frame>
   </div>
 
-  <div class="col-md-3">
-    <h5>Charge Info</h5>
-    <turbo-frame id="charge_info">
-      <% if params[:selected_collector_id] %>
-        <%= render partial: "users/user_list", locals: {
-          users: User.where(parent_id: params[:selected_collector_id], hierarchy_level: :charge),
-          next_level: nil,
-          parent_id: params[:selected_collector_id]
-        } %>
-      <% else %>
-        <p class="text-muted">Select a collector</p>
-      <% end %>
-    </turbo-frame>
-  </div>
+<div class="col-md-3">
+  <h5>Cobros</h5>
+  <turbo-frame id="charge_info">
+    <% if params[:selected_collector_id] %>
+      <%= render partial: "users/collection_list", locals: {
+        collections: Collection.joins(:collection_users).where(collection_users: { user_id: params[:selected_collector_id] }),
+        parent_id: params[:selected_collector_id]
+      } %>
+    <% else %>
+      <p class="text-muted">Seleccione un cobrador</p>
+    <% end %>
+  </turbo-frame>
+</div>
 </div>

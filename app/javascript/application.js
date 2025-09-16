@@ -5,6 +5,9 @@ import "bootstrap" // si estás usando Bootstrap con importmap
 
 import { createPopper } from "@popperjs/core"
 
+
 // Opcional: si Bootstrap o algún plugin externo lo necesita globalmente
 window.createPopper = createPopper
+
+
 

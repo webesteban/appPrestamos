@@ -1,0 +1,7 @@
+es:
+  permissions:
+    actions:
+      view: Ver
+      create: Crear
+      edit: Editar
+      destroy: Eliminar

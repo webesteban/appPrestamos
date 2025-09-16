@@ -1,6 +1,12 @@
 class RolesController < ApplicationController
   def index
-    @roles = Role.all
+    @q = Role.ransack(params[:q])
+    @pagy, @roles = pagy(@q.result, items: 10)
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
   
   def new

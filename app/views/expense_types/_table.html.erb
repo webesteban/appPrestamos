@@ -1,12 +1,24 @@
-<% expense_types.each do |expense_type| %>
-  
-  <tr id="expense_type_<%= expense_type.id %>">
-    <td><%= expense_type.name %></td>
-    <td><%= expense_type.max_value %></td>
-    <td class="text-center">
-      <%= button_to edit_expense_type_path(expense_type, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar Permisos" do %>
-        <i class="ti ti-edit"></i>
-      <% end %>
-    </td>
-  </tr>
-<% end %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= sort_link @q, :name, "NOMBRE" %></th>
+      <th><%= sort_link @q, :max_value, "MONTO" %></th>
+      <th>DESCRIPCION</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% expense_types.each do |expense_type| %>
+      
+      <tr id="expense_type_<%= expense_type.id %>">
+        <td><%= expense_type.name %></td>
+        <td><%= expense_type.max_value %></td>
+        <td class="text-center">
+          <%= button_to edit_expense_type_path(expense_type, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar Tipo de Gasto" do %>
+            <i class="ti ti-edit"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

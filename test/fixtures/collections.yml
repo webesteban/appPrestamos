@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  plate: MyString
+  phone: MyString
+  email: MyString
+  city: MyString
+  min_value: 9.99
+  max_value: 9.99
+  payment_method: 1
+  payment_term: one
+
+two:
+  name: MyString
+  description: MyText
+  plate: MyString
+  phone: MyString
+  email: MyString
+  city: MyString
+  min_value: 9.99
+  max_value: 9.99
+  payment_method: 1
+  payment_term: two

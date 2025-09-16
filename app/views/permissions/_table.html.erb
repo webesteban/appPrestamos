@@ -1,13 +1,25 @@
-<% permissions.each do |permission| %>
-  
-  <tr id="permission_<%= permission.id %>">
-    <td><%= permission.name %></td>
-    <td><%= permission.code %></td>
-    <td><%= permission.description %></td>
-    <td class="text-center">
-      <%= button_to edit_permission_path(permission, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar Permisos" do %>
-        <i class="ti ti-edit"></i>
-      <% end %>
-    </td>
-  </tr>
-<% end %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= sort_link @q, :name, "NOMBRE" %></th>
+      <th><%= sort_link @q, :code, "CODIGO" %></th>
+      <th>DESCRIPCION</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% permissions.each do |permission| %>
+      
+      <tr id="permission_<%= permission.id %>">
+        <td><%= permission.name %></td>
+        <td><%= permission.code %></td>
+        <td><%= permission.description %></td>
+        <td class="text-center">
+          <%= button_to edit_permission_path(permission, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar Permisos" do %>
+            <i class="ti ti-edit"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

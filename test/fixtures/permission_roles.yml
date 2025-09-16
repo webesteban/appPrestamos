@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  role: one
+  section: one
+  can_view: false
+  can_create: false
+  can_edit: false
+  can_destroy: false
+
+two:
+  role: two
+  section: two
+  can_view: false
+  can_create: false
+  can_edit: false
+  can_destroy: false

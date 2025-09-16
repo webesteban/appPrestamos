@@ -1,7 +1,6 @@
 # app/controllers/api/sessions_controller.rb
 module Api
-  class SessionsController < ApplicationController
-    skip_before_action :verify_authenticity_token
+  class SessionsController < BaseController
 
     def create
       user_session = UserSession.new(username: params[:username], password: params[:password])
@@ -10,9 +9,22 @@ module Api
         user = user_session.user
         user.update(api_token: SecureRandom.hex(32)) # renovás el token por seguridad
 
+        movil_sections = Section.where("code LIKE ?", "%_movil")
+        permissions = {}
+
+        movil_sections.each do |section|
+          permission = PermissionRole.find_by(role: user.role, section: section)
+
+          permissions[section.code] = {
+            view: permission&.can_view || false,
+            create: permission&.can_create || false,
+          }
+        end
+
         render json: {
           message: "Login exitoso",
           token: user.api_token,
+          permissions: permissions,
           user: user.slice(:id, :username, :role_id, :hierarchy_level)
         }, status: :ok
       else

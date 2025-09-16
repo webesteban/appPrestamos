@@ -1,0 +1,44 @@
+<h1>Gestión de Permisos por Rol y Módulo</h1>
+
+<turbo-frame id="permission_roles_panel">
+  <div class="row">
+    <div class="col-md-4">
+      <h5 class="mb-3">Roles</h5>
+      <ul class="list-group">
+        <% @roles.each do |role| %>
+          <li class="list-group-item <%= 'active' if role == @selected_role %>">
+            <%= link_to role.name,
+                        permission_roles_path(role_id: role.id),
+                        data: { turbo_frame: "permission_roles_panel" },
+                        class: "text-decoration-none d-block" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <% if @selected_role %>
+      <div class="col-md-4">
+        <h5 class="mb-3">Módulos</h5>
+        <ul class="list-group">
+          <% @sections.each do |section| %>
+            <li class="list-group-item <%= 'active' if section == @selected_section %>">
+              <%= link_to section.name,
+                          permission_roles_path(role_id: @selected_role.id, section_id: section.id),
+                          data: { turbo_frame: "permission_roles_panel" },
+                          class: "text-decoration-none d-block" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% if @selected_role && @selected_section %>
+      <div class="col-md-4">
+        <h5 class="mb-3">Acciones</h5>
+        <turbo-frame id="permission_form">
+          <%= render partial: "form", locals: { permission: @permission } %>
+        </turbo-frame>
+      </div>
+    <% end %>
+  </div>
+</turbo-frame>

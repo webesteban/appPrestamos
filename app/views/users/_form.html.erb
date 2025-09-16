@@ -1,7 +1,7 @@
 <!-- app/views/users/_form_modal.html.erb -->
 <%= form_with model: user do |f| %>
   <%= hidden_field_tag :from, params[:from] %>
-  <%= f.hidden_field :hierarchy_level, value: @hierarchy_level %>
+  <%= f.hidden_field :hierarchy_level, value: @hierarchy_level.present? ? @hierarchy_level : :not_assigned  %>
   <%= f.hidden_field :parent_id,       value: @parent_id %>
 
   <div class="row">

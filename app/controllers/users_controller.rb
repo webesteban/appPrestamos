@@ -4,7 +4,13 @@ class UsersController < ApplicationController
   helper_method :frame_id_for, :user_list_locals_for, :keep_params_for
 
   def index
-    @users = User.includes(:status, :role, :city).all
+    @q = User.includes(:status, :role, :city).ransack(params[:q])
+    @pagy, @users = pagy(@q.result, items: 1)
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream { render :index } # o render turbo_frame si tenés
+    end
   end
 
   def new
@@ -14,6 +20,7 @@ class UsersController < ApplicationController
 
     # ✅ Para navegación dentro de <turbo-frame id="modal"> devolvemos HTML envuelto
     respond_to do |format|
+      format.turbo_stream { render :new }
       format.html do
         if turbo_frame_request?
           render :new, layout: false    # renderiza new.html.erb (con el wrapper del frame)
@@ -37,6 +44,10 @@ class UsersController < ApplicationController
   
     if @user.save
       if params[:from] == "hierarchy"
+        if @user.collector?
+          collection = Collection.create!(name: @user.username, payment_term: PaymentTerm.first) # ajustar según lógica
+          CollectionUser.create!(user: @user, collection: collection)
+        end
         if request.format.turbo_stream?
           # Capturamos el partial como string (NO otro render del controller)
           list_html = render_to_string(
@@ -75,9 +86,13 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to users_path, notice: "Usuario actualizado exitosamente"
     else
-      render :edit, status: :unprocessable_entity, formats: [:turbo_stream]
+      respond_to do |format|
+        format.turbo_stream { render :edit, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
+  
 
   def hierarchy
     @owners             = User.where(hierarchy_level: :owner)

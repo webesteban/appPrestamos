@@ -29,3 +29,9 @@
 
 en:
   hello: "Hello world"
+  permissions:
+    actions:
+      view: Ver
+      create: Crear
+      edit: Editar
+      destroy: Eliminar

@@ -1,6 +1,12 @@
 class ExpenseTypesController < ApplicationController
     def index
-        @expense_types = ExpenseType.all
+        @q = ExpenseType.ransack(params[:q])
+        @pagy, @expense_types = pagy(@q.result, items: 10)
+    
+        respond_to do |format|
+          format.html
+          format.turbo_stream
+        end
       end
       
       def new

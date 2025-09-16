@@ -1,5 +1,4 @@
 class Api::ClientsController < Api::BaseController
-  skip_forgery_protection
 
   def index
     render json: Client.all
@@ -11,6 +10,8 @@ class Api::ClientsController < Api::BaseController
 
   def create
     client = Client.new(client_params)
+    collection = @current_user.collections.presence&.first || Collection.first
+    client.collection_id = collection.id
     if client.save
       render json: client, status: :created
     else

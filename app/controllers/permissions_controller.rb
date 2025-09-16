@@ -1,6 +1,12 @@
 class PermissionsController < ApplicationController
   def index
-    @permissions = Permission.all
+    @q = Permission.ransack(params[:q])
+    @pagy, @permissions = pagy(@q.result, items: 10)
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
   
   def new

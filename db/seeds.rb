@@ -106,3 +106,33 @@ user_socio = User.find_or_create_by!(username: "socio") do |user|
     user.parent_id = user_socio.id
     user.hierarchy_level = 3
   end
+
+Section.create!([
+  { name: "ROLES", code: "roles", description: "Gestión de roles y sus permisos asociados." },
+  { name: "PERMISOS", code: "permisos", description: "Control detallado de accesos por módulo." },
+  { name: "MODULOS", code: "modulos", description: "Módulo de configuración de accesos por usuario." },
+  { name: "USUARIO", code: "usuario", description: "Módulo de configuración de accesos por usuario." },
+  { name: "TIPO TERCERO", code: "tipo_tercero", description: "Clasificación de terceros por tipo o naturaleza." },
+  { name: "TIPO GASTO", code: "tipo_gasto", description: "Definición de categorías de gastos admitidos." },
+  { name: "ESTADOS", code: "estados", description: "Manejo de estados para entidades del sistema." },
+  { name: "TIEMPOS", code: "tiempos", description: "Configuración de tiempos y periodos operativos." },
+  { name: "MOTIVOS", code: "motivos", description: "Listado de motivos para operaciones o movimientos." },
+  { name: "RUTAS", code: "rutas", description: "Gestión de rutas logísticas o comerciales." },
+  { name: "JERARQUIA", code: "jerarquia", description: "Estructura organizacional o jerárquica del sistema." },
+  { name: "CLINTES", code: "clintes", description: "Módulo central de administración de clientes." },
+  { name: "PRESTAMOS", code: "prestamos", description: "Gestión y seguimiento de préstamos otorgados." },
+  { name: "ABONOS", code: "abonos", description: "Control de abonos y pagos realizados por clientes." },
+  { name: "LIQUIDACIONES", code: "liquidaciones", description: "Control la liquidacion diaria." },
+  { name: "REPORTES", code: "reportes", description: "Control de reportes." },
+  { name: "GEOLOCALIZACION", code: "geolocalizacion", description: "Geoocalizacion de clientes." }
+
+])
+
+# create section 
+Section.create!([
+  { name: "PRESTAMOS MOVIL", code: "prestamo_movil", description: "Gestión de roles y sus permisos asociados." },
+  { name: "ABONOS MOVIL", code: "abonos_movil", description: "Control detallado de accesos por módulo." },
+  { name: "GASTOS MOVIL", code: "gastos_movil", description: "Módulo de configuración de accesos por usuario." },
+  { name: "CLIENTES MOVIL", code: "clientes_movil", description: "Módulo de configuración de accesos por usuario." },
+
+])

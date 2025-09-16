@@ -1,8 +1,8 @@
-class Api::LoansController < ApplicationController
-  skip_forgery_protection
+class Api::LoansController < Api::BaseController
 
   def index
     render json: Loan.all
+    
   end
 
   def show

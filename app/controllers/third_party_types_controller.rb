@@ -1,7 +1,13 @@
 class ThirdPartyTypesController < ApplicationController
     def index
-        @third_party_types = ThirdPartyType.all
+      @q = ThirdPartyType.ransack(params[:q])
+      @pagy, @third_party_types = pagy(@q.result, items: 1)
+
+      respond_to do |format|
+        format.html
+        format.turbo_stream
       end
+    end
       
       def new
         @third_party_type = ThirdPartyType.new

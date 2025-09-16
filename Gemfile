@@ -75,3 +75,8 @@ gem "sass-rails", "~> 6.0"
 group :production do
   gem "pg"
 end
+
+gem "pg"
+gem 'pagy'
+gem 'ransack'
+

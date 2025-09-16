@@ -186,10 +186,13 @@ GEM
     nokogiri (1.18.3-x86_64-linux-gnu)
       racc (~> 1.4)
     ostruct (0.6.1)
+    pagy (9.4.0)
     parallel (1.26.3)
     parser (3.3.7.1)
       ast (~> 2.4.1)
       racc
+    pg (1.6.1-arm64-darwin)
+    pg (1.6.1-x86_64-linux)
     popper_js (2.11.8)
     pp (0.6.2)
       prettyprint
@@ -249,6 +252,10 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.2.1)
+    ransack (4.3.0)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     rdoc (6.12.0)
       psych (>= 4.0.0)
     regexp_parser (2.10.0)
@@ -384,10 +391,13 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
+  pagy
+  pg
   propshaft
   puma (>= 5.0)
   rack-cors
   rails (~> 8.0.1)
+  ransack
   rubocop-rails-omakase
   sass-rails (~> 6.0)
   scrypt (~> 3.0)

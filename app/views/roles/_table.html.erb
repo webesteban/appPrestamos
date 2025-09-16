@@ -1,12 +1,24 @@
-<% roles.each do |role| %>
-  
-  <tr id="role_<%= role.id %>">
-    <td><%= role.name %></td>
-    <td><%= role.description %></td>
-    <td class="text-center">
-      <%= button_to edit_role_path(role, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar Permisos" do %>
-        <i class="ti ti-edit"></i>
-      <% end %>
-    </td>
-  </tr>
-<% end %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= sort_link @q, :name, "NOMBRE" %></th>
+      <th><%= sort_link @q, :description, "DESCRIPCION" %></th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% roles.each do |role| %>
+      
+      <tr id="role_<%= role.id %>">
+        <td><%= role.name %></td>
+        <td><%= role.description %></td>
+        <td class="text-center">
+          <%= button_to edit_role_path(role, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar Permisos" do %>
+            <i class="ti ti-edit"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

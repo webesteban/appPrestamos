@@ -1,0 +1,12 @@
+<%= search_form_for q, url: users_path, method: :get, html: { data: { turbo_frame: "users_table" } } do |f| %>
+  <div class="row mb-3">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="input-group">
+        <%= f.search_field :username_or_email_cont,
+          placeholder: "Buscar usuario...",
+          class: "form-control form-control-sm" %>
+        <button class="btn btn-outline-secondary btn-sm" type="submit">Buscar</button>
+      </div>
+    </div>
+  </div>
+<% end %>

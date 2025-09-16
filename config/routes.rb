@@ -2,10 +2,16 @@ Rails.application.routes.draw do
   resources :sections
   resources :permissions
   resources :roles
-  resources :clients
+  resources :clients do
+    member do
+      get :summary
+    end
+  end
   resources :loans
 
   resources :payments
+
+  resources :collections
 
   resources :third_party_types
   resources :expense_types
@@ -19,6 +25,7 @@ Rails.application.routes.draw do
       get :hierarchy
     end
   end
+  resources :permission_roles, only: [:index, :create, :update]
 
   namespace :api do
     resources :clients, only: [:index, :show, :create, :update]
@@ -35,7 +42,7 @@ Rails.application.routes.draw do
   get 'login', to: 'user_sessions#new', as: :login
 
   # Ruta por defecto
-  root to: 'sections#index'
+  root to: 'dashboards#clinic'
 
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

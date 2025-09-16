@@ -1,5 +1,5 @@
-class Api::PaymentsController < ApplicationController
-  skip_forgery_protection
+class Api::PaymentsController < Api::BaseController
+  
 
   def index
     render json: Payment.all

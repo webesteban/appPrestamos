@@ -5,11 +5,23 @@ class User < ApplicationRecord
   end
 
   
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[username email]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+      []
+  end
+
+  
   belongs_to :status
   belongs_to :role
   belongs_to :city
   belongs_to :parent, class_name: 'User', optional: true
   has_many :children, class_name: 'User', foreign_key: :parent_id
+  has_many :collection_users
+  has_many :collections, through: :collection_users
 
   enum :hierarchy_level, { not_assigned: 0, owner: 1, partner: 2, collector: 3, charge: 4 }
 

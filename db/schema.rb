@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_14_073203) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_15_144435) do
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -44,6 +44,33 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_14_073203) do
     t.decimal "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "collection_id", null: false
+    t.index ["collection_id"], name: "index_clients_on_collection_id"
+  end
+
+  create_table "collection_users", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "collection_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["collection_id"], name: "index_collection_users_on_collection_id"
+    t.index ["user_id"], name: "index_collection_users_on_user_id"
+  end
+
+  create_table "collections", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "plate"
+    t.string "phone"
+    t.string "email"
+    t.string "city"
+    t.decimal "min_value"
+    t.decimal "max_value"
+    t.integer "payment_method"
+    t.integer "payment_term_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["payment_term_id"], name: "index_collections_on_payment_term_id"
   end
 
   create_table "expense_types", force: :cascade do |t|
@@ -104,6 +131,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_14_073203) do
     t.index ["client_id"], name: "index_payments_on_client_id"
     t.index ["loan_id"], name: "index_payments_on_loan_id"
     t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "permission_roles", force: :cascade do |t|
+    t.integer "role_id", null: false
+    t.integer "section_id", null: false
+    t.boolean "can_view"
+    t.boolean "can_create"
+    t.boolean "can_edit"
+    t.boolean "can_destroy"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_permission_roles_on_role_id"
+    t.index ["section_id"], name: "index_permission_roles_on_section_id"
   end
 
   create_table "permissions", force: :cascade do |t|
@@ -198,6 +238,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_14_073203) do
     t.index ["status_id"], name: "index_users_on_status_id"
   end
 
+  add_foreign_key "clients", "collections"
+  add_foreign_key "collection_users", "collections"
+  add_foreign_key "collection_users", "users"
+  add_foreign_key "collections", "payment_terms"
   add_foreign_key "expenses", "expense_types"
   add_foreign_key "expenses", "users"
   add_foreign_key "loans", "clients"
@@ -205,6 +249,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_14_073203) do
   add_foreign_key "payments", "clients"
   add_foreign_key "payments", "loans"
   add_foreign_key "payments", "users"
+  add_foreign_key "permission_roles", "roles"
+  add_foreign_key "permission_roles", "sections"
   add_foreign_key "section_permissions", "permissions"
   add_foreign_key "section_permissions", "sections"
   add_foreign_key "users", "cities"

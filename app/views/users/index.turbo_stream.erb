@@ -1,0 +1,6 @@
+<!-- app/views/users/index.turbo_stream.erb -->
+<%= turbo_stream.remove "modal" %>
+
+<%= turbo_stream.replace "users_table" do %>
+  <%= render "table", users: @users, q: @q, pagy: @pagy %>
+<% end %>

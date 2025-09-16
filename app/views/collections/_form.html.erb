@@ -1,0 +1,52 @@
+<%= form_with model: collection, url: collection.persisted? ? collection_path(collection) : collections_path(user_id: user_id), method: collection.persisted? ? :patch : :post, data: { turbo_frame: "_top" }, class: "p-3" do |f| %>
+  <div class="mb-3">
+    <%= f.label :name, "Nombre", class: "form-label text-uppercase" %>
+    <%= f.text_field :name, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :description, "Descripción", class: "form-label text-uppercase" %>
+    <%= f.text_area :description, class: "form-control", rows: 3 %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :plate, "Placa de moto", class: "form-label text-uppercase" %>
+    <%= f.text_field :plate, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :phone, "Celular", class: "form-label text-uppercase" %>
+    <%= f.telephone_field :phone, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :email, "Correo", class: "form-label text-uppercase" %>
+    <%= f.email_field :email, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :city, "Ciudad", class: "form-label text-uppercase" %>
+    <%= f.text_field :city, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :min_value, "Valor mínimo", class: "form-label text-uppercase" %>
+    <%= f.number_field :min_value, step: 0.01, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :max_value, "Valor máximo", class: "form-label text-uppercase" %>
+    <%= f.number_field :max_value, step: 0.01, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :payment_term_id, "Término de pago", class: "form-label text-uppercase" %>
+    <%= f.collection_select :payment_term_id, PaymentTerm.all, :id, :payment_frequency,
+          { prompt: "Seleccione un término" },
+          { class: "form-select" } %>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <%= f.submit (collection.persisted? ? "Actualizar cobro" : "Crear cobro"), class: "btn btn-primary" %>
+  </div>
+<% end %>

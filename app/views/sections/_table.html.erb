@@ -1,13 +1,25 @@
-<% sections.each do |section| %>
-  
-  <tr id="section_<%= section.id %>">
-    <td><%= section.name %></td>
-    <td><%= section.code %></td>
-    <td><%= section.description %></td>
-    <td class="text-center">
-      <%= button_to edit_section_path(section, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar Modulo" do %>
-        <i class="ti ti-edit"></i>
-      <% end %>
-    </td>
-  </tr>
-<% end %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= sort_link @q, :name, "NOMBRE" %></th>
+      <th><%= sort_link @q, :code, "CODIGO" %></th>
+      <th>DESCRIPCION</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% sections.each do |section| %>
+      
+      <tr id="section_<%= section.id %>">
+        <td><%= section.name %></td>
+        <td><%= section.code %></td>
+        <td><%= section.description %></td>
+        <td class="text-center">
+          <%= button_to edit_section_path(section, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar Modulo" do %>
+            <i class="ti ti-edit"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <tbody>
+</table>  

@@ -29,45 +29,52 @@
         <!--- Sidenav Menu -->
         <ul class="side-nav">
 
-            <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarHospital" aria-expanded="false" aria-controls="sidebarHospital" class="side-nav-link">
+            <% if can_action?(:view, "roles") || can_action?(:view, "permisos") || can_action?(:view, "modulos") || can_action?(:view, "usuarios") %>
+                <li class="side-nav-item">
+                    <a data-bs-toggle="collapse" href="#sidebarHospital" aria-expanded="false" aria-controls="sidebarHospital" class="side-nav-link">
                     <span class="menu-icon"><i class="ti ti-medical-cross"></i></span>
                     <span class="menu-text"> Aplicacion</span>
                     <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarHospital">
+                    </a>
+                    <div class="collapse" id="sidebarHospital">
                     <ul class="sub-menu">
+                        <% if can_action?(:view, "roles") %>
                         <li class="side-nav-item">
                             <a href="<%= url_for(controller: 'roles', action: 'index') %>" data-turbo="false" class="side-nav-link">
-                                <span class="menu-text">Roles</span>
+                            <span class="menu-text">Roles</span>
                             </a>
                         </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for(controller: 'permissions', action: 'index') %>" data-turbo="false" class="side-nav-link">
-                                <span class="menu-text">Permisos</span>
-                            </a>
-                        </li>
-                        <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'sections', :action => 'index' %>" data-turbo="false" class="side-nav-link">
-                                <span class="menu-text">Modulos</span>
-                            </a>
-                        </li>
+                        <% end %>
 
+                        <% if can_action?(:view, "permisos") %>
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'section_permissions', :action => 'index' %>" data-turbo="false" class="side-nav-link">
-                                <span class="menu-text">Modulo Permisos</span>
+                            <a href="<%= url_for(controller: 'permission_roles', action: 'index') %>" data-turbo="false" class="side-nav-link">
+                            <span class="menu-text">Permisos</span>
                             </a>
                         </li>
+                        <% end %>
 
+                        <% if can_action?(:view, "modulos") %>
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'users', :action => 'index' %>" data-turbo="false" class="side-nav-link">
-                                <span class="menu-text">Usuarios</span>
+                            <a href="<%= url_for(controller: 'sections', action: 'index') %>" data-turbo="false" class="side-nav-link">
+                            <span class="menu-text">Modulos</span>
                             </a>
                         </li>
+                        <% end %>
+
+                        <% if can_action?(:view, "usuarios") %>
+                        <li class="side-nav-item">
+                            <a href="<%= url_for(controller: 'users', action: 'index') %>" data-turbo="false" class="side-nav-link">
+                            <span class="menu-text">Usuarios</span>
+                            </a>
+                        </li>
+                        <% end %>
                     </ul>
-                </div>
-            </li>
+                    </div>
+                </li>
+                <% end %>
 
+            <% if can_action?(:view, "tipo_tercero") || can_action?(:view, "tipo_gasto") || can_action?(:view, "estados") || can_action?(:view, "tiempos") || can_action?(:view, "motivos") || can_action?(:view, "rutas") %>
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarEcommerce" aria-expanded="false" aria-controls="sidebarEcommerce" class="side-nav-link">
                     <span class="menu-icon"><i class="ti ti-basket"></i></span>
@@ -76,39 +83,59 @@
                 </a>
                 <div class="collapse" id="sidebarEcommerce">
                     <ul class="sub-menu">
+                        <% if can_action?(:view, "tipo_tercero") %>
                         <li class="side-nav-item">
                             <a href="<%= url_for :controller => 'third_party_types', :action => 'index' %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Tipo Tercero</span>
                             </a>
                         </li>
+                        <% end %>
+
+                        <% if can_action?(:view, "tipo_gasto") %>
                         <li class="side-nav-item">
                             <a href="<%= url_for :controller => 'expense_types', :action => 'index' %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Tipo Gasto</span>
                             </a>
                         </li>
+                        <% end %>
+
+                        <% if can_action?(:view, "estados") %>
                         <li class="side-nav-item">
                             <a href="<%= url_for :controller => 'statuses', :action => 'index' %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Estados</span>
                             </a>
                         </li>
+                        <% end %>
+
+                        <% if can_action?(:view, "tiempos") %>
                         <li class="side-nav-item">
                             <a href="<%= url_for :controller => 'payment_terms', :action => 'index' %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Tiempos</span>
                             </a>
                         </li>
+                        <% end %>
+
+                        <% if can_action?(:view, "motivos") %>
                         <li class="side-nav-item">
                             <a href="<%= url_for :controller => 'reasons', :action => 'index' %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Motivos</span>
                             </a>
                         </li>
+                        <% end %>
+
+                        <% if can_action?(:view, "rutas") %>
                         <li class="side-nav-item">
                             <a href="<%= url_for :controller => 'tracks', :action => 'index' %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Rutas</span>
                             </a>
                         </li>
+                        <% end %>
                     </ul>
                 </div>
             </li>
+            <% end %>
+
+            <% if can_action?(:view, "jerarquia") || can_action?(:view, "clientes") || can_action?(:view, "prestamos") || can_action?(:view, "abonos") %>
 
             <li class="side-nav-item">
                 <a data-bs-toggle="collapse" href="#sidebarInvoice" aria-expanded="false" aria-controls="sidebarInvoice" class="side-nav-link">
@@ -118,30 +145,43 @@
                 </a>
                 <div class="collapse" id="sidebarInvoice">
                     <ul class="sub-menu">
+
+                        <% if can_action?(:view, "jerarquia") %>
                         <li class="side-nav-item">
                             <a href="<%= url_for :controller => 'users', :action => 'hierarchy' %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Jerarquia</span>
                             </a>
                         </li>
+                        <% end %>
+
+                        <% if can_action?(:view, "clientes") %>
                         <li class="side-nav-item">
                             <a href="<%= url_for :controller => 'clients', :action => 'index' %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Clientes</span>
                             </a>
                         </li>
+                        <% end %>
+
+                        <% if can_action?(:view, "prestamos") %>
                         <li class="side-nav-item">
                             <a href="<%= url_for :controller => 'loans', :action => 'index' %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Prestamos</span>
                             </a>
                         </li>
+                        <% end %>
+
+                        <% if can_action?(:view, "abonos") %>
 
                         <li class="side-nav-item">
                             <a href="<%= url_for :controller => 'payments', :action => 'index' %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Abonos</span>
                             </a>
                         </li>
+                        <% end %>
                     </ul>
                 </div>
             </li>
+            <% end %>
 
             <li class="side-nav-title mt-2">Liquidaciones y reportes</li>
 
@@ -195,12 +235,12 @@
                 <div class="collapse" id="sidebarForms">
                     <ul class="sub-menu">
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'forms', :action => 'elements' %>" data-turbo="false" class="side-nav-link">
+                            <a href="#" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Liquidaciones</span>
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'tables', :action => 'basic' %>" data-turbo="false" class="side-nav-link">
+                            <a href="#" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Reportes tablas</span>
                             </a>
                         </li>
@@ -218,7 +258,7 @@
                 <div class="collapse" id="sidebarMaps">
                     <ul class="sub-menu">
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'maps', :action => 'leaflet' %>" data-turbo="false" class="side-nav-link">
+                            <a href="#" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Geolocalizacion de clientes</span>
                             </a>
                         </li>

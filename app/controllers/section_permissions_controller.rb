@@ -1,6 +1,12 @@
 class SectionPermissionsController < ApplicationController
     def index
-      @section_permissions = SectionPermission.includes(:section, :permission).all
+      @q = SectionPermission.ransack(params[:q])
+      @pagy, @section_permissions = pagy(@q.result.includes(:section, :permission), items: 10)
+  
+      respond_to do |format|
+        format.html
+        format.turbo_stream
+      end
     end
   
     def new

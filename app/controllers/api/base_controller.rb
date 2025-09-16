@@ -1,8 +1,7 @@
 # app/controllers/api/base_controller.rb
 module Api
-    class BaseController < ApplicationController
+    class BaseController < ActionController::API
       before_action :authenticate_api_user
-      skip_before_action :verify_authenticity_token
   
       private
   

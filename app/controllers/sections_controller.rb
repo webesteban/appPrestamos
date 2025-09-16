@@ -1,6 +1,12 @@
 class SectionsController < ApplicationController
   def index
-    @sections = Section.all
+    @q = Section.ransack(params[:q])
+    @pagy, @sections = pagy(@q.result, items: 10)
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
   
   def new

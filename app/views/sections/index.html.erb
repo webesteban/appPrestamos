@@ -5,20 +5,9 @@
 <%= button_to 'Nueva Modulo', new_section_path(format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" } }, class: "btn btn-primary" %>
 </div>
 
-<div class="table-responsive">
-  <table class="table table-nowrap mb-0">
-    <thead class="bg-light-subtle">
-      <tr>
-        <th>Nombre</th>
-        <th>Codigo</th>
-        <th>Descripcion</th>
-        <th class="text-center">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-        <%= turbo_frame_tag "sections_table" do %>
-            <%= render "table", sections: @sections %>
-        <% end %>
-    </tbody>
-  </table>
-</div>
+<%= turbo_frame_tag "sections_table" do %>
+  <%= render "search_form", q: @q %>
+  <%= render "table", sections: @sections %>
+  <%= render partial: "pagination", locals: { pagy: @pagy } %>
+<% end %>
+

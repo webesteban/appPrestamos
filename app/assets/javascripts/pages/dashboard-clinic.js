@@ -14,22 +14,14 @@ if (dataColors) {
 
 var options = {
     series: [{
-        name: 'Out Patient',
+        name: 'Abonos',
         type: 'bar',
         data: [16,19,19,16,16,14,15,15,17,17,19,19,18,18,20,20,18,18,22,22,20,20,18,18,20,20,18,20,20,22]
     }, {
-        name: 'In Patient',
+        name: 'Prestamos',
+        type: 'bar',
         data: [21,24,24,21,21,19,20,20,22,22,24,24,23,23,25,25,23,23,27,27,25,25,23,23,25,25,23,25,25,27]
     }],
-    chart: {
-        type: 'area',
-        height: 358,
-        toolbar: {
-            show: false
-        },
-        offsetX: 0,
-        offsetY: 2
-    },
     stroke: {
         width: [0, 2],
         dashArray: [5, 0],

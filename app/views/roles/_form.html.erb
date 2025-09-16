@@ -1,13 +1,13 @@
 <%= form_with model: role, data: { turbo: false } do |f| %>
   <div class="mb-3">
-    <%= f.label :name, class: "form-label" %>
+    <%= f.label 'NOMBRE'.upcase, class: "form-label text-uppercase" %>
     <%= f.text_field :name, class: "form-control" %>
   </div>
   <div class="mb-3">
-    <%= f.label :description, class: "form-label" %>
+    <%= f.label 'DESCRIPCION', class: "form-label text-uppercase" %>
     <%= f.text_area :description, class: "form-control" %>
   </div>
   <div class="d-flex justify-content-end">
-    <%= f.submit class: "btn btn-primary" %>
+    <%= f.submit "GUARDAR", class: "btn btn-primary" %>
   </div>
 <% end %>
