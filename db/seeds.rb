@@ -21,7 +21,7 @@ Role.find_or_create_by!(name: "SOCIO", description: "SOCIO")
 Role.find_or_create_by!(name: "SOCIO COBRADOR NO LIQUIDA", description: "SOCIO NO LIQUIDA")
 Role.find_or_create_by!(name: "AUDITOR-ROTADOR NO LIQUIDAR", description: "ROTADOR SIN LIQUIDAR")
 Role.find_or_create_by!(name: "AUDITOR-ROTADOR", description: "LIQUIDA")
-Role.find_or_create_by!(name: "COBRADORES", description: "COBRADORES")
+cobrador_role = Role.find_or_create_by!(name: "COBRADORES", description: "COBRADORES")
 Role.find_or_create_by!(name: "COBRADOR NO LIQUIDA", description: "COBRADOR NO LIQUIDA")
 Role.find_or_create_by!(name: "SECRETARIA", description: "SECRETARIA")
 Role.find_or_create_by!(name: "SECRETARIA NO LIQUIDA", description: "SECRETARIA NO LIQUIDA")
@@ -91,10 +91,10 @@ user_socio = User.find_or_create_by!(username: "socio") do |user|
     user.hierarchy_level = 2
   end
 
-  cobrador1 = User.find_or_create_by!(username: "Cobrador1") do |user|
+  cobrador1 = User.find_or_create_by!(username: "cobrador1") do |user|
     user.password = "123"
     user.status = Status.find_by(name: "Activo")
-    user.role = admin_role
+    user.role = cobrador_role
     user.reason_block = nil
     user.email = "socio@example.com"
     user.phone = "04141234567"
@@ -109,10 +109,10 @@ user_socio = User.find_or_create_by!(username: "socio") do |user|
   collection1 = Collection.create!(name: cobrador1.username, payment_term: PaymentTerm.first) # ajustar según lógica
   CollectionUser.create!(user: cobrador1, collection: collection1)
 
-  cobrador2 = User.find_or_create_by!(username: "Cobrador2") do |user|
+  cobrador2 = User.find_or_create_by!(username: "cobrador2") do |user|
     user.password = "123"
     user.status = Status.find_by(name: "Activo")
-    user.role = admin_role
+    user.role = cobrador_role
     user.reason_block = nil
     user.email = "socio@example.com"
     user.phone = "04141234567"
@@ -127,10 +127,10 @@ user_socio = User.find_or_create_by!(username: "socio") do |user|
   collection2 = Collection.create!(name: cobrador2.username, payment_term: PaymentTerm.first) # ajustar según lógica
   CollectionUser.create!(user: cobrador2, collection: collection2)
 
-  cobrador3 = User.find_or_create_by!(username: "Cobrador3") do |user|
+  cobrador3 = User.find_or_create_by!(username: "cobrador3") do |user|
     user.password = "123"
     user.status = Status.find_by(name: "Activo")
-    user.role = admin_role
+    user.role = cobrador_role
     user.reason_block = nil
     user.email = "socio@example.com"
     user.phone = "04141234567"
@@ -175,9 +175,10 @@ Section.create!([
 
 ])
 
+Payment.destroy_all
+Loan.destroy_all
 
-
-
+Client.destroy_all
 
 puts "✅ #{payment_terms_data.size} términos de pago creados con éxito."
 
