@@ -30,7 +30,7 @@ module ApplicationHelper
 
     # Mapear a colores estándar de Bootstrap
     btn_class =
-      case overdue_days
+      case overdue_days.to_i
       when 0..10   then "text-bg-dark"  # gris
       when 11..20  then "bg-warning"    # amarillo
       when 21..30  then "bg-secondary"    # azul (usamos como "morado")

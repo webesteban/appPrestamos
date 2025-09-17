@@ -10,4 +10,12 @@ class Loan < ApplicationRecord
   def total_with_interest
     amount.to_f * (1 + payment_term.percentage.to_f / 100)
   end
+
+  def total_paid
+    payments.sum(:amount)
+  end
+
+  def remaining_balance
+    total_with_interest - total_paid
+  end
 end

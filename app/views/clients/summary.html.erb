@@ -37,8 +37,11 @@
       <table class="table table-sm table-striped table-hover align-middle">
         <thead>
           <tr>
+            <th>Id prestamo</th>
             <th>Monto</th>
-            <th>Deuda</th>
+            <th>Compra</th>
+            <th>Abonado</th>
+            <th>Saldo</th>
             <th>Dias de atraso</th>
             <th>Dias sin abonar</th>
             <th>Fecha</th>
@@ -47,11 +50,12 @@
         <tbody>
           <% @client.loans.each do |loan| %>
             <% status = loan_status(@client, loan) %>
-            <% total_loan = loan.total_with_interest %>
-            <% total_loans += total_loans + total_loan %>
             <tr>
+              <td><%= loan.id %></td>
               <td><%= number_to_currency(loan.amount) %></td>
-              <td><%= number_to_currency(total_loan) %></td>
+              <td><%= number_to_currency(loan.total_with_interest) %></td>
+              <td><%= number_to_currency(loan.total_paid) %></td>
+              <td><%= number_to_currency(loan.remaining_balance) %></td>
               <td>
                 <span class="<%= status[:btn_class] %>">
                   <%= status[:overdue_days] %>
@@ -79,7 +83,7 @@
         <thead>
           <tr>
             <th>Monto</th>
-            <th>Préstamo</th>
+            <th>Id Préstamo</th>
             <th>Fecha</th>
           </tr>
         </thead>
@@ -87,7 +91,7 @@
           <% Payment.joins(:loan).where(loans: { client_id: @client.id }).order(created_at: :desc).each do |payment| %>
             <tr>
               <td><%= number_to_currency(payment.amount) %></td>
-              <td>#<%= payment.loan.id %></td>
+              <td><%= payment.loan.id %></td>
               <td><%= l payment.paid_at.to_date %></td>
             </tr>
           <% end %>
