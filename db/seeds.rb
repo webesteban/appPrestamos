@@ -8,6 +8,13 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+Payment.destroy_all
+Loan.destroy_all
+Client.destroy_all
+CollectionUser.destroy_all
+Expense.destroy_all
+Collection.destroy_all
+User.destroy_all
 
 # Estados posibles
 Status.find_or_create_by!(name: "Activo")
@@ -52,7 +59,7 @@ payment_terms_data.each do |percentage, quota_days, payment_frequency, payment_d
     monthly: monthly
   )
 end
-
+User.destroy_all
 # Ciudad
 city = City.find_or_create_by!(name: "Lima")
 city = City.find_or_create_by!(name: "Bogota")
