@@ -10,14 +10,17 @@
   <tbody>
     <% clients.each do |client| %>
       <tr>
-        <td><%= link_to client.full_name,
-            summary_client_path(client, format: :turbo_stream),
-            data: { turbo_frame: "modal" },
-            class: "text-blue-600 hover:underline" %></td>
+        <td><%= client.full_name %>
+            <%= link_to summary_client_path(client), class: "btn btn-soft-success btn-icon btn-sm rounded-circle", target: "_blank" do %>
+              <i class="ti ti-search"></i>
+            <% end %>
+          </td>
         <td><%= client.identification %></td>
         <td><%= client.email %></td>
         <td>
-          <%= link_to "Editar", edit_client_path(client), data: { turbo_frame: "_top" } %>
+        <%= button_to edit_client_path(client, format: :turbo_stream), method: :get, form: { data: { turbo_frame: "modal" }, class: "d-inline" }, class: "btn btn-soft-success btn-icon btn-sm rounded-circle", title: "Editar" do %>
+            <i class="ti ti-edit"></i>
+        <% end %>
         </td>
       </tr>
     <% end %>

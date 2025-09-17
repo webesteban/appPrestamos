@@ -45,8 +45,7 @@ class ClientsController < ApplicationController
     @client = Client.find(params[:id])
   
     respond_to do |format|
-      format.turbo_stream { render partial: "clients/modal", locals: { client: @client } }
-      format.html { head :not_found } # o redirect, o render normal si querés
+      format.html
     end
   end
 

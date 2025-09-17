@@ -1,0 +1,99 @@
+<div class="container py-4">
+
+
+
+  <!-- Encabezado del cliente -->
+  <div class="mb-4">
+    <h2 class="h4 mb-1"><%= @client.full_name %></h2>
+    <p class="text-muted mb-0">
+      🆔 <%= @client.identification %> · 📍 <%= @client.address %>
+    </p>
+  </div>
+  <% total_loans = 0 %>
+  <!-- Resumen financiero -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">📊 Resumen financiero</h5>
+      
+      <% total_payment = Payment.joins(:loan).where(loans: { client_id: @client.id }).sum(:amount) %>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          Total prestado: <strong><%= number_to_currency(@client.total_loans_with_interest) %></strong>
+        </li>
+        <li class="list-group-item">
+          Total abonado: <strong><%= number_to_currency(@client.total_payments) %></strong>
+        </li>
+        <li class="list-group-item">
+          Saldo: <strong class="text-danger"><%= number_to_currency(@client.balance) %></strong>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Préstamos vigentes -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">📌 Préstamos vigentes</h5>
+      <table class="table table-sm table-striped table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Monto</th>
+            <th>Deuda</th>
+            <th>Dias de atraso</th>
+            <th>Dias sin abonar</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @client.loans.each do |loan| %>
+            <% status = loan_status(@client, loan) %>
+            <% total_loan = loan.total_with_interest %>
+            <% total_loans += total_loans + total_loan %>
+            <tr>
+              <td><%= number_to_currency(loan.amount) %></td>
+              <td><%= number_to_currency(total_loan) %></td>
+              <td>
+                <span class="<%= status[:btn_class] %>">
+                  <%= status[:overdue_days] %>
+                </span>
+              </td>
+              <td>
+                <span class="<%= status[:btn_class] %>">
+                  <%= status[:days_without_payment] %>
+                </span>
+              </td>
+              <td><%= l loan.created_at.to_date %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= render "shared/loan_status_legend" %>
+    </div>
+  </div>
+
+  <!-- Lista de abonos -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">💵 Todos los abonos</h5>
+      <table class="table table-sm table-bordered table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Monto</th>
+            <th>Préstamo</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% Payment.joins(:loan).where(loans: { client_id: @client.id }).order(created_at: :desc).each do |payment| %>
+            <tr>
+              <td><%= number_to_currency(payment.amount) %></td>
+              <td>#<%= payment.loan.id %></td>
+              <td><%= l payment.paid_at.to_date %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

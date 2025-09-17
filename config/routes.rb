@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get "settlements/index"
   resources :sections
+  resources :settlements
   resources :permissions
   resources :roles
   resources :clients do

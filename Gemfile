@@ -80,3 +80,5 @@ gem "pg"
 gem 'pagy'
 gem 'ransack'
 
+gem "faker", "~> 3.2"
+

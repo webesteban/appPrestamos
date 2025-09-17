@@ -28,12 +28,41 @@ Role.find_or_create_by!(name: "SECRETARIA NO LIQUIDA", description: "SECRETARIA 
 Role.find_or_create_by!(name: "SOLO ABONO", description: "SOLO ABONO")
 Role.find_or_create_by!(name: "ENSAYO", description: "ENSAYO")
 
+payment_terms_data = [
+  [20, 30, "DIARIO 30 Días 20%", 1],
+  [20, 60, "DIARIO 60 Días 20%", 1],
+  [30, 30, "DIARIO 30 Días 30%", 1],
+  [20, 24, "DIARIO 24 Días 20%", 1],
+  [20, 120, "DIARIO 120 NECESITA AURORIZACION 20%", 1],
+  [20, 40, "SEMANAL 40 Semanas 20%", 7],
+  [20, 40, "DIARIO 40 Días 20%", 1],
+  [20, 40, "DIARIO 40 Días NECESITA AUTORIZACION 20%", 1],
+]
+
+puts "⏳ Creando términos de pago..."
+
+payment_terms_data.each do |percentage, quota_days, payment_frequency, payment_days|
+  monthly = payment_frequency.to_s.upcase.include?("MENSUAL") ? 0 : 1
+
+  PaymentTerm.create!(
+    percentage: percentage,
+    quota_days: quota_days,
+    payment_frequency: payment_frequency,
+    payment_days: payment_days,
+    monthly: monthly
+  )
+end
+
 # Ciudad
+city = City.find_or_create_by!(name: "Lima")
+city = City.find_or_create_by!(name: "Bogota")
+city = City.find_or_create_by!(name: "Colombia")
+city = City.find_or_create_by!(name: "Peru")
 city = City.find_or_create_by!(name: "Medellin")
 
 # Usuario por defecto
 user_owner = User.find_or_create_by!(username: "admin") do |user|
-  user.password = "password123"
+  user.password = "123"
   user.status = Status.find_by(name: "Activo")
   user.role = admin_role
   user.reason_block = nil
@@ -48,7 +77,7 @@ end
 
 
 user_socio = User.find_or_create_by!(username: "socio") do |user|
-    user.password = "password123"
+    user.password = "123"
     user.status = Status.find_by(name: "Activo")
     user.role = admin_role
     user.reason_block = nil
@@ -62,8 +91,8 @@ user_socio = User.find_or_create_by!(username: "socio") do |user|
     user.hierarchy_level = 2
   end
 
-  User.find_or_create_by!(username: "Cobrador1") do |user|
-    user.password = "password123"
+  cobrador1 = User.find_or_create_by!(username: "Cobrador1") do |user|
+    user.password = "123"
     user.status = Status.find_by(name: "Activo")
     user.role = admin_role
     user.reason_block = nil
@@ -77,8 +106,11 @@ user_socio = User.find_or_create_by!(username: "socio") do |user|
     user.hierarchy_level = 3
   end
 
-  User.find_or_create_by!(username: "Cobrador2") do |user|
-    user.password = "password123"
+  collection1 = Collection.create!(name: cobrador1.username, payment_term: PaymentTerm.first) # ajustar según lógica
+  CollectionUser.create!(user: cobrador1, collection: collection1)
+
+  cobrador2 = User.find_or_create_by!(username: "Cobrador2") do |user|
+    user.password = "123"
     user.status = Status.find_by(name: "Activo")
     user.role = admin_role
     user.reason_block = nil
@@ -92,8 +124,11 @@ user_socio = User.find_or_create_by!(username: "socio") do |user|
     user.hierarchy_level = 3
   end
 
-  User.find_or_create_by!(username: "Cobrador3") do |user|
-    user.password = "password123"
+  collection2 = Collection.create!(name: cobrador2.username, payment_term: PaymentTerm.first) # ajustar según lógica
+  CollectionUser.create!(user: cobrador2, collection: collection2)
+
+  cobrador3 = User.find_or_create_by!(username: "Cobrador3") do |user|
+    user.password = "123"
     user.status = Status.find_by(name: "Activo")
     user.role = admin_role
     user.reason_block = nil
@@ -106,6 +141,9 @@ user_socio = User.find_or_create_by!(username: "socio") do |user|
     user.parent_id = user_socio.id
     user.hierarchy_level = 3
   end
+
+  collection3 = Collection.create!(name: cobrador3.username, payment_term: PaymentTerm.first) # ajustar según lógica
+  CollectionUser.create!(user: cobrador3, collection: collection3)
 
 Section.create!([
   { name: "ROLES", code: "roles", description: "Gestión de roles y sus permisos asociados." },
@@ -137,38 +175,100 @@ Section.create!([
 
 ])
 
-payment_terms_data = [
-  [20, 60, "DIARIO", 1],
-  [20, 60, "DIARIO", 1],
-  [20, 30, "DIARIO", 1],
-  [20, 24, "DIRIO", 1],
-  [20, 120, "NECESITA AURORIZACION", 1],
-  [20, 24, "DIARIO", 1],
-  [20, 40, "SEMANAL", 7],
-  [20, 40, "DIRARIO", 1],
-  [20, 40, "NECESITA AUTORIZACION", 1],
-  [20, 60, "DIARIO", 1],
-  [0,   111111, "VENTA CONTADO", 1],
-  [20, 30010, "MENSUAL", 0],
-  [1,  31, "pago letras", 30],
-  [20, 60, "SEMNAL", 7],
-  [20, 45, "SEMANAL", 7],
-  [20, 50, "DIARIO", 1],
-  [20, 20, "DIARIO", 1]
-]
 
-puts "⏳ Creando términos de pago..."
 
-payment_terms_data.each do |percentage, quota_days, payment_frequency, payment_days|
-  monthly = payment_frequency.to_s.upcase.include?("MENSUAL") ? 0 : 1
 
-  PaymentTerm.create!(
-    percentage: percentage,
-    quota_days: quota_days,
-    payment_frequency: payment_frequency,
-    payment_days: payment_days,
-    monthly: monthly
+
+puts "✅ #{payment_terms_data.size} términos de pago creados con éxito."
+
+collections = [collection1, collection2, collection3]
+
+puts "📌 Creando clientes..."
+100.times do
+  Client.create!(
+    identification: Faker::Number.number(digits: 10),
+    identification_type: %w[CC TI CE PAS].sample,
+    full_name: Faker::Name.name,
+    identification_issued_at: Faker::Date.between(from: 20.years.ago, to: Date.today),
+    birth_date: Faker::Date.birthday(min_age: 18, max_age: 70),
+    sex: %w[M F].sample,
+    address: Faker::Address.full_address,
+    mobile_phone: Faker::PhoneNumber.cell_phone_in_e164,
+    landline_phone: Faker::PhoneNumber.phone_number,
+    billing_address: Faker::Address.full_address,
+    occupation: Faker::Job.title,
+    workplace: Faker::Company.name,
+    income: Faker::Number.number(digits: 6),
+    reference1_name: Faker::Name.name,
+    reference1_identification: Faker::Number.number(digits: 8),
+    reference1_address: Faker::Address.full_address,
+    reference1_phone: Faker::PhoneNumber.cell_phone_in_e164,
+    reference2_name: Faker::Name.name,
+    reference2_identification: Faker::Number.number(digits: 8),
+    reference2_address: Faker::Address.full_address,
+    reference2_phone: Faker::PhoneNumber.cell_phone_in_e164,
+    email: Faker::Internet.unique.email,
+    latitude: Faker::Address.latitude,
+    longitude: Faker::Address.longitude,
+    collection_id: collections.sample.id
   )
 end
 
-puts "✅ #{payment_terms_data.size} términos de pago creados con éxito."
+
+puts "📌 Creando préstamos para cada cliente..."
+payment_term = PaymentTerm.first
+
+Client.find_each do |client|
+  rand(1..1).times do
+    raw_amount = rand(100_000..7_000_000)
+    normalized_amount = raw_amount / 1000 # guardamos en miles
+
+    insurance_flag = [true, false].sample
+    insurance_value = insurance_flag ? rand(100..500) : 0
+
+    Loan.create!(
+      payment_term_id: payment_term.id,
+      client_id: client.id,
+      installment_days: 30,
+      amount: normalized_amount,
+      details: Faker::Lorem.sentence(word_count: 5),
+      insurance: insurance_flag,
+      insurance_amount: insurance_value,
+      created_at: Faker::Date.between(from: 2.months.ago, to: Date.today),
+      latitude: Faker::Address.latitude,
+      longitude: Faker::Address.longitude
+    )
+  end
+end
+
+puts "📌 Creando pagos para cada préstamo..."
+
+Loan.find_each do |loan|
+  client = loan.client
+  user_id = client.collection.collection_users.first.user_id
+
+  # préstamo + 20%
+  total_with_interest = loan.amount.to_f * 1.2
+  base_amount = total_with_interest / loan.installment_days
+
+  start_date = loan.created_at.to_date
+  num_payments = rand(1..15)
+
+  num_payments.times do |i|
+    payment_date = start_date + i.days
+    break if payment_date > Date.today # nunca pasarse de hoy
+
+    Payment.create!(
+      client_id: client.id,
+      loan_id: loan.id,
+      user_id: user_id,
+      amount: base_amount.round(2),
+      latitude: loan.latitude,
+      longitude: loan.longitude,
+      paid_at: payment_date,
+      details: "Pago automático generado en seed"
+    )
+  end
+end
+
+puts "✅ Pagos creados correctamente para todos los préstamos"
