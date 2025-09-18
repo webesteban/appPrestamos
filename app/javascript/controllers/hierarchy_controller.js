@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Conecta con data-controller="hierarchy"
 export default class extends Controller {
-  static targets = ["owner", "partner", "collector", "collection"]
+  static targets = ["owner", "partner", "collector", "collection", "date"]
 
   connect() {
     console.log("Hierarchy controller conectado ✅")
@@ -87,13 +87,15 @@ export default class extends Controller {
   applyFilterSettlement() {
 
     let id = null
+    let date = null
 
     if (this.collectionTarget.value) {
       id = this.collectionTarget.value
+      date = this.dateTarget.value
     } else {
         alert("Por favor selecciona una Ruta")
         return
     }
-    window.location.href = `/settlements/${id}`
+    window.location.href = `/settlements/${id}?date=${date}`
   }
 }

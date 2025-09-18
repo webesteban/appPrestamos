@@ -1,0 +1,23 @@
+<%= form_with model: [@settlement, Expense.new],
+              url: settlement_expenses_path(@settlement),
+              method: :post,
+              format: :turbo_stream,
+              data: { turbo_frame: "expenses_frame" },
+              class: "row g-2" do |f| %>
+
+  <div class="col-md-4">
+    <%= f.number_field :amount, step: "0.01", min: "0", class: "form-control", placeholder: "Monto" %>
+  </div>
+  <div class="col-md-4">
+  <%= f.hidden_field :expense_type_id, value: ExpenseType.first.id, class: "form-control", placeholder: "Descripción" %>
+  <%= f.hidden_field :user_id, value: current_user.id, class: "form-control", placeholder: "Descripción" %>
+    <%= f.text_field :description, class: "form-control", placeholder: "Descripción" %>
+  </div>
+  <div class="col-md-4">
+    <%= f.date_field :created_at, value: Date.current, class: "form-control", disabled: true %>
+  </div>
+
+  <div class="col-12 mt-2">
+    <%= f.submit "➕ Agregar gasto", class: "btn btn-warning btn-sm w-100" %>
+  </div>
+<% end %>

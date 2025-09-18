@@ -4,7 +4,7 @@ class Client < ApplicationRecord
     has_many :loans
     has_many :payments, through: :loans
 
-    validates :identification, :full_name, :birth_date, presence: true
+    validates :identification, :full_name, presence: true
 
     
 

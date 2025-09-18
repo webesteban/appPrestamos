@@ -1,0 +1,117 @@
+<div class="container py-4" data-turbo="false">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h4">💵 Reporte de Abonos</h2>
+    <div>
+      <%= link_to "⬇️ Excel", payments_reports_path(format: :xlsx, params: request.query_parameters), class: "btn btn-sm btn-outline-secondary", data: { turbo: false } %>
+    </div>
+  </div>
+
+    <div class="mb-3 d-flex align-items-center">
+    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#collectionFilterModal">
+      Filtrar por jerarquía
+    </button>
+
+    <% if @selected_label.present? %>
+      <div class="alert alert-info mb-0 ms-3">
+        <strong>Jerarquia Aplicada:</strong> <%= @selected_label %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Buscador -->
+  <div class="card mb-3">
+    <div class="card-body">
+      <%= form_with url: payments_reports_path,
+                    method: :get,
+                    local: true,
+                    data: { turbo: false },
+                    class: "row g-2" do %>
+        <div class="col-md-4">
+          <%= label_tag :full_name, "Buscar por cliente" %>
+          <%= text_field_tag :full_name, params[:full_name], class: "form-control" %>
+        </div>
+        <div class="col-md-3">
+          <%= label_tag :collection_id, "Buscar por Cobro (ID)" %>
+          <%= number_field_tag :collection_id, params[:collection_id], class: "form-control" %>
+        </div>
+        <div class="col-md-2 align-self-end">
+          <%= submit_tag "Buscar", class: "btn btn-primary w-100" %>
+        </div>
+        <div class="col-md-2 align-self-end">
+          <%= link_to "Limpiar", payments_reports_path, class: "btn btn-outline-secondary w-100", data: { turbo: false } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Filtro de rangos -->
+  <div class="mb-3">
+    <div class="btn-group" role="group">
+      <%= link_to "Todos",
+                  payments_reports_path(request.query_parameters.except(:overdue_range)),
+                  class: "btn btn-sm border border-2 rounded-pill text-white #{'active' unless params[:overdue_range]}",
+                  data: { turbo: false } %>
+
+      <% [["0-10","0–10 días","text-bg-dark"],
+         ["11-20","11–20 días","bg-warning"],
+         ["21-30","21–30 días","bg-secondary"],
+         ["31-40","31–40 días","bg-primary"],
+         ["41-50","41–50 días","bg-info"],
+         ["51-60","51–60 días","bg-danger"],
+         ["60+","60+ días","bg-success"]].each do |range, label, color_class| %>
+        <%= link_to label,
+                    payments_reports_path(request.query_parameters.merge(overdue_range: range)),
+                    class: "btn btn-sm border border-2 rounded-pill text-white #{color_class} #{'active' if params[:overdue_range] == range}",
+                    data: { turbo: false } %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Tabla -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <table class="table table-sm table-striped table-hover align-middle">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Id</th>
+            <th>Cliente</th>
+            <th>Cobro</th>
+            <th>Valor Compra</th>
+            <th>Valor Abono</th>
+            <th>Saldo</th>
+            <th>Fecha de la compra</th>
+            <th>Fecha del abono</th>
+            <th>Atrasos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @payments.each_with_index do |payment, idx| %>
+            <% status = loan_status(payment.client, payment.loan) %>
+            <tr>
+              <td><%= idx + 1 %></td>
+              <td><%= payment.id %></td>
+              <td><%= payment.client.full_name %></td>
+              <td><%= payment.client.collection&.name || "N/A" %></td>
+              <td><%= number_to_currency(payment.loan.amount) %></td>
+              <td><%= number_to_currency(payment.amount) %></td>
+              <td><%= number_to_currency(payment.loan.remaining_balance) %></td>
+              <td><%= l payment.loan.created_at.to_date %></td>
+              <td><%= l payment.paid_at.to_date %></td>
+              <td>
+                <span class="<%= status[:btn_class] %>"><%= status[:overdue_days] %></span>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <!-- Paginación -->
+      <div class="d-flex justify-content-center mt-3">
+        <%= raw(pagy_bootstrap_nav(@pagy)) if @pagy.pages > 1 %>
+      </div>
+
+      <%= render "shared/loan_status_legend" %>
+    </div>
+  </div>
+</div>

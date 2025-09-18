@@ -84,3 +84,5 @@ gem "faker", "~> 3.2"
 
 gem "axlsx_rails"
 
+gem "byebug"
+

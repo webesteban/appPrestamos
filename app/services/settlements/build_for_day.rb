@@ -44,7 +44,7 @@ module Settlements
 
       # Ajusta si tu app usa otro modelo de gastos de ruta
       if defined?(RouteExpense)
-        expenses_scope = RouteExpense.where(collection_id: @collection.id).where("DATE(spent_at) = ?", @date)
+        expenses_scope = RouteExpense.where(collection_id: @collection.id).where("DATE(created_at) = ?", @date)
         expenses_total = to_d(expenses_scope.sum(:amount))
       elsif defined?(Expense)
         expenses_scope = Expense.where(collection_id: @collection.id).where("DATE(created_at) = ?", @date)

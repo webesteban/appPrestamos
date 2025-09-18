@@ -8,7 +8,7 @@ class ReportsController < ApplicationController
     @selected_date = params[:date].present? ? Date.parse(params[:date]) : Date.today
 
     loans_scope = Loan.includes(:payments, client: :collection)
-                      .where(status: [:active, :overdue]) # 👈 Solo activos o en mora
+                      .where(status: [:active, :overdue], created_at: @selected_date) # 👈 Solo activos o en mora
                       .order(created_at: :desc)
 
     # --- Filtro de jerarquía obligatorio hasta ruta ---
@@ -58,9 +58,15 @@ class ReportsController < ApplicationController
   end
 
   def loans
+    @selected_date = params[:date].present? ? Date.parse(params[:date]) : nil
     loans_scope = Loan.includes(client: :collection)
                       .where(status: [:active, :overdue])
-                      .order(created_at: :desc)
+                      
+                      
+
+    loans_scope = loans_scope.where(created_at: @selected_date) if @selected_date.present?
+
+    loans_scope = loans_scope.order(created_at: :desc)
 
     # --- Filtros por nombre ---
     if params[:full_name].present?
@@ -124,6 +130,80 @@ class ReportsController < ApplicationController
       format.html
       format.csv { send_data generate_csv(@loans), filename: "loans-#{Date.today}.csv" }
       format.xlsx { render xlsx: "loans", filename: "loans-#{Date.today}.xlsx" }
+    end
+  end
+
+  def payments
+    @selected_date = params[:date].present? ? Date.parse(params[:date]) : nil
+    payments_scope = Payment.includes(:loan, client: :collection)
+                            
+    payments_scope = payments_scope.where(created_at: @selected_date) if @selected_date.present?
+    payments_scope = payments_scope.order(created_at: :desc)
+
+    # --- Solo prestamos activos o en mora
+    payments_scope = payments_scope.where(loans: { status: [:active, :overdue] })
+
+    # --- Filtro por cliente
+    if params[:full_name].present?
+      payments_scope = payments_scope.joins(:client)
+                                     .where("clients.full_name ILIKE ?", "%#{params[:full_name]}%")
+    end
+
+    # --- Filtro por jerarquía (collection_id viene del modal)
+    if params[:collection_id].present?
+      payments_scope = payments_scope.joins(:client)
+                                     .where(clients: { collection_id: params[:collection_id] })
+    end
+
+    # --- Filtro por rango de días de atraso
+    if params[:overdue_range].present?
+      range = case params[:overdue_range]
+              when "0-10"   then 0..10
+              when "11-20"  then 11..20
+              when "21-30"  then 21..30
+              when "31-40"  then 31..40
+              when "41-50"  then 41..50
+              when "51-60"  then 51..60
+              when "60+"    then 61..Float::INFINITY
+              end
+
+      payments_scope = payments_scope.select do |p|
+        range.include?(loan_status(p.client, p.loan)[:overdue_days])
+      end
+    end
+
+    # --- Paginación
+    if payments_scope.is_a?(Array)
+      @pagy, @payments = pagy_array(payments_scope, items: 20)
+    else
+      @pagy, @payments = pagy(payments_scope, items: 20)
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data generate_csv(@payments), filename: "payments-#{Date.today}.csv" }
+      format.xlsx { render xlsx: "payments", filename: "payments-#{Date.today}.xlsx" }
+    end
+  end
+
+  def settlements
+    collection_id = params[:collection_id]
+    unless collection_id.present?
+      redirect_to reports_path, alert: "Debes indicar una ruta (collection_id)" and return
+    end
+
+    @collection = Collection.find(collection_id)
+
+    settlements_scope = Settlement.where(collection_id: collection_id)
+                                  .order(settlement_date: :desc)
+                                  .limit(20)
+
+    @pagy, @settlements = pagy(settlements_scope, items: 20)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data generate_csv(@settlements), filename: "settlements-#{@collection.name}-#{Date.today}.csv" }
+      format.xlsx { render xlsx: "settlements", filename: "settlements-#{@collection.name}-#{Date.today}.xlsx" }
     end
   end
 

@@ -1,0 +1,66 @@
+<div class="container py-4" data-turbo="false">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h4">📑 Últimas 20 liquidaciones — <%= @collection.name %></h2>
+    <div>
+      <%= link_to "⬇️ CSV", settlements_reports_path(format: :csv, collection_id: @collection.id), class: "btn btn-sm btn-outline-secondary", data: { turbo: false } %>
+      <%= link_to "⬇️ Excel", settlements_reports_path(format: :xlsx, collection_id: @collection.id), class: "btn btn-sm btn-outline-secondary", data: { turbo: false } %>
+    </div>
+  </div>
+
+  <!-- Tabla -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <table class="table table-sm table-striped table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Num</th>
+            <th>Fecha</th>
+            <th>Base</th>
+            <th>Abonos</th>
+            <th>Compras</th>
+            <th>Gastos</th>
+            <th>Efect</th>
+            <th>Desc</th>
+            <th>Retiro</th>
+            <th>O. gastos</th>
+            <th>A. Cap</th>
+            <th>Ref</th>
+            <th>Dif</th>
+            <th>Det</th>
+            <th>Seg</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @settlements.each do |s| %>
+            <tr>
+              <td><%= s.id %></td>
+              <td><%= l s.settlement_date %></td>
+              <td><%= number_to_currency(s.base_start) %></td>
+              <td><%= number_to_currency(s.payments_total) %></td>
+              <td><%= number_to_currency(s.loans_total) %></td>
+              <td><%= number_to_currency(s.expenses_total) %></td>
+              <td><%= number_to_currency(s.delivered_cash) %></td>
+              <td><%= number_to_currency(s.discounts_total || 0) %></td>
+              <td><%= number_to_currency(s.withdrawals_total || 0) %></td>
+              <td><%= number_to_currency(s.other_expenses_total) %></td>
+              <td><%= number_to_currency(s.additional_capital || 0) %></td>
+              <td><%= number_to_currency(s.refinancings_total || 0) %></td>
+              <td><%= number_to_currency(s.difference) %></td>
+              <td><%= s.notes.presence || "-" %></td>
+              <td>
+                <span class="badge rounded-pill <%= s.status == "finalized" ? "bg-success" : "bg-warning" %>">
+                  <%= s.status %>
+                </span>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <!-- Paginación -->
+      <div class="d-flex justify-content-center mt-3">
+        <%= raw(pagy_bootstrap_nav(@pagy)) if @pagy.pages > 1 %>
+      </div>
+    </div>
+  </div>
+</div>

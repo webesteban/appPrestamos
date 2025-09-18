@@ -15,7 +15,10 @@ CollectionUser.destroy_all
 Expense.destroy_all
 Collection.destroy_all
 User.destroy_all
+ExpenseType.destroy_all
 
+
+ExpenseType.create!(name: 'Creado del admin', max_value: 9999999999)
 # Estados posibles
 Status.find_or_create_by!(name: "Activo")
 Status.find_or_create_by!(name: "Blocked")

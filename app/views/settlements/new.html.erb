@@ -39,11 +39,19 @@
       <label for="collection_id">Ruta</label>
       <select name="collection_id" id="collection_id" class="form-select"
               data-hierarchy-target="collection">
-        <option value="">Seleccione un Ruta</option>
+        <option value="">Seleccione una Ruta</option>
       </select>
     </div>
 
-    <div class="col-md-3 pt-2 mt-1">
+     <div class="col-md-2">
+      <label for="date_data">Fecha</label>
+      <%= datetime_local_field_tag "date_data",
+            Time.current.strftime("%Y-%m-%dT%H:%M"),
+            class: "form-control",
+            data: { hierarchy_target: "date" } %>
+    </div>
+
+    <div class="col-md-2 pt-2 mt-1">
       <input type="hidden" name="level" id="selected_level">
       <input type="hidden" name="hierarchy_id" id="selected_hierarchy_id">
       <button type="button" class="btn btn-primary" data-action="click->hierarchy#applyFilterSettlement">Ver Liquidacion</button>

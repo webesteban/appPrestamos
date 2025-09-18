@@ -1,0 +1,11 @@
+<div>
+  <h6>📌 Gastos del día</h6>
+  <ul class="list-group list-group-flush mb-2">
+    <% @settlement.collection.expenses.for_day(@settlement.collection_id, @settlement.settlement_date).each do |expense| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span><%= expense.description %></span>
+        <span class="badge bg-danger"><%= number_to_currency(expense.amount) %></span>
+      </li>
+    <% end %>
+  </ul>
+</div>

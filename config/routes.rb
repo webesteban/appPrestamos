@@ -45,6 +45,8 @@ Rails.application.routes.draw do
     collection do
       get :loans
       get :collections_progress
+      get :payments
+      get :settlements
     end
   end
 
@@ -64,6 +66,7 @@ Rails.application.routes.draw do
 
     resources :settlement_topups, only: [:create, :destroy]
     resources :settlement_withdrawals, only: [:create, :destroy]
+    resources :expenses, only: [:create, :destroy]
   end
   
 

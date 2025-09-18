@@ -106,7 +106,8 @@ class SettlementsController < ApplicationController
   end
 
   def set_settlement_collection
-    @settlement = Settlements::FetchOrCreate.call(collection_id: params[:id], date: Date.today)
+    date = params[:date].present? ? params[:date].to_date : Date.today
+    @settlement = Settlements::FetchOrCreate.call(collection_id: params[:id], date: date)
   end
 
   def set_collection_for_new_create

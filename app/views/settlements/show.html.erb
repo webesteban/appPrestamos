@@ -2,43 +2,41 @@
   <div class="row">
     <!-- Panel izquierdo -->
     <div class="col-md-3">
-      <div class="mb-3">
-        <input type="text" class="form-control" value="<%= @settlement.collection.name %>" disabled>
-        <div class="d-flex mt-2 gap-2">
-          <%= button_to "Guardar", settlement_path(@settlement), method: :put, params: { settlement: {} }, class: "btn btn-primary btn-sm" %>
-          <%= link_to "Gastos", "#", class: "btn btn-danger btn-sm disabled" %>
-          <button class="btn btn-outline-secondary btn-sm" onclick="window.print()"><i class="bi bi-printer"></i></button>
-        </div>
-      </div>
 
       <div class="card p-2">
         <h6>Reportes</h6>
         <div class="d-grid gap-2">
-          <%= link_to "Ver compras", loans_reports_path(level: "collection", hierarchy_id: @settlement.collection_id), class: "btn btn-dark", data: { turbo: false } %>
-          <%= link_to "Ver abonos",  loans_reports_path(level: "collection", hierarchy_id: @settlement.collection_id), class: "btn btn-primary", data: { turbo: false } %>
-          <%= link_to "Liquidaciones", settlements_path(collection_id: @settlement.collection_id), class: "btn btn-info", data: { turbo: false } %>
-          <button class="btn btn-secondary" disabled>Liquidaciones2</button>
-          <button class="btn btn-danger" disabled>Autorizacion</button>
+          <%= link_to "Ver compras", loans_reports_path(level: "collection", hierarchy_id: @settlement.collection_id, date: @settlement.settlement_date ), class: "btn btn-dark", data: { turbo: false } %>
+          <%= link_to "Ver abonos",  loans_reports_path(level: "payments", hierarchy_id: @settlement.collection_id, date: @settlement.settlement_date), class: "btn btn-primary", data: { turbo: false } %>
+          <%= link_to "Liquidaciones", settlements_reports_path(collection_id: @settlement.collection_id), class: "btn btn-info", data: { turbo: false } %>
           <button class="btn btn-dark" disabled>Ultimas compras</button>
           <button class="btn btn-warning" disabled>Faltantes</button>
-          <button class="btn btn-warning" disabled>Informes de socios y dueños</button>
-          <button class="btn btn-warning" disabled>Retiros o traslado de clientes</button>
-          <button class="btn btn-warning" disabled>Estadisticas semanales</button>
-          <button class="btn btn-primary" disabled>Descuentos y refinanciacion</button>
-          <button class="btn btn-warning" disabled>Liquidaciones por bodegas</button>
           <button class="btn btn-success" disabled>Morocidad de ruta</button>
-          <button class="btn btn-danger" disabled>Grafica liquidacion x mes</button>
-          <button class="btn btn-dark" disabled>Verificar compras</button>
-          <button class="btn btn-dark" disabled>Verificar abonos</button>
+          <button class="btn btn-danger" disabled>Graficas ruta</button>
         </div>
       </div>
+      <div class="card">
+      <div class="card-body">
+        <h5 class="text-muted fs-13 text-uppercase" title="Number of Orders">Cartera</h5>
+        <p class="mb-1">
+          <span class="text-primary me-1"><i class="ti ti-point-filled"></i></span>
+          <span class="text-nowrap text-muted">Cartera total (<%= Loan.joins(:client).where(clients: { collection_id: @settlement.collection_id }).where(status: [:active, :overdue]).count %>)</span>
+          <span class="float-end"><b><%= Loan.joins(:client).where(clients: { collection_id: @settlement.collection_id }).where(status: [:active, :overdue]).sum(:amount) %></b></span>
+        </p>
+        <p class="mb-0">
+          <span class="text-primary me-1"><i class="ti ti-point-filled"></i></span>
+          <span class="text-nowrap text-muted">Cartera vencida (<%= Loan.joins(:client).where(clients: { collection_id: @settlement.collection_id }).where(status: [:active, :overdue]).where("end_date < ?", Time.zone.today).count %>)</span>
+          <span class="float-end"><b><%= Loan.joins(:client).where(clients: { collection_id: @settlement.collection_id }).where(status: [:active, :overdue]).where("end_date < ?", Time.zone.today).sum(:amount) %></b></span>
+        </p>
+      </div>
+    </div>
     </div>
 
     <!-- Panel central -->
     <div class="col-md-6">
       <div class="card p-3">
         <div class="d-flex align-items-center justify-content-between">
-          <h5 class="mb-0">LIQUIDAR — <%= @settlement.settlement_date %></h5>
+          <h5 class="mb-0">Ruta: <%= @settlement.collection.name %> — <%= @settlement.settlement_date %></h5>
           <span class="badge <%= @settlement.closed? ? 'bg-primary' : 'bg-secondary' %>">
             <%= @settlement.status.upcase %>
           </span>
@@ -72,6 +70,14 @@
         <div class="mt-3 d-block">
           <turbo-frame id="settlement_totals">
             <%= render "settlements/totals", settlement: @settlement %>
+          </turbo-frame>
+        </div>
+
+        <!-- Gastos -->
+        <div class="mt-3 d-block">
+          <turbo-frame id="expenses_frame" class="">
+            <%= render "expenses/list", settlement: @settlement %>
+            <%= render "expenses/form", settlement: @settlement %>
           </turbo-frame>
         </div>
 

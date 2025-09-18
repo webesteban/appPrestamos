@@ -6,7 +6,7 @@
     <%= text_field_tag "settlement_topup[note]", nil, class: "form-control", placeholder: "Nota" %>
   </div>
   <div class="col-12 d-flex gap-2">
-    <%= datetime_local_field_tag "settlement_topup[happened_at]", Time.current.strftime("%Y-%m-%dT%H:%M"), class: "form-control", disabled: true %>
+    <%= date_field_tag "settlement_topup[happened_at]", Date.current, class: "form-control", disabled: true %>
   </div>
   <div class="col-12">
     <%= submit_tag "Agregar retanqueo", class: "btn btn-success btn-sm w-100" %>

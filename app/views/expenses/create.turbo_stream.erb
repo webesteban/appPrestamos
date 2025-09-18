@@ -1,0 +1,11 @@
+<%= turbo_stream.replace "expenses_frame" do %>
+
+<turbo-frame id="expenses_frame" class="">
+  <%= render "expenses/list", settlement: @settlement %>
+  <%= render "expenses/form", settlement: @settlement %>
+</turbo-frame>
+<% end %>
+
+<%= turbo_stream.replace "settlement_totals" do %>
+  <%= render "settlements/totals", settlement: @settlement %>
+<% end %>
