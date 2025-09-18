@@ -20,9 +20,7 @@
             <th>Compras</th>
             <th>Gastos</th>
             <th>Efect</th>
-            <th>Desc</th>
             <th>Retiro</th>
-            <th>O. gastos</th>
             <th>A. Cap</th>
             <th>Ref</th>
             <th>Dif</th>
@@ -40,13 +38,10 @@
               <td><%= number_to_currency(s.loans_total) %></td>
               <td><%= number_to_currency(s.expenses_total) %></td>
               <td><%= number_to_currency(s.delivered_cash) %></td>
-              <td><%= number_to_currency(s.discounts_total || 0) %></td>
               <td><%= number_to_currency(s.withdrawals_total || 0) %></td>
-              <td><%= number_to_currency(s.other_expenses_total) %></td>
-              <td><%= number_to_currency(s.additional_capital || 0) %></td>
+
               <td><%= number_to_currency(s.refinancings_total || 0) %></td>
               <td><%= number_to_currency(s.difference) %></td>
-              <td><%= s.notes.presence || "-" %></td>
               <td>
                 <span class="badge rounded-pill <%= s.status == "finalized" ? "bg-success" : "bg-warning" %>">
                   <%= s.status %>

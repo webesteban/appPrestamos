@@ -17,156 +17,17 @@
   </div>
   <!-- end col-->
 
-  <div class="col-xl-6">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="header-title mb-3">Column Chart with Datalabels</h4>
-        <div dir="ltr">
-          <div id="datalabels-column" class="apex-charts" data-colors="#727cf5"></div>
-        </div>
-      </div>
-      <!-- end card body-->
-    </div>
-    <!-- end card -->
-  </div>
-  <!-- end col-->
-</div>
-<!-- end row-->
-
-<div class="row">
-  <div class="col-xl-6">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="header-title">Stacked Column Chart</h4>
-        <div dir="ltr">
-          <div id="stacked-column" class="apex-charts" data-colors="#39afd1,#ffbc00,#e3eaef"></div>
-        </div>
-      </div>
-      <!-- end card body-->
-    </div>
-    <!-- end card -->
-  </div>
-  <!-- end col-->
-
-  <div class="col-xl-6">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="header-title">100% Stacked Column Chart</h4>
-        <div dir="ltr">
-          <div id="full-stacked-column" class="apex-charts" data-colors="#39afd1,#0acf97,#e3eaef"></div>
-        </div>
-      </div>
-      <!-- end card body-->
-    </div>
-    <!-- end card -->
-  </div>
-  <!-- end col-->
-</div>
-<!-- end row-->
-
-<div class="row">
-  <div class="col-xl-6">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="header-title">Column with Markers</h4>
-        <div dir="ltr">
-          <div id="column-with-markers" class="apex-charts" data-colors="#727cf5,#ffbc00"></div>
-        </div>
-      </div>
-      <!-- end card body-->
-    </div>
-    <!-- end card -->
-  </div>
-  <!-- end col-->
-
-  <div class="col-xl-6">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="header-title">Column with Group Label</h4>
-        <div dir="ltr">
-          <div id="column-with-group-label" class="apex-charts" data-colors="#39afd1,#0acf97,#e3eaef"></div>
-        </div>
-      </div>
-      <!-- end card body-->
-    </div>
-    <!-- end card -->
-  </div>
-  <!-- end col-->
-</div>
-<!-- end row-->
-
-<div class="row">
-  <div class="col-xl-6">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="header-title">Column Chart with rotated labels & Annotations</h4>
-        <div dir="ltr">
-          <div id="rotate-labels-column" class="apex-charts" data-colors="#fa5c7c"></div>
-        </div>
-      </div>
-      <!-- end card body-->
-    </div>
-    <!-- end card -->
-  </div>
-  <!-- end col-->
-
-  <div class="col-xl-6">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="header-title">Column Chart with negative values</h4>
-        <div dir="ltr">
-          <div id="negative-value-column" class="apex-charts" data-colors="#727cf5"></div>
-        </div>
-      </div>
-      <!-- end card body-->
-    </div>
-    <!-- end card -->
-  </div>
-  <!-- end col-->
-</div>
-<!-- end row-->
-
-<div class="row">
-  <div class="col-xl-6">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="header-title">Distributed Column Chart</h4>
-        <div dir="ltr">
-          <div id="distributed-column" class="apex-charts" data-colors="#727cf5,#6c757d,#0acf97,#fa5c7c,#ffbc00,#39afd1,#e3eaef,#313a46"></div>
-        </div>
-      </div>
-      <!-- end card body-->
-    </div>
-    <!-- end card -->
-  </div>
-  <!-- end col-->
-
-  <div class="col-xl-6">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="header-title">Range Column Chart</h4>
-        <div dir="ltr">
-          <div id="range-column" class="apex-charts" data-colors="#0acf97,#39afd1"></div>
-        </div>
-      </div>
-      <!-- end card body-->
-    </div>
-    <!-- end card -->
-  </div>
-  <!-- end col-->
-</div>
-<!-- end row-->
 
 <div class="row">
   <div class="col-12">
     <div class="card">
       <div class="d-flex card-header justify-content-between align-items-center">
-        <h4 class="header-title">Dynamic Loaded Chart</h4>
+        <h4 class="header-title">Grafico Dinamico</h4>
         <div class="flex-shrink-0">
           <select id="model" class="form-select form-select-sm">
-            <option value="iphone5">iPhone 5</option>
-            <option value="iphone6">iPhone 6</option>
-            <option value="iphone7">iPhone 7</option>
+            <option value="iphone5">Compras</option>
+            <option value="iphone6">Abonos</option>
+            <option value="iphone7">Gastos</option>
           </select>
         </div>
       </div>
@@ -191,6 +52,8 @@
   <!-- end col-->
 </div>
 <!-- end row-->
+
+
 
 <% content_for :javascript do %>
   <%= javascript_include_tag 'pages/chart-apex-column.js', defer: true %>

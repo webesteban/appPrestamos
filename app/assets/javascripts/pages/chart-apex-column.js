@@ -7,7 +7,84 @@
 //
 // BASIC COLUMN CHART
 //
+var colors = ["#727cf5", "#0acf97", "#fa5c7c"];
+var dataColors = $("#basic-column").data('colors');
+if (dataColors) {
+    colors = dataColors.split(",");
+}
+var options = {
+    chart: {
+        height: 396,
+        type: 'bar',
+        toolbar: {
+            show: false
+        }
+    },
+    plotOptions: {
+        bar: {
+            horizontal: false,
+            endingShape: 'rounded',
+            columnWidth: '55%',
+        },
+    },
+    dataLabels: {
+        enabled: false
+    },
+    stroke: {
+        show: true,
+        width: 2,
+        colors: ['transparent']
+    },
+    colors: colors,
+    series: [{
+        name: 'Compras',
+        data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+    }, {
+        name: 'Abonos',
+        data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+    }, {
+        name: 'Gastos',
+        data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
+    }],
+    xaxis: {
+        categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+    },
+    legend: {
+        offsetY: 7,
+    },
+    yaxis: {
+        title: {
+            text: '$ Balance'
+        }
+    },
+    fill: {
+        opacity: 1
+    },
+    grid: {
+        row: {
+            colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
+            opacity: 0.2
+        },
+        borderColor: '#f1f3fa',
+        padding: {
+            bottom: 5
+        }
+    },
+    tooltip: {
+        y: {
+            formatter: function (val) {
+                return "$ " + val + " thousands"
+            }
+        }
+    }
+}
 
+var chart = new ApexCharts(
+    document.querySelector("#basic-column"),
+    options
+);
+
+chart.render();
 
 
 //
@@ -927,32 +1004,32 @@ function makeData() {
     var dataSet = shuffleArray(arrayData)
 
     var dataYearSeries = [{
-        x: "2011",
+        x: "Marzo",
         y: dataSet[0].y,
         color: colors[0],
         quarters: dataSet[0].quarters
     }, {
-        x: "2012",
+        x: "Abril",
         y: dataSet[1].y,
         color: colors[1],
         quarters: dataSet[1].quarters
     }, {
-        x: "2013",
+        x: "Mayo",
         y: dataSet[2].y,
         color: colors[2],
         quarters: dataSet[2].quarters
     }, {
-        x: "2014",
+        x: "Junio",
         y: dataSet[3].y,
         color: colors[3],
         quarters: dataSet[3].quarters
     }, {
-        x: "2015",
+        x: "Julio",
         y: dataSet[4].y,
         color: colors[4],
         quarters: dataSet[4].quarters
     }, {
-        x: "2016",
+        x: "Agosto",
         y: dataSet[5].y,
         color: colors[5],
         quarters: dataSet[5].quarters
