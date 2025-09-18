@@ -61,6 +61,9 @@ Rails.application.routes.draw do
       post :recalculate
       post :close
     end
+
+    resources :settlement_topups, only: [:create, :destroy]
+    resources :settlement_withdrawals, only: [:create, :destroy]
   end
   
 

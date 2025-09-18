@@ -1,0 +1,15 @@
+<div class="row g-2">
+  <div class="col-6">
+    <label>EN CAJA</label>
+    <input class="form-control bg-light" value="<%= number_to_currency(settlement.expected_cash) %>" disabled>
+  </div>
+  <div class="col-6">
+    <label>DIFERENCIA (esperado)</label>
+    <input class="form-control <%= settlement.difference.to_f.zero? ? 'bg-success-subtle' : 'bg-warning' %>"
+           value="<%= number_to_currency(settlement.difference) %>" disabled>
+  </div>
+  <div class="col-6">
+    <label>BASE FINAL (arrastra a mañana)</label>
+    <input class="form-control bg-light" value="<%= number_to_currency(settlement.base_carryover) %>" disabled>
+  </div>
+</div>

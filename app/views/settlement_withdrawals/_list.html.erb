@@ -1,0 +1,22 @@
+<div class="mb-2">
+  <strong>Retiros:</strong> <%= number_to_currency(settlement.withdrawals_total) %>
+  <% if local_assigns[:error].present? %>
+    <div class="alert alert-danger py-1 my-2"><%= error %></div>
+  <% end %>
+  <ul class="small list-unstyled">
+    <% settlement.withdrawals.order(happened_at: :asc).each do |w| %>
+      <li class="d-flex justify-content-between align-items-center border-bottom py-1">
+        <span>
+          <%= l w.happened_at.to_date %> — <%= number_to_currency(w.amount) %>
+          <% if w.destination.present? %>[<%= w.destination %>] <% end %>
+          <% if w.note.present? %>(<%= w.note %>)<% end %>
+        </span>
+        <%= button_to "✕", settlement_settlement_withdrawal_path(settlement, w),
+                      method: :delete, form: { data: { turbo_confirm: "¿Eliminar retiro?" } },
+                      class: "btn btn-sm btn-outline-danger" %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<%= render "settlement_withdrawals/form", settlement: settlement %>

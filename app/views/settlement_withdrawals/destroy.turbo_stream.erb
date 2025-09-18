@@ -1,0 +1,11 @@
+<%= turbo_stream.replace "withdrawals_frame" do %>
+  <turbo-frame id="withdrawals_frame" class="mt-3 d-block">
+    <%= render "settlement_withdrawals/list", settlement: @settlement %>
+  </turbo-frame>
+<% end %>
+
+<%= turbo_stream.replace "settlement_totals" do %>
+  <turbo-frame id="settlement_totals">
+    <%= render "settlements/totals", settlement: @settlement %>
+  </turbo-frame>
+<% end %>

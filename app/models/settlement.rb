@@ -13,7 +13,7 @@ class Settlement < ApplicationRecord
   
     validates :settlement_date, presence: true
     validates :collection_id, uniqueness: { scope: :settlement_date }
-    validates :base_start, :expected_cash, :difference, :base_carryover,
+    validates :base_start,
               :topups_total, :withdrawals_total,
               :payments_total, :loans_total, :expenses_total, :other_expenses_total,
               numericality: { greater_than_or_equal_to: 0 }

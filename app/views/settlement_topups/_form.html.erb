@@ -1,0 +1,14 @@
+<%= form_with url: settlement_settlement_topups_path(settlement), method: :post, data: { turbo: true }, class: "row g-2" do |f| %>
+  <div class="col-12">
+    <%= number_field_tag "settlement_topup[amount]", nil, step: "0.01", min: "0", class: "form-control", placeholder: "Monto" %>
+  </div>
+  <div class="col-12">
+    <%= text_field_tag "settlement_topup[note]", nil, class: "form-control", placeholder: "Nota" %>
+  </div>
+  <div class="col-12 d-flex gap-2">
+    <%= datetime_local_field_tag "settlement_topup[happened_at]", Time.current.strftime("%Y-%m-%dT%H:%M"), class: "form-control", disabled: true %>
+  </div>
+  <div class="col-12">
+    <%= submit_tag "Agregar retanqueo", class: "btn btn-success btn-sm w-100" %>
+  </div>
+<% end %>

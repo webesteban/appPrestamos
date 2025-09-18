@@ -1,0 +1,11 @@
+<%= turbo_stream.replace "topups_frame" do %>
+    <turbo-frame id="topups_frame">
+        <%= render "settlement_topups/list", settlement: @settlement %>
+    </turbo-frame>
+<% end %>
+
+<%= turbo_stream.replace "settlement_totals" do %>
+  <turbo-frame id="settlement_totals">
+    <%= render "settlements/totals", settlement: @settlement %>
+  </turbo-frame>
+<% end %>

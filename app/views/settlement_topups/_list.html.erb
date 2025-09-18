@@ -1,0 +1,21 @@
+<div class="mb-2">
+  <strong>Retanqueos:</strong> <%= number_to_currency(settlement.topups_total) %>
+  <% if local_assigns[:error].present? %>
+    <div class="alert alert-danger py-1 my-2"><%= error %></div>
+  <% end %>
+  <ul class="small list-unstyled">
+    <% settlement.topups.order(happened_at: :asc).each do |t| %>
+      <li class="d-flex justify-content-between align-items-center border-bottom py-1">
+        <span>
+          <%= l t.happened_at.to_date %> — <%= number_to_currency(t.amount) %>
+          <% if t.note.present? %>(<%= t.note %>)<% end %>
+        </span>
+        <%= button_to "✕", settlement_settlement_topup_path(settlement, t),
+                      method: :delete, form: { data: { turbo_confirm: "¿Eliminar retanqueo?" } },
+                      class: "btn btn-sm btn-outline-danger" %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<%= render "settlement_topups/form", settlement: settlement %>
