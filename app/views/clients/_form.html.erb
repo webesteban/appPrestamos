@@ -1,8 +1,8 @@
 <%= form_with model: client, data: { turbo: false } do |f| %>
   <div class="row">
     <div class="col-md-6 mb-2">
-      <%= f.label :collection_id, "COBRO", class: "form-label text-uppercase" %>
-      <%= f.collection_select :collection_id, Collection.all, :id, :name, { prompt: "Seleccione un cobro" }, {class: "form-control select2", required: true } %>
+      <%= f.label :collection_id, "Ruta", class: "form-label text-uppercase" %>
+      <%= f.collection_select :collection_id, Collection.all, :id, :name, { prompt: "Seleccione un Ruta" }, {class: "form-control select2", required: true } %>
     </div>
 
     <div class="col-md-6 mb-2">

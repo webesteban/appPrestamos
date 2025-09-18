@@ -38,13 +38,16 @@
         <thead>
           <tr>
             <th>Id prestamo</th>
+            <th>Fecha Compra</th>
+            <th>Fecha Finalización</th>
             <th>Monto</th>
             <th>Compra</th>
             <th>Abonado</th>
             <th>Saldo</th>
             <th>Dias de atraso</th>
             <th>Dias sin abonar</th>
-            <th>Fecha</th>
+            <th>Estado</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -52,6 +55,8 @@
             <% status = loan_status(@client, loan) %>
             <tr>
               <td><%= loan.id %></td>
+              <td><%= l loan.created_at.to_date %></td>
+              <td><%= loan.end_date %></td>
               <td><%= number_to_currency(loan.amount) %></td>
               <td><%= number_to_currency(loan.total_with_interest) %></td>
               <td><%= number_to_currency(loan.total_paid) %></td>
@@ -66,7 +71,12 @@
                   <%= status[:days_without_payment] %>
                 </span>
               </td>
-              <td><%= l loan.created_at.to_date %></td>
+              <td>
+                <span class="<%= status[:btn_class] %>">
+                  <%= loan.status_in_spanish %>
+                </span>
+              </td>
+              
             </tr>
           <% end %>
         </tbody>

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :sections
-  resources :settlements
   resources :permissions
   resources :roles
   resources :clients do
@@ -37,6 +36,33 @@ Rails.application.routes.draw do
     resources :payments, only: [:index, :show, :create, :update]
     resource :session, only: [:create, :destroy]
   end
+
+  namespace :admin do
+    post "loans/recalc", to: "loans#recalc"
+  end
+
+  resources :reports, only: [] do
+    collection do
+      get :loans
+      get :collections_progress
+    end
+  end
+
+  resources :hierarchy, only: [] do
+    member do
+      get :partners
+      get :collectors
+      get :collections
+    end
+  end
+
+  resources :settlements do
+    member do
+      post :recalculate
+      post :close
+    end
+  end
+  
 
   resources :user_sessions, only: [:new, :create]
   delete 'logout', to: 'user_sessions#destroy', as: :logout

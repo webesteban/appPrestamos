@@ -8,3 +8,4 @@
 //= link controllers/application.js
 //= link controllers/index.js
 //= link controllers/modal_controller.js
+//= link controllers/hierarchy_controller.js

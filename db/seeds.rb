@@ -227,56 +227,115 @@ puts "📌 Creando préstamos para cada cliente..."
 payment_term = PaymentTerm.first
 
 Client.find_each do |client|
-  rand(1..1).times do
-    raw_amount = rand(100_000..7_000_000)
-    normalized_amount = raw_amount / 1000 # guardamos en miles
+  # Decidimos el estado inicial del préstamo
+  chosen_state = [:paid, :active, :overdue].sample
 
-    insurance_flag = [true, false].sample
-    insurance_value = insurance_flag ? rand(100..500) : 0
-
-    Loan.create!(
-      payment_term_id: payment_term.id,
-      client_id: client.id,
-      installment_days: 30,
-      amount: normalized_amount,
-      details: Faker::Lorem.sentence(word_count: 5),
-      insurance: insurance_flag,
-      insurance_amount: insurance_value,
-      created_at: Faker::Date.between(from: 2.months.ago, to: Date.today),
-      latitude: Faker::Address.latitude,
-      longitude: Faker::Address.longitude
-    )
+  # Si ya tiene un loan en mora, no le damos más
+  if client.loans.overdue.exists?
+    next
   end
-end
 
-puts "📌 Creando pagos para cada préstamo..."
+  # Si ya tiene uno pagado, puede tener otro activo
+  if client.loans.paid.exists?
+    chosen_state = :active
+  end
 
-Loan.find_each do |loan|
-  client = loan.client
+  # Si no tiene préstamos, seguimos con lo elegido random
+  raw_amount = rand(100_000..7_000_000)
+  normalized_amount = raw_amount / 1000 # guardamos en miles
+
+  insurance_flag = [true, false].sample
+  insurance_value = insurance_flag ? rand(100..500) : 0
+
+  loan = Loan.create!(
+    payment_term_id: payment_term.id,
+    client_id: client.id,
+    installment_days: 30,
+    amount: normalized_amount,
+    details: Faker::Lorem.sentence(word_count: 5),
+    insurance: insurance_flag,
+    insurance_amount: insurance_value,
+    created_at: Faker::Date.between(from: 2.months.ago, to: Date.today),
+    latitude: Faker::Address.latitude,
+    longitude: Faker::Address.longitude
+  )
+
+  puts "   → Loan #{loan.id} creado para #{client.full_name} (estado simulado: #{chosen_state})"
+
+  # --- Crear pagos según estado deseado ---
   user_id = client.collection.collection_users.first.user_id
-
-  # préstamo + 20%
   total_with_interest = loan.amount.to_f * 1.2
   base_amount = total_with_interest / loan.installment_days
-
   start_date = loan.created_at.to_date
-  num_payments = rand(1..15)
 
-  num_payments.times do |i|
-    payment_date = start_date + i.days
-    break if payment_date > Date.today # nunca pasarse de hoy
+  case chosen_state
+  when :paid
+    # Crea todos los pagos necesarios para cubrir el préstamo
+    loan.installment_days.times do |i|
+      payment_date = start_date + i.days
+      break if payment_date > Date.today
 
-    Payment.create!(
-      client_id: client.id,
-      loan_id: loan.id,
-      user_id: user_id,
-      amount: base_amount.round(2),
-      latitude: loan.latitude,
-      longitude: loan.longitude,
-      paid_at: payment_date,
-      details: "Pago automático generado en seed"
-    )
+      Payment.create!(
+        client_id: client.id,
+        loan_id: loan.id,
+        user_id: user_id,
+        amount: base_amount.round(2),
+        latitude: loan.latitude,
+        longitude: loan.longitude,
+        paid_at: payment_date,
+        details: "Pago automático (simulación estado pagado)"
+      )
+    end
+
+  when :active
+    # Pagos parciales, menos que el total
+    num_payments = rand(1..(loan.installment_days / 2))
+    num_payments.times do |i|
+      payment_date = start_date + i.days
+      break if payment_date > Date.today
+
+      Payment.create!(
+        client_id: client.id,
+        loan_id: loan.id,
+        user_id: user_id,
+        amount: base_amount.round(2),
+        latitude: loan.latitude,
+        longitude: loan.longitude,
+        paid_at: payment_date,
+        details: "Pago automático (simulación estado activo)"
+      )
+    end
+
+  when :overdue
+    # Pagos incompletos y la fecha ya pasó del end_date
+    num_payments = rand(1..(loan.installment_days / 3))
+    num_payments.times do |i|
+      payment_date = start_date + i.days
+      break if payment_date > Date.today
+
+      Payment.create!(
+        client_id: client.id,
+        loan_id: loan.id,
+        user_id: user_id,
+        amount: base_amount.round(2),
+        latitude: loan.latitude,
+        longitude: loan.longitude,
+        paid_at: payment_date,
+        details: "Pago automático (simulación estado moroso)"
+      )
+    end
+
+    # Forzar end_date en el pasado para que caiga en mora
+    loan.update!(end_date: Date.today - rand(1..15).days)
   end
 end
 
-puts "✅ Pagos creados correctamente para todos los préstamos"
+puts "📌 Ejecutando recálculo de estados..."
+Loan.recalc_all_statuses!
+
+puts "✅ Préstamos y pagos creados con estados simulados"
+
+
+puts "Recalculando estados de préstamos..."
+Loan.recalc_all_statuses!
+puts "OK ✅"

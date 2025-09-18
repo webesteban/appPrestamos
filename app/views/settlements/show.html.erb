@@ -1,0 +1,154 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- Panel izquierdo -->
+    <div class="col-md-3">
+      <div class="mb-3">
+        <input type="text" class="form-control" value="<%= @settlement.collection.name %>" disabled>
+        <div class="d-flex mt-2 gap-2">
+          <%= button_to "Guardar", settlement_path(@settlement), method: :put, params: { settlement: {} }, class: "btn btn-primary btn-sm" %>
+          <%= link_to "Gastos", "#", class: "btn btn-danger btn-sm disabled" %>
+          <button class="btn btn-outline-secondary btn-sm" onclick="window.print()"><i class="bi bi-printer"></i></button>
+        </div>
+      </div>
+
+      <div class="card p-2">
+        <h6>Reportes</h6>
+        <div class="d-grid gap-2">
+          <%= link_to "Ver compras", loans_reports_path(level: "collection", hierarchy_id: @settlement.collection_id), class: "btn btn-dark", data: { turbo: false } %>
+          <%= link_to "Ver abonos",  loans_reports_path(level: "collection", hierarchy_id: @settlement.collection_id), class: "btn btn-primary", data: { turbo: false } %>
+          <%= link_to "Liquidaciones", settlements_path(collection_id: @settlement.collection_id), class: "btn btn-info", data: { turbo: false } %>
+          <button class="btn btn-secondary" disabled>Liquidaciones2</button>
+          <button class="btn btn-danger" disabled>Autorizacion</button>
+          <button class="btn btn-dark" disabled>Ultimas compras</button>
+          <button class="btn btn-warning" disabled>Faltantes</button>
+          <button class="btn btn-warning" disabled>Informes de socios y dueños</button>
+          <button class="btn btn.warning" disabled>Retiros o traslado de clientes</button>
+          <button class="btn btn-warning" disabled>Estadisticas semanales</button>
+          <button class="btn btn-primary" disabled>Descuentos y refinanciacion</button>
+          <button class="btn btn-warning" disabled>Liquidaciones por bodegas</button>
+          <button class="btn btn-success" disabled>Morocidad de ruta</button>
+          <button class="btn btn-danger" disabled>Grafica liquidacion x mes</button>
+          <button class="btn btn-dark" disabled>Verificar compras</button>
+          <button class="btn btn-dark" disabled>Verificar abonos</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel central -->
+    <div class="col-md-6">
+      <div class="card p-3">
+        <div class="d-flex align-items-center justify-content-between">
+          <h5 class="mb-0">LIQUIDAR — <%= @settlement.settlement_date %></h5>
+          <span class="badge <%= @settlement.closed? ? 'bg-primary' : 'bg-secondary' %>">
+            <%= @settlement.status.upcase %>
+          </span>
+        </div>
+
+        <%= form_with model: @settlement,
+                      url: settlement_path(@settlement),
+                      method: :put,
+                      local: true do |f| %>
+          <div class="row g-2 mt-2">
+            <div class="col-6">
+              <label>BASE</label>
+              <%= f.number_field :base_start, step: "0.01", class: "form-control" %>
+            </div>
+            <div class="col-6">
+              <label>GASTOS (del sistema)</label>
+              <input class="form-control" value="<%= number_to_currency(@settlement.expenses_total) %>" disabled>
+            </div>
+            <div class="col-6">
+              <label>ABONOS</label>
+              <input class="form-control" value="<%= number_to_currency(@settlement.payments_total) %>" disabled>
+            </div>
+            <div class="col-6">
+              <label>COMPRAS</label>
+              <input class="form-control" value="<%= number_to_currency(@settlement.loans_total) %>" disabled>
+            </div>
+            <div class="col-6">
+              <label>EFECTIVO ENTREGADO</label>
+              <div class="input-group">
+                <%= f.number_field :delivered_cash, step: "0.01", class: "form-control" %>
+                <%= f.submit "💾", class: "btn btn-success" %>
+              </div>
+            </div>
+            <div class="col-6">
+              <label>OTROS GASTOS</label>
+              <%= f.number_field :other_expenses_total, step: "0.01", class: "form-control" %>
+            </div>
+            <div class="col-12">
+              <label>Detalle otros gastos</label>
+              <%= f.text_field :other_expenses_note, class: "form-control" %>
+            </div>
+            <div class="col-6">
+              <label>ESPERADO</label>
+              <input class="form-control bg-light" value="<%= number_to_currency(@settlement.expected_cash) %>" disabled>
+            </div>
+            <div class="col-6">
+              <label>DIFERENCIA (Entregado - Esperado)</label>
+              <input class="form-control <%= @settlement.difference.to_f.zero? ? 'bg-success-subtle' : 'bg-warning' %>" value="<%= number_to_currency(@settlement.difference) %>" disabled>
+            </div>
+            <div class="col-6">
+              <label>BASE FINAL (arrastra a mañana)</label>
+              <input class="form-control bg-light" value="<%= number_to_currency(@settlement.base_carryover) %>" disabled>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="mt-3 d-flex gap-2">
+          <%= button_to "🔄 Recalcular", recalculate_settlement_path(@settlement), method: :post, class: "btn btn-outline-info" %>
+          <%= button_to "Cerrar liquidación", close_settlement_path(@settlement), method: :post, class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel derecho -->
+    <div class="col-md-3">
+      <div class="card p-2 mb-3">
+        <h6>Movimientos del día</h6>
+        <div class="mb-2">
+          <strong>Retanqueos:</strong> <%= number_to_currency(@settlement.topups_total) %>
+          <ul class="small">
+            <% @settlement.topups.order(happened_at: :asc).each do |t| %>
+              <li><%= l t.happened_at %> — <%= number_to_currency(t.amount) %> (<%= t.note %>)</li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="mb-2">
+          <strong>Retiros:</strong> <%= number_to_currency(@settlement.withdrawals_total) %>
+          <ul class="small">
+            <% @settlement.withdrawals.order(happened_at: :asc).each do |w| %>
+              <li><%= l w.happened_at %> — <%= number_to_currency(w.amount) %> (<%= w.destination || w.note %>)</li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="d-flex gap-2">
+          <%= link_to "Agregar retanqueo", "#", class: "btn btn-success btn-sm disabled" %>
+          <%= link_to "Agregar retiro",   "#", class: "btn btn-danger btn-sm disabled" %>
+        </div>
+        <small class="text-muted d-block mt-2">(*Crea formularios para topups/retiros y al guardarlos, se recalcula.)</small>
+      </div>
+
+      <div class="row g-2">
+        <% stats = [
+          ['ABONOS MOROSOS', @settlement.payments_count],
+          ['CARTERA TOTAL', @settlement.loans_total],
+          ['CARTERA VENCIDA', 0],
+          ['Clientes abonados', @settlement.payments_count],
+          ['Num compras canceladas', 0],
+          ['Valor compras canceladas', 0],
+          ['Num de reenganches', 0],
+          ['Valor de reenganches', 0]
+        ] %>
+        <% stats.each do |label, value| %>
+          <div class="col-6">
+            <div class="card text-center text-white bg-primary p-2">
+              <div><strong><%= label %></strong></div>
+              <div><%= (value.is_a?(Numeric) ? number_with_delimiter(value) : value) %></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

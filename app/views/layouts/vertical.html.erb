@@ -4,8 +4,7 @@
 <head>
   <%= csrf_meta_tags %>
   <%= turbo_include_tags %>
-  <%= javascript_importmap_tags %>
-
+  <%= javascript_importmap_tags %> <!-- 👈 Importmap ya carga Stimulus -->
 
   <%= render 'layouts/partials/title_meta', title: @page_title %>
   <%= render 'layouts/partials/head_css' %>
@@ -20,25 +19,15 @@
 
   <turbo-frame id="modal"></turbo-frame>  <!-- 👈 contenedor persistente -->
 
-
   <div class="page-content">
     <div class="page-container">
-
-        <%= yield %>
-
-<%= turbo_frame_tag "modal" %>
-
+      <%= yield %>
+      <%= turbo_frame_tag "modal" %>
     </div>
 
     <%= render 'layouts/partials/footer' %>
-
   </div>
 </div>
 
 <%= render 'layouts/partials/customizer' %>
-
 <%= render 'layouts/partials/footer_scripts' %>
-
-<% content_for :javascript do %>
-  <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-<% end %>

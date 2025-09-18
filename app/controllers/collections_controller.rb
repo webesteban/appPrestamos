@@ -16,8 +16,8 @@ class CollectionsController < ApplicationController
       if @collection.save
         CollectionUser.create(user_id: params[:user_id], collection: @collection) if params[:user_id]
         respond_to do |format|
-          format.turbo_stream { redirect_to request.referer || root_path, notice: "Cobro creado exitosamente" }
-          format.html { redirect_to request.referer || root_path, notice: "Cobro creado exitosamente" }
+          format.turbo_stream { redirect_to request.referer || root_path, notice: "Ruta creado exitosamente" }
+          format.html { redirect_to request.referer || root_path, notice: "Ruta creado exitosamente" }
         end
       else
         render :new, status: :unprocessable_entity, formats: [:html, :turbo_stream]
@@ -34,7 +34,7 @@ class CollectionsController < ApplicationController
   
     def update
       if @collection.update(collection_params)
-        redirect_to request.referer || root_path, notice: "Cobro actualizado exitosamente"
+        redirect_to request.referer || root_path, notice: "Ruta actualizado exitosamente"
       else
         render :edit, status: :unprocessable_entity, formats: [:html, :turbo_stream]
       end

@@ -1,17 +1,19 @@
-# SQLite para dev/test
-default: &sqlite
-  adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5) %>
-  timeout: 5000
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root   # tu usuario de Postgres
+  password: qwer1234           # tu contraseña, si tienes
+  host: localhost
+  port: 5432
 
 development:
-  <<: *sqlite
-  database: storage/development.sqlite3
+  <<: *default
+  database: app_dev
 
 test:
-  <<: *sqlite
-  database: storage/test.sqlite3
-
+  <<: *default
+  database: app_test
 
 # Producción: PostgreSQL (todas las conexiones a la misma URL)
 production:

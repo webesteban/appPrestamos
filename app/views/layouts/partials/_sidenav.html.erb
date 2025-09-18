@@ -194,13 +194,13 @@
                 <div class="collapse" id="sidebarCharts">
                     <ul class="sub-menu">
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'area' %>"  data-turbo="false" class="side-nav-link">
-                                <span class="menu-text">reportes grafico Area</span>
+                            <a href="<%= url_for :controller => 'reports', :action => 'loans' %>"  data-turbo="false" class="side-nav-link">
+                                <span class="menu-text">Saldos</span>
                             </a>
                         </li>
                         <li class="side-nav-item">
-                            <a href="<%= url_for :controller => 'charts', :action => 'bar' %>" data-turbo="false" class="side-nav-link">
-                                <span class="menu-text">Reportes grafico barra</span>
+                            <a href="<%= url_for :controller => 'reports', :action => 'collections_progress' %>"  data-turbo="false" class="side-nav-link">
+                                <span class="menu-text">Avance Ruta</span>
                             </a>
                         </li>
                         
@@ -235,7 +235,7 @@
                 <div class="collapse" id="sidebarForms">
                     <ul class="sub-menu">
                         <li class="side-nav-item">
-                            <a href="#" data-turbo="false" class="side-nav-link">
+                            <a href="<%= url_for :controller => 'settlements', :action => 'new' %>" data-turbo="false" class="side-nav-link">
                                 <span class="menu-text">Liquidaciones</span>
                             </a>
                         </li>

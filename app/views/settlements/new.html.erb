@@ -1,0 +1,52 @@
+
+<div data-controller="hierarchy">
+  <div class="row">
+    <!-- Dueños -->
+    <div class="col-md-2">
+      <label for="owner_id">Dueño</label>
+      <select name="owner_id" id="owner_id" class="form-select"
+              data-hierarchy-target="owner"
+              data-action="change->hierarchy#loadPartners">
+        <option value="">Seleccione un dueño</option>
+        <% User.owner.each do |owner| %>
+          <option value="<%= owner.id %>"><%= owner.full_name %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <!-- Socios -->
+    <div class="col-md-2">
+      <label for="partner_id">Socio</label>
+      <select name="partner_id" id="partner_id" class="form-select"
+              data-hierarchy-target="partner"
+              data-action="change->hierarchy#loadCollectors">
+        <option value="">Seleccione un socio</option>
+      </select>
+    </div>
+
+    <!-- Cobradores -->
+    <div class="col-md-2">
+      <label for="collector_id">Cobrador</label>
+      <select name="collector_id" id="collector_id" class="form-select"
+              data-hierarchy-target="collector"
+              data-action="change->hierarchy#loadCollections">
+        <option value="">Seleccione un cobrador</option>
+      </select>
+    </div>
+
+    <!-- Cobros -->
+    <div class="col-md-2">
+      <label for="collection_id">Ruta</label>
+      <select name="collection_id" id="collection_id" class="form-select"
+              data-hierarchy-target="collection">
+        <option value="">Seleccione un Ruta</option>
+      </select>
+    </div>
+
+    <div class="col-md-3 pt-2 mt-1">
+      <input type="hidden" name="level" id="selected_level">
+      <input type="hidden" name="hierarchy_id" id="selected_hierarchy_id">
+      <button type="button" class="btn btn-primary" data-action="click->hierarchy#applyFilterSettlement">Ver Liquidacion</button>
+    </div>
+  </div>
+</div>

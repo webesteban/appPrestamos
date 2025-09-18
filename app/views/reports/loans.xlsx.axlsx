@@ -1,0 +1,25 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Préstamos") do |sheet|
+  sheet.add_row ["Cliente", "Identificación", "Ruta", "Fecha Compra",
+                 "Fecha Finalización", "Monto", "Compra", "Abonado", "Saldo",
+                 "Días de atraso", "Días sin abonar", "Estado"]
+
+  @loans.each do |loan|
+    status = loan.status_metrics
+    sheet.add_row [
+      loan.client.full_name,
+      loan.client.identification,
+      loan.client.collection&.name || "N/A",
+      loan.created_at.to_date,
+      loan.end_date,
+      loan.amount,
+      loan.total_with_interest,
+      loan.total_paid,
+      loan.remaining_balance,
+      status[:overdue_days],
+      status[:days_without_payment],
+      loan.status_in_spanish
+    ]
+  end
+end

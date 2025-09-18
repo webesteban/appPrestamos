@@ -1,0 +1,133 @@
+<div class="container py-4" data-turbo="false">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h4">📊 Avance de Cobros</h2>
+    <div>
+      <%= link_to "⬇️ Excel", collections_progress_reports_path(format: :xlsx, params: request.query_parameters), class: "btn btn-sm btn-outline-secondary", data: { turbo: false } %>
+    </div>
+  </div>
+
+  <!-- Botón + filtro aplicado -->
+  <div class="mb-3 d-flex justify-content-between align-items-center">
+    <div>
+      <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#collectionFilterModal">
+        Filtrar por jerarquía
+      </button>
+    </div>
+
+    <% if @selected_label.present? %>
+      <div class="alert alert-info mb-0">
+        <strong>Filtro aplicado:</strong> <%= @selected_label %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Filtro de día -->
+  <div class="card mb-3">
+    <div class="card-body">
+      <%= form_with url: collections_progress_reports_path,
+                    method: :get,
+                    local: true,
+                    data: { turbo: false },
+                    class: "row g-2 align-items-end" do %>
+        <div class="col-md-3">
+          <%= label_tag :date, "Fecha" %>
+          <%= date_field_tag :date, params[:date] || Date.today, class: "form-control" %>
+        </div>
+
+        <div class="col-md-2">
+          <%= submit_tag "Aplicar", class: "btn btn-primary w-100" %>
+        </div>
+
+        <div class="col-md-2">
+          <%= link_to "Limpiar", collections_progress_reports_path, class: "btn btn-outline-secondary w-100", data: { turbo: false } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="mb-3">
+    <div class="btn-group" role="group">
+      <%= link_to "Todos",
+                  collections_progress_reports_path(request.query_parameters.except(:overdue_range)),
+                  class: "btn btn-sm border border-2 rounded-pill text-white #{'active' unless params[:overdue_range]}",
+                  data: { turbo: false } %>
+
+      <% [["0-10","0–10 días","text-bg-dark"],
+         ["11-20","11–20 días","bg-warning"],
+         ["21-30","21–30 días","bg-secondary"],
+         ["31-40","31–40 días","bg-primary"],
+         ["41-50","41–50 días","bg-info"],
+         ["51-60","51–60 días","bg-danger"],
+         ["60+","60+ días","bg-success"]].each do |range, label, color_class| %>
+        <%= link_to label,
+                    collections_progress_reports_path(request.query_parameters.merge(overdue_range: range)),
+                    class: "btn btn-sm border border-2 rounded-pill text-white #{color_class} #{'active' if params[:overdue_range] == range}",
+                    data: { turbo: false } %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Tabla -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <table class="table table-sm table-striped table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Pagos del día <p style="margin-bottom: 0px; color:#367334; font-size: 10px;">Abonos del día <b>(<%= @payments_count %>)</b></p></th>
+            <th>Nit</th>
+            <th>Cliente</th>
+            <th>Fecha de la compra</th>
+            <th>Valor</th>
+            <th>Cuota</th>
+            <th>Abono</th>
+            <th>Saldo</th>
+            <th>F. del abono</th>
+            <th>F. vence</th>
+            <th>Atrasados</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @loans.each_with_index do |loan, i| %>
+            <% status = loan.status_metrics %>
+            <% payment_today = loan.payments.find { |p| p.created_at.to_date == @selected_date.to_date } %>
+            <tr>
+              <td><%= payment_today&.amount ? number_to_currency(payment_today.amount) : "-" %></td>
+              <td><%= loan.client.identification %></td>
+              <td class="text-nowrap">
+                <div class="d-flex align-items-center gap-2">
+                  <%= link_to summary_client_path(loan.client),
+                              target: "_blank",
+                              class: "btn btn-soft-success btn-icon btn-sm rounded-circle",
+                              data: { turbo: false } do %>
+                    <i class="ti ti-search"></i>
+                  <% end %>
+                  <span><%= loan.client.full_name %></span>
+                </div>
+              </td>
+              <td><%= l loan.created_at.to_date %></td>
+              <td>
+                <span class="<%= status[:btn_class] %>"><%= number_to_currency(loan.total_with_interest)%></span>
+              </td>
+              <td><%= number_to_currency(loan.installment_value) %></td>
+              <td><%= number_to_currency(loan.total_paid) %></td>
+              <td><%= number_to_currency(loan.remaining_balance) %></td>
+              <td><%= l loan.payments.last&.created_at.to_date || "-" %></td>
+              <td><%= loan.end_date %></td>
+              <td>
+                <span class="<%= status[:btn_class] %>"><%= status[:overdue_days] %></span>
+              </td>
+          <% end %>
+        </tbody>
+      </table>
+
+      <!-- Paginación -->
+      <div class="d-flex justify-content-center mt-3">
+        <%= raw(pagy_bootstrap_nav(@pagy)) if @pagy.pages > 1 %>
+      </div>
+
+      <%= render "shared/loan_status_legend" %>
+    </div>
+  </div>
+</div>
+
+<!-- Modal compartido de jerarquía -->
+<%= render "reports/collection_filter_modal" %>

@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_15_144435) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_18_103816) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -87,6 +90,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_144435) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "active", default: true, null: false
+    t.bigint "collection_id", null: false
+    t.index ["collection_id"], name: "index_expenses_on_collection_id"
     t.index ["expense_type_id"], name: "index_expenses_on_expense_type_id"
     t.index ["user_id"], name: "index_expenses_on_user_id"
   end
@@ -103,8 +108,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_144435) do
     t.datetime "updated_at", null: false
     t.decimal "latitude", precision: 10, scale: 6
     t.decimal "longitude", precision: 10, scale: 6
+    t.decimal "total_with_interest"
+    t.date "end_date"
+    t.integer "status", default: 0, null: false
     t.index ["client_id"], name: "index_loans_on_client_id"
     t.index ["payment_term_id"], name: "index_loans_on_payment_term_id"
+    t.index ["status"], name: "index_loans_on_status"
   end
 
   create_table "payment_terms", force: :cascade do |t|
@@ -184,6 +193,65 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_144435) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "settlement_topups", force: :cascade do |t|
+    t.bigint "settlement_id", null: false
+    t.decimal "amount", precision: 14, scale: 2, default: "0.0", null: false
+    t.string "note"
+    t.bigint "user_id"
+    t.datetime "happened_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["settlement_id"], name: "index_settlement_topups_on_settlement_id"
+    t.index ["user_id"], name: "index_settlement_topups_on_user_id"
+  end
+
+  create_table "settlement_withdrawals", force: :cascade do |t|
+    t.bigint "settlement_id", null: false
+    t.decimal "amount", precision: 14, scale: 2, default: "0.0", null: false
+    t.string "destination"
+    t.string "note"
+    t.bigint "user_id"
+    t.datetime "happened_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["settlement_id"], name: "index_settlement_withdrawals_on_settlement_id"
+    t.index ["user_id"], name: "index_settlement_withdrawals_on_user_id"
+  end
+
+  create_table "settlements", force: :cascade do |t|
+    t.bigint "collection_id", null: false
+    t.date "settlement_date", null: false
+    t.bigint "previous_settlement_id"
+    t.decimal "base_start", precision: 14, scale: 2, default: "0.0", null: false
+    t.decimal "topups_total", precision: 14, scale: 2, default: "0.0", null: false
+    t.decimal "withdrawals_total", precision: 14, scale: 2, default: "0.0", null: false
+    t.integer "payments_count", default: 0, null: false
+    t.decimal "payments_total", precision: 14, scale: 2, default: "0.0", null: false
+    t.integer "loans_count", default: 0, null: false
+    t.decimal "loans_total", precision: 14, scale: 2, default: "0.0", null: false
+    t.decimal "expenses_total", precision: 14, scale: 2, default: "0.0", null: false
+    t.decimal "other_expenses_total", precision: 14, scale: 2, default: "0.0", null: false
+    t.string "other_expenses_note"
+    t.decimal "delivered_cash", precision: 14, scale: 2, default: "0.0", null: false
+    t.decimal "expected_cash", precision: 14, scale: 2, default: "0.0", null: false
+    t.decimal "difference", precision: 14, scale: 2, default: "0.0", null: false
+    t.decimal "base_carryover", precision: 14, scale: 2, default: "0.0", null: false
+    t.integer "status", default: 0, null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "recalculated_at"
+    t.jsonb "snapshot", default: {}
+    t.integer "lock_version", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["collection_id", "settlement_date"], name: "index_settlements_on_collection_id_and_settlement_date", unique: true
+    t.index ["collection_id"], name: "index_settlements_on_collection_id"
+    t.index ["created_by_id"], name: "index_settlements_on_created_by_id"
+    t.index ["previous_settlement_id"], name: "index_settlements_on_previous_settlement_id"
+    t.index ["settlement_date"], name: "index_settlements_on_settlement_date"
+    t.index ["updated_by_id"], name: "index_settlements_on_updated_by_id"
+  end
+
   create_table "statuses", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -242,6 +310,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_144435) do
   add_foreign_key "collection_users", "collections"
   add_foreign_key "collection_users", "users"
   add_foreign_key "collections", "payment_terms"
+  add_foreign_key "expenses", "collections"
   add_foreign_key "expenses", "expense_types"
   add_foreign_key "expenses", "users"
   add_foreign_key "loans", "clients"
@@ -253,6 +322,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_15_144435) do
   add_foreign_key "permission_roles", "sections"
   add_foreign_key "section_permissions", "permissions"
   add_foreign_key "section_permissions", "sections"
+  add_foreign_key "settlement_topups", "settlements"
+  add_foreign_key "settlement_withdrawals", "settlements"
+  add_foreign_key "settlements", "collections"
+  add_foreign_key "settlements", "settlements", column: "previous_settlement_id"
   add_foreign_key "users", "cities"
   add_foreign_key "users", "roles"
   add_foreign_key "users", "statuses"
