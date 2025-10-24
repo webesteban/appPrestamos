@@ -1,4 +1,5 @@
 class PaymentsController < ApplicationController
+  
   def index
     @payments = Payment.includes(:client, :loan, :user).all
   end
@@ -37,7 +38,16 @@ class PaymentsController < ApplicationController
 
   private
 
+  def payload(status, message, redirect_url)
+    {
+      status: status,
+      message: message,
+      redirect_to: redirect_url
+    }
+  end
+
   def payment_params
     params.require(:payment).permit(:client_id, :loan_id, :user_id, :amount, :latitude, :longitude, :paid_at, :details)
   end
+
 end

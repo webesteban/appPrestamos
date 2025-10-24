@@ -7,6 +7,14 @@ Rails.application.routes.draw do
       get :summary
     end
   end
+
+  namespace :mp do
+    get :success, to: "feedback#success"
+    get :failure, to: "feedback#failure"
+    get :pending, to: "feedback#pending"
+    post 'webhook', to: 'notifications#webhook'
+
+  end
   resources :loans
 
   resources :payments

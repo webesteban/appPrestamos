@@ -1,3 +1,5 @@
+require 'mercadopago'
+
 class Loan < ApplicationRecord
   TOLERANCE = BigDecimal("0.01")
 
@@ -120,7 +122,94 @@ class Loan < ApplicationRecord
     total_with_interest / payment_term.quota_days
   end
 
+  def payment_status
+    return {
+      status: "paid",
+      message: "Préstamo completamente pagado"
+    } if paid?
+  
+    return {
+      status: "canceled",
+      message: "Préstamo cancelado"
+    } if canceled?
+  
+    days_between_payments = payment_term.payment_days
+    first_payment_date = created_at.to_date
+    today = Date.today
+  
+    expected_payment_count = ((today - first_payment_date).to_i / days_between_payments) + 1
+    actual_payment_count = payments.count
+  
+    overdue = actual_payment_count < expected_payment_count
+    expected_payment_date = first_payment_date + (actual_payment_count * days_between_payments)
+    days_until_next_payment = (expected_payment_date - today).to_i
+  
+    current_status =
+      if should_be_paid?
+        "paid"
+      elsif should_be_overdue?(today)
+        "overdue"
+      else
+        "active"
+      end
+  
+    {
+      status: current_status,
+      overdue: overdue,
+      expected_payment_date: expected_payment_date,
+      days_until_next_payment: days_until_next_payment,
+      remaining_balance: remaining_balance.to_f.round(2),
+      total_paid: total_paid.to_f.round(2),
+      total_due: total_with_interest.to_f.round(2),
+      payment_link: generate_payment_link # acá se invoca dinámicamente
+    }
+  end
+  
+  
+
   private
+
+  def generate_payment_link
+    sdk = Mercadopago::SDK.new(ENV['MP_ACCESS_TOKEN'])
+
+    days_from_start = (Date.today - created_at.to_date).to_i
+    installment_number = (days_from_start / payment_term.payment_days) + 1
+
+    title = "Cuota ##{installment_number} - #{client.full_name} (Préstamo ##{id})"
+    unit_price = format_unit_price(currency_code: 'COP') * 1000
+    host = ENV.fetch('MP_FEEDBACK_HOST', 'http://localhost:3000')
+
+    preference_data = {
+      items: [{
+        title: title,
+        quantity: 1,
+        unit_price: unit_price,
+        currency_id: 'COP'
+      }],
+      back_urls: {
+        success: "#{host}/mp/success",
+        failure: "#{host}/mp/failure",
+        pending: "#{host}/mp/pending"
+      },
+      auto_return: 'approved',
+      external_reference: "loan_#{id}_installment_#{installment_number}_client_#{client.id}"
+    }
+
+    response = sdk.preference.create(preference_data)
+    payment_link = response.dig(:response, 'init_point') || response.dig(:response, :init_point)
+    payment_link
+  rescue => e
+    Rails.logger.error("[Loan##{id}] Mercado Pago link error: #{e.message}")
+    nil
+  end
+
+  def format_unit_price(currency_code:)
+    if currency_code == 'COP'
+      installment_value.to_i
+    else
+      installment_value.to_f.round(2)
+    end
+  end
 
   def set_total_and_end_date
     # congelamos monto con interés

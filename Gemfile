@@ -54,7 +54,7 @@ group :development, :test do
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
-
+  gem 'dotenv-rails'
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 end
@@ -85,4 +85,7 @@ gem "faker", "~> 3.2"
 gem "axlsx_rails"
 
 gem "byebug"
+
+gem 'mercadopago-sdk'
+
 

@@ -9,4 +9,13 @@ class Payment < ApplicationRecord
     manual: "manual",
     mercado_pago: "mercado_pago"
   }
+
+  after_save :recalculate_loan_status
+  after_destroy :recalculate_loan_status
+
+  private
+
+  def recalculate_loan_status
+    loan.recalc_status!
+  end
 end
