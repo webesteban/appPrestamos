@@ -152,6 +152,13 @@ class Loan < ApplicationRecord
       else
         "active"
       end
+
+    response_mp, preference_data = generate_payment_link
+    payment_link = if ENV['TEST_MP'] == 'true'
+      response_mp.dig(:response, 'sandbox_init_point') || response_mp.dig(:response, :sandbox_init_point)
+    else
+      response_mp.dig(:response, 'init_point') || response_mp.dig(:response, :init_point)
+    end
   
     {
       status: current_status,
@@ -161,7 +168,9 @@ class Loan < ApplicationRecord
       remaining_balance: remaining_balance.to_f.round(2),
       total_paid: total_paid.to_f.round(2),
       total_due: total_with_interest.to_f.round(2),
-      payment_link: generate_payment_link # acá se invoca dinámicamente
+      payment_link: payment_link,
+      response_mp: response_mp,
+      preference_data: preference_data # acá se invoca dinámicamente
     }
   end
   
@@ -192,12 +201,12 @@ class Loan < ApplicationRecord
         pending: "#{host}/mp/pending"
       },
       auto_return: 'approved',
-      external_reference: "loan_#{id}_installment_#{installment_number}_client_#{client.id}"
+      external_reference: "loan_#{id}_installment_#{installment_number}_client_#{client.id}",
+      notification_url: "#{host}/mp/webhook"
     }
 
     response = sdk.preference.create(preference_data)
-    payment_link = response.dig(:response, 'init_point') || response.dig(:response, :init_point)
-    payment_link
+    return response, preference_data
   rescue => e
     Rails.logger.error("[Loan##{id}] Mercado Pago link error: #{e.message}")
     nil
