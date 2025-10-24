@@ -35,6 +35,14 @@ Rails.application.routes.draw do
     resources :loans, only: [:index, :show, :create, :update]
     resources :payments, only: [:index, :show, :create, :update]
     resource :session, only: [:create, :destroy]
+    
+  end
+
+  namespace :api do
+    namespace :client do
+      resource :session, only: [:create, :destroy]
+      resources :loans, only: [:index, :show]
+    end
   end
 
   namespace :admin do

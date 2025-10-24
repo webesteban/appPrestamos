@@ -196,8 +196,10 @@ collections = [collection1, collection2, collection3]
 
 puts "📌 Creando clientes..."
 100.times do
+  identification = Faker::Number.number(digits: 10)
   Client.create!(
-    identification: Faker::Number.number(digits: 10),
+    username: identification,
+    identification: identification,
     identification_type: %w[CC TI CE PAS].sample,
     full_name: Faker::Name.name,
     identification_issued_at: Faker::Date.between(from: 20.years.ago, to: Date.today),

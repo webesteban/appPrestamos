@@ -3,7 +3,7 @@ class CreatePayments < ActiveRecord::Migration[8.0]
     create_table :payments do |t|
       t.references :client, null: false, foreign_key: true
       t.references :loan, null: false, foreign_key: true
-      t.references :user, null: false, foreign_key: true
+      t.references :user, null: true
       t.decimal :amount
       t.decimal :latitude
       t.decimal :longitude
