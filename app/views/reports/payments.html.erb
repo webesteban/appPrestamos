@@ -76,6 +76,7 @@
             <th>#</th>
             <th>Id</th>
             <th>Cliente</th>
+            <th>Fuente</th>
             <th>Cobro</th>
             <th>Valor Compra</th>
             <th>Valor Abono</th>
@@ -92,6 +93,7 @@
               <td><%= idx + 1 %></td>
               <td><%= payment.id %></td>
               <td><%= payment.client.full_name %></td>
+              <td><span class="<%= payment.source_color %>"><%= payment.source_name %></span></td>
               <td><%= payment.client.collection&.name || "N/A" %></td>
               <td><%= number_to_currency(payment.loan.amount) %></td>
               <td><%= number_to_currency(payment.amount) %></td>

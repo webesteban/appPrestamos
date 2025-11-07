@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :payment_credentials, except: [:show, :destroy]
+
   namespace :mp do
     get :success, to: "feedback#success"
     get :failure, to: "feedback#failure"

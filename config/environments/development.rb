@@ -9,7 +9,7 @@ Rails.application.configure do
   config.hosts.clear
 
   config.hosts << "app-prestamos.ngrok.dev"
-  config.hosts << "bc4e7703b559.ngrok.app"
+  config.hosts << "47c902d3d70f.ngrok-free.app"
   config.hosts << "localhost:3000"
   
 

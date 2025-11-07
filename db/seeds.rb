@@ -194,6 +194,52 @@ puts "✅ #{payment_terms_data.size} términos de pago creados con éxito."
 
 collections = [collection1, collection2, collection3]
 
+puts "📌 Creando cliente y préstamo de prueba..."
+
+client = Client.create!(
+  username: "123456789",
+  identification: "123456789",
+  identification_type: "CC",
+  full_name: "Cliente Prueba",
+  identification_issued_at: Date.new(2010, 1, 1),
+  birth_date: Date.new(1990, 1, 1),
+  sex: "M",
+  address: "Dirección de prueba",
+  mobile_phone: "3000000000",
+  landline_phone: "6000000",
+  billing_address: "Dirección de prueba",
+  occupation: "Tester",
+  workplace: "Empresa Prueba",
+  income: 1000000,
+  reference1_name: "Referencia Uno",
+  reference1_identification: "11111111",
+  reference1_address: "Calle 1",
+  reference1_phone: "3000000001",
+  reference2_name: "Referencia Dos",
+  reference2_identification: "22222222",
+  reference2_address: "Calle 2",
+  reference2_phone: "3000000002",
+  email: "clienteprueba@example.com",
+  latitude: "6.2442",
+  longitude: "-75.5812",
+  collection_id: collection1.id
+)
+
+loan = Loan.create!(
+  payment_term_id: PaymentTerm.first.id,
+  client_id: client.id,
+  installment_days: 30,
+  amount: 260,
+  details: "Préstamo de prueba de 30mil",
+  insurance: false,
+  insurance_amount: 0,
+  created_at: Date.new(2025, 10, 20),
+  latitude: "6.2442",
+  longitude: "-75.5812"
+)
+
+puts "✅ Cliente de prueba creado con préstamo ID #{loan.id}"
+
 puts "📌 Creando clientes..."
 100.times do
   identification = Faker::Number.number(digits: 10)

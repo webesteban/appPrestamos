@@ -1,0 +1,2 @@
+class MpWebhookLog < ApplicationRecord
+end

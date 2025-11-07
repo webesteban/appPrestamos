@@ -7,7 +7,7 @@
         <h6>Reportes</h6>
         <div class="d-grid gap-2">
           <%= link_to "Ver compras", loans_reports_path(level: "collection", hierarchy_id: @settlement.collection_id, date: @settlement.settlement_date ), class: "btn btn-dark", data: { turbo: false } %>
-          <%= link_to "Ver abonos",  loans_reports_path(level: "payments", hierarchy_id: @settlement.collection_id, date: @settlement.settlement_date), class: "btn btn-primary", data: { turbo: false } %>
+          <%= link_to "Ver abonos",  payments_reports_path(level: "collection", hierarchy_id: @settlement.collection_id, date: @settlement.settlement_date), class: "btn btn-primary", data: { turbo: false } %>
           <%= link_to "Liquidaciones", settlements_reports_path(collection_id: @settlement.collection_id), class: "btn btn-info", data: { turbo: false } %>
           <button class="btn btn-dark" disabled>Ultimas compras</button>
           <button class="btn btn-warning" disabled>Faltantes</button>
@@ -62,6 +62,14 @@
             <div class="col-6">
               <label>COMPRAS</label>
               <input class="form-control" value="<%= number_to_currency(@settlement.loans_total) %>" disabled>
+            </div>
+            <div class="col-6">
+              <label>ABONOS MANUAL</label>
+              <input class="form-control" value="<%= number_to_currency(@settlement.payments_manual_total) %>" disabled>
+            </div>
+            <div class="col-6">
+              <label>ABONOS APP</label>
+              <input class="form-control" value="<%= number_to_currency(@settlement.payments_mercado_pago_total) %>" disabled>
             </div>
           </div>
         <% end %>

@@ -94,6 +94,7 @@
           <tr>
             <th>Monto</th>
             <th>Id Préstamo</th>
+            <th>Fuente</th>
             <th>Fecha</th>
           </tr>
         </thead>
@@ -102,6 +103,7 @@
             <tr>
               <td><%= number_to_currency(payment.amount) %></td>
               <td><%= payment.loan.id %></td>
+              <td><%= payment.source_name %></td>
               <td><%= l payment.paid_at.to_date %></td>
             </tr>
           <% end %>

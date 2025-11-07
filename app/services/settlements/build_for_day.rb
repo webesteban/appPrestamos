@@ -30,11 +30,25 @@ module Settlements
       # base_start: prioridad => override -> ya guardada -> carryover previo -> 0
       base_start = @base_override.presence || settlement.base_start || prev&.base_carryover || 0
 
-      payments_scope = Payment.joins(loan: :client)
+      payments_scope_manual = Payment.joins(loan: :client)
                               .where(clients: { collection_id: @collection.id })
                               .where("DATE(paid_at) = ?", @date)
-      payments_total = to_d(payments_scope.sum(:amount))
-      payments_count = payments_scope.count
+                              .where(source: :manual)
+
+      payments_scope_mercado_pago = Payment.joins(loan: :client)
+                              .where(clients: { collection_id: @collection.id })
+                              .where("DATE(paid_at) = ?", @date)
+                              .where(source: :mercado_pago)
+      
+      payments_total_manual = to_d(payments_scope_manual.sum(:amount))
+      
+      payments_total_mercado_pago = to_d(payments_scope_mercado_pago.sum(:amount))  
+
+      payments_total = payments_total_manual
+
+
+
+      payments_count = payments_scope_manual.count + payments_scope_mercado_pago.count
 
       loans_scope = Loan.joins(:client)
                         .where(clients: { collection_id: @collection.id })
@@ -57,6 +71,8 @@ module Settlements
       settlement.previous_settlement_id ||= prev&.id
       settlement.base_start            = base_start
       settlement.payments_total        = payments_total
+      settlement.payments_mercado_pago_total        = payments_total_mercado_pago
+      settlement.payments_manual_total        = payments_total_manual
       settlement.payments_count        = payments_count
       settlement.loans_total           = loans_total
       settlement.loans_count           = loans_count
@@ -68,7 +84,7 @@ module Settlements
 
       settlement.recompute_expected!
       settlement.set_snapshot!(
-        payments: payments_scope.pluck(:id),
+        payments: payments_scope_manual.pluck(:id)  + payments_scope_mercado_pago.pluck(:id),
         loans:    loans_scope.pluck(:id),
         expenses: (expenses_scope ? expenses_scope.pluck(:id) : []),
         version:  1

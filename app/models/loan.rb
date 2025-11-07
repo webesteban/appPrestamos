@@ -179,13 +179,15 @@ class Loan < ApplicationRecord
   private
 
   def generate_payment_link
-    sdk = Mercadopago::SDK.new(ENV['MP_ACCESS_TOKEN'])
+    byebug
+    access_token = PaymentCredential.where(status: :active).first.access_token
+    sdk = Mercadopago::SDK.new(access_token)
 
     days_from_start = (Date.today - created_at.to_date).to_i
     installment_number = (days_from_start / payment_term.payment_days) + 1
 
     title = "Cuota ##{installment_number} - #{client.full_name} (Préstamo ##{id})"
-    unit_price = format_unit_price(currency_code: 'COP') * 1000
+    unit_price = format_unit_price(currency_code: 'COP')
     host = ENV.fetch('MP_FEEDBACK_HOST', 'http://localhost:3000')
 
     preference_data = {
@@ -214,7 +216,7 @@ class Loan < ApplicationRecord
 
   def format_unit_price(currency_code:)
     if currency_code == 'COP'
-      installment_value.to_i
+      (installment_value * 1000).to_i
     else
       installment_value.to_f.round(2)
     end

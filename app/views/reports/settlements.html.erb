@@ -40,7 +40,6 @@
               <td><%= number_to_currency(s.delivered_cash) %></td>
               <td><%= number_to_currency(s.withdrawals_total || 0) %></td>
 
-              <td><%= number_to_currency(s.refinancings_total || 0) %></td>
               <td><%= number_to_currency(s.difference) %></td>
               <td>
                 <span class="badge rounded-pill <%= s.status == "finalized" ? "bg-success" : "bg-warning" %>">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_24_020703) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_07_050108) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -131,6 +131,28 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_24_020703) do
     t.index ["status"], name: "index_loans_on_status"
   end
 
+  create_table "mp_webhook_logs", force: :cascade do |t|
+    t.string "topic"
+    t.json "payload"
+    t.boolean "attempted"
+    t.string "message"
+    t.string "payment_id"
+    t.string "external_reference"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "payment_credentials", force: :cascade do |t|
+    t.string "name"
+    t.string "access_token"
+    t.string "country"
+    t.string "client_id"
+    t.string "client_secret"
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "payment_terms", force: :cascade do |t|
     t.integer "percentage"
     t.integer "quota_days"
@@ -144,7 +166,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_24_020703) do
   create_table "payments", force: :cascade do |t|
     t.integer "client_id", null: false
     t.integer "loan_id", null: false
-    t.integer "user_id", null: false
+    t.integer "user_id"
     t.decimal "amount"
     t.decimal "latitude"
     t.decimal "longitude"
@@ -261,6 +283,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_24_020703) do
     t.integer "lock_version", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "payments_manual_total", precision: 14, scale: 2, default: "0.0", null: false
+    t.decimal "payments_mercado_pago_total", precision: 14, scale: 2, default: "0.0", null: false
+    t.integer "payments_manual_count", default: 0, null: false
+    t.integer "payments_mercado_pago_count", default: 0, null: false
     t.index ["collection_id", "settlement_date"], name: "index_settlements_on_collection_id_and_settlement_date", unique: true
     t.index ["collection_id"], name: "index_settlements_on_collection_id"
     t.index ["created_by_id"], name: "index_settlements_on_created_by_id"

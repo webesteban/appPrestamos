@@ -1,0 +1,12 @@
+<div class="card-header d-flex align-items-center justify-content-between border-bottom border-light">
+  <h4 class="header-title">Credenciales de Pago</h4>
+  <%= button_to 'NUEVA CREDENCIAL',
+                new_payment_credential_path(format: :turbo_stream),
+                method: :get,
+                form: { data: { turbo_frame: "modal" } },
+                class: "btn btn-primary" %>
+</div>
+
+<%= turbo_frame_tag "payment_credentials_table" do %>
+  <%= render "table", payment_credentials: @payment_credentials %>
+<% end %>

@@ -137,11 +137,40 @@ class ReportsController < ApplicationController
     @selected_date = params[:date].present? ? Date.parse(params[:date]) : nil
     payments_scope = Payment.includes(:loan, client: :collection)
                             
-    payments_scope = payments_scope.where(created_at: @selected_date) if @selected_date.present?
+    payments_scope = payments_scope.where(paid_at: @selected_date) if @selected_date.present?
     payments_scope = payments_scope.order(created_at: :desc)
 
     # --- Solo prestamos activos o en mora
     payments_scope = payments_scope.where(loans: { status: [:active, :overdue] })
+
+    if params[:level].present? && params[:hierarchy_id].present?
+      user = User.find_by_id(params[:hierarchy_id])
+      case params[:level]
+      when "owner"
+        partner_ids   = User.where(parent_id: params[:hierarchy_id], hierarchy_level: :partner).pluck(:id)
+        collector_ids = User.where(parent_id: partner_ids, hierarchy_level: :collector).pluck(:id)
+        collection_ids = Collection.joins(:collection_users).where(collection_users: { user_id: collector_ids }).pluck(:id)
+        payments_scope = payments_scope.joins(:client).where(clients: { collection_id: collection_ids })
+        
+        @selected_label = "#{user.full_name} (Dueño)"
+
+      when "partner"
+        collector_ids = User.where(parent_id: params[:hierarchy_id], hierarchy_level: :collector).pluck(:id)
+        collection_ids = Collection.joins(:collection_users).where(collection_users: { user_id: collector_ids }).pluck(:id)
+        payments_scope = payments_scope.joins(:client).where(clients: { collection_id: collection_ids })
+        @selected_label = "#{user.full_name} (Socio)"
+
+      when "collector"
+        collection_ids = Collection.joins(:collection_users).where(collection_users: { user_id: params[:hierarchy_id] }).pluck(:id)
+        payments_scope = payments_scope.joins(:client).where(clients: { collection_id: collection_ids })
+        @selected_label = "#{user.full_name} (Cobrador)"
+
+      when "collection"
+        payments_scope = payments_scope.joins(:client).where(clients: { collection_id: params[:hierarchy_id] })
+
+        @selected_label = "#{Collection.find(params[:hierarchy_id]).name} (Ruta)"
+      end
+    end
 
     # --- Filtro por cliente
     if params[:full_name].present?
@@ -154,6 +183,8 @@ class ReportsController < ApplicationController
       payments_scope = payments_scope.joins(:client)
                                      .where(clients: { collection_id: params[:collection_id] })
     end
+
+
 
     # --- Filtro por rango de días de atraso
     if params[:overdue_range].present?

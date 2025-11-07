@@ -44,6 +44,11 @@
                             <span class="menu-text">Roles</span>
                             </a>
                         </li>
+                        <li class="side-nav-item">
+                            <a href="<%= url_for(controller: 'payment_credentials', action: 'index') %>" data-turbo="false" class="side-nav-link">
+                            <span class="menu-text">Credenciales de Pago</span>
+                            </a>
+                        </li>
                         <% end %>
 
                         <% if can_action?(:view, "permisos") %>
