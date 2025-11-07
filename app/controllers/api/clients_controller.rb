@@ -1,7 +1,9 @@
 class Api::ClientsController < Api::BaseController
 
   def index
-    render json: Client.all
+    collection =  @current_user.collections.presence&.first
+
+    render json: Client.where(collection_id: collection.id)
   end
 
   def show

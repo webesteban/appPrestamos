@@ -7,15 +7,25 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-
+Settlement.update_all(previous_settlement_id: nil)
+Settlement.destroy_all
 Payment.destroy_all
 Loan.destroy_all
 Client.destroy_all
 CollectionUser.destroy_all
 Expense.destroy_all
+
 Collection.destroy_all
 User.destroy_all
 ExpenseType.destroy_all
+PermissionRole.destroy_all
+User.destroy_all
+Payment.destroy_all
+Loan.destroy_all
+Client.destroy_all
+Section.destroy_all
+Role.destroy_all
+
 
 
 ExpenseType.create!(name: 'Creado del admin', max_value: 9999999999)
@@ -62,7 +72,7 @@ payment_terms_data.each do |percentage, quota_days, payment_frequency, payment_d
     monthly: monthly
   )
 end
-User.destroy_all
+
 # Ciudad
 city = City.find_or_create_by!(name: "Lima")
 city = City.find_or_create_by!(name: "Bogota")
@@ -185,10 +195,7 @@ Section.create!([
 
 ])
 
-Payment.destroy_all
-Loan.destroy_all
 
-Client.destroy_all
 
 puts "✅ #{payment_terms_data.size} términos de pago creados con éxito."
 
@@ -390,3 +397,20 @@ puts "✅ Préstamos y pagos creados con estados simulados"
 puts "Recalculando estados de préstamos..."
 Loan.recalc_all_statuses!
 puts "OK ✅"
+
+
+puts "CRear permission Role"
+role = Role.where(name: 'COBRADORES').first
+section = Section.where(code: 'prestamo_movil').first
+PermissionRole.create(role: role, section: section,can_view: true,can_create: true, can_edit: true,can_destroy: true )
+
+section = Section.where(code: 'abonos_movil').first
+PermissionRole.create(role: role, section: section,can_view: true,can_create: true, can_edit: true,can_destroy: true )
+
+section = Section.where(code: 'gastos_movil').first
+PermissionRole.create(role: role, section: section,can_view: true,can_create: true, can_edit: true,can_destroy: true )
+
+section = Section.where(code: 'clientes_movil').first
+PermissionRole.create(role: role, section: section,can_view: true,can_create: true, can_edit: true,can_destroy: true )
+puts "OK ✅"
+
