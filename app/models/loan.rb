@@ -179,7 +179,6 @@ class Loan < ApplicationRecord
   private
 
   def generate_payment_link
-    byebug
     access_token = PaymentCredential.where(status: :active).first.access_token
     sdk = Mercadopago::SDK.new(access_token)
 
