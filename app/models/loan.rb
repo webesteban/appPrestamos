@@ -187,7 +187,7 @@ class Loan < ApplicationRecord
     installment_number = (days_from_start / payment_term.payment_days) + 1
 
     title = "Cuota ##{installment_number} - #{client.full_name} (Préstamo ##{id})"
-    unit_price = format_unit_price(currency_code: 'COP')
+    unit_price = format_unit_price(currency_code: 'PEN')
     host = ENV.fetch('MP_FEEDBACK_HOST', 'http://localhost:3000')
 
     preference_data = {
@@ -195,7 +195,7 @@ class Loan < ApplicationRecord
         title: title,
         quantity: 1,
         unit_price: unit_price,
-        currency_id: 'COP'
+        currency_id: 'PEN'
       }],
       back_urls: {
         success: "#{host}/mp/success",
@@ -215,7 +215,7 @@ class Loan < ApplicationRecord
   end
 
   def format_unit_price(currency_code:)
-    if currency_code == 'COP'
+    if currency_code == 'COL'
       (installment_value * 1000).to_i
     else
       installment_value.to_f.round(2)
